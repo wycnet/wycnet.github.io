@@ -1,1 +1,1 @@
-[{"title":"Hello World","date":"2019.01.10","uri":"2019/01/10/hello-world/","excerpt":""},{"title":"pa","date":"2019.01.10","uri":"2019/01/10/pa/","excerpt":""},{"title":"pa","date":"2019.01.10","uri":"2019/01/10/jsnote/jstest1/","excerpt":""}]
+[{"title":"Hello World","date":"2019.01.10","uri":"2019/01/10/hello-world/","excerpt":""},{"title":"pa","date":"2019.01.10","uri":"2019/01/10/jsnote/jstest1/","excerpt":""}]
