@@ -66,101 +66,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-csdn转移/1-tensorflow学习笔记-会话" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/28/csdn转移/1-tensorflow学习笔记-会话/" class="article-date">
-  <time datetime="2019-04-28T12:31:54.325Z" itemprop="datePublished">2019-04-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!-- Table of Contents -->
-        
-        <h1 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h1><p>会话拥有并管理TensorFlow程序运行时的所有资源</p>
-<p>当所有计算完成之后要关闭会话，帮助系统回收资源</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="comment"># 定义计算图</span></span><br><span class="line">tens1 = tf.constant([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个会话</span></span><br><span class="line">sess = tf.Session()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用会话来得到运算结果</span></span><br><span class="line">result= sess.run(tens1)</span><br><span class="line">print(result)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭会话并释放资源</span></span><br><span class="line">sess.close()</span><br></pre></td></tr></table></figure>
-<pre><code>[1 2 3]
-</code></pre><h3 id="会话模式一"><a href="#会话模式一" class="headerlink" title="会话模式一"></a>会话模式一</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义计算图</span></span><br><span class="line">tens2= tf.constant([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个会话</span></span><br><span class="line">sess = tf.Session()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用会话来得到运算结果</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    print(sess.run(tens2))</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">    print(<span class="string">"Exception!"</span>)</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line"><span class="comment"># 关闭会话并释放资源</span></span><br><span class="line">    sess.close()</span><br></pre></td></tr></table></figure>
-<pre><code>[1 2 3]
-</code></pre><h3 id="会话模式二"><a href="#会话模式二" class="headerlink" title="会话模式二"></a>会话模式二</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">node1 = tf.constant(<span class="number">3.0</span>, tf.float32, name=<span class="string">"node1"</span>)</span><br><span class="line">node2 = tf.constant(<span class="number">4.0</span>, tf.float32, name=<span class="string">'nmde2'</span>)</span><br><span class="line"></span><br><span class="line">result=tf.add(node1,node2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个会话，并用Python的上下文管理器来管理这个会话</span></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    print(sess.run(result))</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 改方法不需要再使用sess.close()方法。</span></span><br></pre></td></tr></table></figure>
-<pre><code>7.0
-</code></pre><h3 id="指定默认会话，需要手动指定"><a href="#指定默认会话，需要手动指定" class="headerlink" title="指定默认会话，需要手动指定"></a>指定默认会话，需要手动指定</h3><p>TensorFlow不会自动生成默认会话，需要手动指定当默认的会话被指定后可以通过tf.Tensor.eval函数来计算一个张量的取值</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">node1 = tf.constant(<span class="number">3.0</span>, tf.float32, name=<span class="string">'node1'</span>)</span><br><span class="line">node2 = tf.constant(<span class="number">4.0</span>, tf.float32, name=<span class="string">'node2'</span>)</span><br><span class="line"></span><br><span class="line">result = tf.add(node1, node2)</span><br><span class="line"></span><br><span class="line">sess = tf.Session()</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> sess.as_default():</span><br><span class="line">    print(result.eval())</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 可以发现print(sess.run(result)) 与print(result.eval(session=sess)) 相同</span></span><br></pre></td></tr></table></figure>
-<pre><code>7.0
-</code></pre><h3 id="交互式环境下设置默认会话"><a href="#交互式环境下设置默认会话" class="headerlink" title="交互式环境下设置默认会话"></a>交互式环境下设置默认会话</h3><p>在交互式环境下,Python脚本或者Jupyter编辑器下,通过设置默认会话来获取张量的取值<br>更加方便<br>tf.InteractiveSession 使用这个函数会自动将生成的会话注册为默认会话</p>
-<h2 id="常量与变量"><a href="#常量与变量" class="headerlink" title="常量与变量"></a>常量与变量</h2><h3 id="常量constant"><a href="#常量constant" class="headerlink" title="常量constant"></a>常量constant</h3><p>在运行过程中值不会改变的单元,在TensorFlow中无须进行初始化操作<br>创建语句:</p>
-<p><code>constant_ name = tf.constant(value)</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a = tf.constant(<span class="number">1.0</span>, name=<span class="string">'a'</span>)</span><br><span class="line">b = tf.constant(<span class="number">2.5</span>, name=<span class="string">'b'</span>)</span><br><span class="line">c = tf.add(a, b, name=<span class="string">'c'</span>)</span><br><span class="line"></span><br><span class="line">sess = tf.Session()</span><br><span class="line">c_value = sess.run(c)</span><br><span class="line"></span><br><span class="line">print(c_value)</span><br><span class="line">sess.close()</span><br></pre></td></tr></table></figure>
-<pre><code>3.5
-</code></pre><h3 id="变量-Variable"><a href="#变量-Variable" class="headerlink" title="变量 Variable"></a>变量 Variable</h3><p>在运行过程中值会改变的单元,在TensorFlow中须进行初始化操作<br>创建语句:</p>
-<p><code>name_variable = tf.Variable(value, name)</code></p>
-<p>个别变量初始化:</p>
-<p><code>init_op = name_variable.initializer()</code></p>
-<p>所有变量初始化:</p>
-<p><code>init_op = tf.global_variables_initializer()</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">a = tf.Variable(<span class="number">1.0</span>, name=<span class="string">'a'</span>)</span><br><span class="line">b = tf.Variable(<span class="number">2.5</span>, name=<span class="string">'b'</span>)</span><br><span class="line">c = tf.add(a, b, name=<span class="string">'add'</span>)</span><br><span class="line"></span><br><span class="line">sess = tf.Session()</span><br><span class="line"></span><br><span class="line">init = tf.global_variables_initializer() <span class="comment"># 增加了一个init初始化的变量</span></span><br><span class="line">sess.run(init)</span><br><span class="line"></span><br><span class="line">c_value = sess.run(result)</span><br><span class="line"></span><br><span class="line">print(c_value)</span><br><span class="line">sess.close()</span><br></pre></td></tr></table></figure>
-<pre><code>7.0
-</code></pre><h3 id="变量赋值"><a href="#变量赋值" class="headerlink" title="变量赋值"></a>变量赋值</h3><ul>
-<li>与传统编程语言不同,TensorFlow中的变量定义后,一般无需人工赋值,<br>系统会根据算法模型,训练优化过程中自动调整变量对应的数值</li>
-<li>后面在将机器学习模型训练时会更能体会,比如权重Weight变量w,经<br>过多次迭代,会自动调<br><code>epoch = tf.Variable(0,name=&#39;epoch&#39;,trainable=False)</code></li>
-<li>特殊情况需要人工更新的,可用变量赋值语句<br>变量更新语句:<br><code>update_op = tf.assign(variable_to_be_updated, new_value)</code></li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 变量赋值</span></span><br><span class="line"></span><br><span class="line">value = tf.Variable(<span class="number">0</span>, name= <span class="string">'value'</span>)</span><br><span class="line">one = tf.constant(<span class="number">1</span>)</span><br><span class="line">new_value = tf.add(value, one)</span><br><span class="line"></span><br><span class="line">update_value = tf.assign(value, new_value) <span class="comment"># 更新变量</span></span><br><span class="line"></span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    sess.run(init)</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">        sess.run(update_value)</span><br><span class="line">        print(sess.run(value))</span><br></pre></td></tr></table></figure>
-<pre><code>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</code></pre><h3 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h3><p>如何通过TensorFlow的变量赋值计算:1+2+3+…+10 ?</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">value =tf.Variable(<span class="number">1</span>, name=<span class="string">"value"</span>)</span><br><span class="line">sums = tf.Variable(<span class="number">0</span>)</span><br><span class="line">one = tf.constant(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">new_sums = tf.add(sums,value)</span><br><span class="line">update_sums = tf.assign(sums, new_sums)</span><br><span class="line"></span><br><span class="line">new_value = tf.add(value, one)</span><br><span class="line">update_value = tf.assign(value,new_value)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    sess.run(init)</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">        sess.run(update_sums)</span><br><span class="line">        sess.run(update_value)</span><br><span class="line">    </span><br><span class="line">    print(sess.run(sums))</span><br></pre></td></tr></table></figure>
-<pre><code>55
-</code></pre><h2 id="占位符"><a href="#占位符" class="headerlink" title="占位符"></a>占位符</h2><h3 id="占位符-placeholder"><a href="#占位符-placeholder" class="headerlink" title="占位符 placeholder"></a>占位符 placeholder</h3><ul>
-<li>TensorFlow中的Variable变量类型,在定义时需要初始化,但有些变量<br>定义时并不知道其数值,只有当真正开始运行程序时,才由外部输入,<br>比如训练数据,这时候需要用到占位符</li>
-<li><p>tf.placeholder占位符,是TensorFlow中特有的一种数据结构,类似动<br>态变量,函数的参数、或者C语言或者Python语言中格式化输出时的“%”<br>占位符</p>
-</li>
-<li><p>TensorFlow占位符Placeholder,先定义一种数据,其参数为数据的</p>
-<p>  Type和Shape</p>
-<p>  占位符Placeholder的函数接口如下:</p>
-<p>   <code>tf.placeholder(dtype, shape=None, name=None)</code></p>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = tf.placeholder(tf.float32, [<span class="number">2</span>,<span class="number">3</span>], name= <span class="string">'tx'</span>)</span><br><span class="line"><span class="comment"># 生成一个2*3的二维2数组</span></span><br></pre></td></tr></table></figure>
-<h2 id="Feed提交数据和Fetch提取数据"><a href="#Feed提交数据和Fetch提取数据" class="headerlink" title="Feed提交数据和Fetch提取数据"></a>Feed提交数据和Fetch提取数据</h2><h3 id="Feed提交数据"><a href="#Feed提交数据" class="headerlink" title="Feed提交数据"></a>Feed提交数据</h3><p>如果构建了一个包含placeholder操作的计算图,当在session中调用run方<br>法时,placeholder占用的变量必须通过feed_dict参数传递进去,否则报错</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">a = tf.placeholder(tf.float32,name=<span class="string">'a'</span>)</span><br><span class="line">b = tf.placeholder(tf.float32,name=<span class="string">'b'</span>)</span><br><span class="line">c = tf.multiply(a, b, name=<span class="string">'c'</span>)</span><br><span class="line"></span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    sess.run(init)</span><br><span class="line">    result = sess.run(c, feed_dict=&#123;a: <span class="number">8.0</span>, b: <span class="number">3.5</span>&#125;)</span><br><span class="line">    </span><br><span class="line">    print(result)</span><br></pre></td></tr></table></figure>
-<pre><code>28.0
-</code></pre><p>多个操作可以通过一次Feed完成执行</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">a = tf.placeholder(tf.float32, name=<span class="string">'a'</span>)</span><br><span class="line">b = tf.placeholder(tf.float32, name=<span class="string">'b'</span>)</span><br><span class="line"></span><br><span class="line">c = tf.multiply(a,b,name=<span class="string">'c'</span>)</span><br><span class="line">d = tf.subtract(a,b,name=<span class="string">'d'</span>)</span><br><span class="line"></span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    sess.run(init)</span><br><span class="line">    result = sess.run([c,d], feed_dict=&#123;a:[<span class="number">8.1</span>,<span class="number">2.0</span>,<span class="number">3.5</span>], b:[<span class="number">1.5</span>,<span class="number">2.0</span>,<span class="number">4.0</span>]&#125;)</span><br><span class="line">    </span><br><span class="line">    print(result)</span><br><span class="line">    </span><br><span class="line">    print(result[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
-<pre><code>[array([ 12.15000057,   4.        ,  14.        ], dtype=float32), array([ 6.60000038,  0.        , -0.5       ], dtype=float32)]
-[ 12.15000057   4.          14.        ]
-</code></pre><p>一次返回多个值分别赋给多个变量</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">a = tf.placeholder(tf.float32, name=<span class="string">'a'</span>)</span><br><span class="line">b = tf.placeholder(tf.float32, name=<span class="string">'b'</span>)</span><br><span class="line"></span><br><span class="line">c = tf.multiply(a,b,name=<span class="string">'c'</span>)</span><br><span class="line">d = tf.subtract(a,b,name=<span class="string">'d'</span>)</span><br><span class="line"></span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    sess.run(init)</span><br><span class="line">    rc, rd = sess.run([c,d], feed_dict=&#123;a:[<span class="number">8.1</span>,<span class="number">2.0</span>,<span class="number">3.5</span>], b:[<span class="number">1.5</span>,<span class="number">2.0</span>,<span class="number">4.0</span>]&#125;)</span><br><span class="line">    </span><br><span class="line">    print(rc)</span><br><span class="line">    </span><br><span class="line">    print(rd)</span><br></pre></td></tr></table></figure>
-<pre><code>[ 12.15000057   4.          14.        ]
-[ 6.60000038  0.         -0.5       ]
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/04/28/csdn转移/1-tensorflow学习笔记-会话/" data-id="cjv0wzt87000981rweegypv07" class="article-share-link">分享</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
- 
-
-
-  
     <article id="post-csdn转移/八皇后问题--" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/04/28/csdn转移/八皇后问题--/" class="article-date">
@@ -181,7 +86,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/04/28/csdn转移/八皇后问题--/" data-id="cjv0wzt8v001581rwlnf8x5rh" class="article-share-link">分享</a>
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/八皇后问题--/" data-id="cjv0x3vc50019j5rw0fzaxerr" class="article-share-link">分享</a>
       
       
       
@@ -584,7 +489,7 @@ end
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/04/28/csdn转移/python3必须掌握的内置函数(一)/" data-id="cjv0wzt8o000v81rwdp8jne1a" class="article-share-link">分享</a>
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/python3必须掌握的内置函数(一)/" data-id="cjv0x3vby000zj5rwfp94y722" class="article-share-link">分享</a>
       
       
       
@@ -732,7 +637,7 @@ TypeError: getType() takes 1 positional argument but 2 were given
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/04/28/csdn转移/python3必须掌握的内置函数(二)/" data-id="cjv0wzt8p000w81rwuupqi77v" class="article-share-link">分享</a>
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/python3必须掌握的内置函数(二)/" data-id="cjv0x3vby0010j5rw3kj26srf" class="article-share-link">分享</a>
       
       
       
@@ -793,7 +698,7 @@ TypeError: getType() takes 1 positional argument but 2 were given
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/04/28/csdn转移/python List中的方法/" data-id="cjv0wzt8n000u81rw5ok7x9ej" class="article-share-link">分享</a>
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/python List中的方法/" data-id="cjv0x3vbx000yj5rwb04uctni" class="article-share-link">分享</a>
       
       
       
@@ -834,7 +739,7 @@ TypeError: getType() takes 1 positional argument but 2 were given
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/04/28/csdn转移/python中dict 字典的方法/" data-id="cjv0wzt8p000x81rw95g0iuuv" class="article-share-link">分享</a>
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/python中dict 字典的方法/" data-id="cjv0x3vbz0011j5rw4qh2csp4" class="article-share-link">分享</a>
       
       
       
@@ -1037,7 +942,7 @@ TypeError: getType() takes 1 positional argument but 2 were given
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/04/28/csdn转移/anaconda使用/" data-id="cjv0wzt8b000f81rwln49di5y" class="article-share-link">分享</a>
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/anaconda使用/" data-id="cjv0x3vbn000jj5rwdjpgjlz6" class="article-share-link">分享</a>
       
       
       
@@ -1154,7 +1059,7 @@ TypeError: getType() takes 1 positional argument but 2 were given
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/04/28/csdn转移/python常用库类/" data-id="cjv0wzt8q000y81rw2wbc7dff" class="article-share-link">分享</a>
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/python常用库类/" data-id="cjv0x3vc00012j5rw4r3exk7l" class="article-share-link">分享</a>
       
       
       
@@ -1297,7 +1202,7 @@ git add &lt;文件名&gt; 将文件标记为冲突已解决
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/04/28/csdn转移/git团队使用/" data-id="cjv0wzt8g000m81rwtvunq1ye" class="article-share-link">分享</a>
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/git团队使用/" data-id="cjv0x3vbs000qj5rwbk67kuhp" class="article-share-link">分享</a>
       
       
       
@@ -1456,10 +1361,75 @@ git add &lt;文件名&gt; 将文件标记为冲突已解决
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/04/28/csdn转移/js正则表达式/" data-id="cjv0wzt8j000p81rwr48b0xnk" class="article-share-link">分享</a>
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/js正则表达式/" data-id="cjv0x3vbu000uj5rwfol8469k" class="article-share-link">分享</a>
       
       
       
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-hexo入坑/阿里云服务器搭建hexoblog" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/28/hexo入坑/阿里云服务器搭建hexoblog/" class="article-date">
+  <time datetime="2019-04-28T11:41:25.000Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/hexo入坑/">hexo入坑</a>►<a class="article-category-link" href="/categories/hexo入坑/阿里云服务器搭建hexoblog/">阿里云服务器搭建hexoblog</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/28/hexo入坑/阿里云服务器搭建hexoblog/">阿里云服务器搭建hexoblog</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>[toc]</p>
+<h1 id="使用阿里云服务器搭建hexoblog"><a href="#使用阿里云服务器搭建hexoblog" class="headerlink" title="使用阿里云服务器搭建hexoblog"></a>使用阿里云服务器搭建hexoblog</h1><h2 id="创建服务器坑"><a href="#创建服务器坑" class="headerlink" title="创建服务器坑"></a>创建服务器坑</h2><p>购买阿里云轻量级服务器,观看了各种镜像说明最终选择了镜像系统BT-Panel(宝塔Linux面板是一款使用方便、功能强大的服务器管理软件。面板集成一键配置：LAMP/LNMP/Tomcat/Node.js、网站、数据库、FTP、SSL，可以通过Web端轻松管理服务器。该镜像基于CentOS 7.3 64位操作系统。),根据教程设置并登录了宝塔系统,之后新建网站,网站名为/www/wwwroot.</p>
+<p>BT-Panel提供了ftp服务, 然而hexo有sftp,ftpsync,git 等推送方式,就是没有ftp方式,所以我就想能否用git仓库来搭建.</p>
+<p>期初想着把git仓库直接放在网站目录下,这样就可以直接将发布的笔记推送到服务器.于是在<code>/www/wwwroot/robocup3d</code> 目录下使用 <code>git init robocup3d</code>建立git仓库, 在推送的时候却出现了问题,</p>
+<ul>
+<li>git init 建立仓库会在目录下生成work-tree</li>
+<li>git –bare init 建立的仓库没有work-tree</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">remote: error: is denied, because it will make the index and work tree inconsis</span><br><span class="line">ent</span><br><span class="line">remote: error: with what you pushed, and will require <span class="string">'git reset --hard'</span> to mat</span><br><span class="line">h</span><br><span class="line">remote: error: the work tree to HEAD.</span><br><span class="line">remote: error:</span><br><span class="line">remote: error: You can <span class="built_in">set</span> <span class="string">'receive.denyCurrentBranch'</span> configuration variable t</span><br><span class="line"></span><br><span class="line">remote: error: <span class="string">'ignore'</span> or <span class="string">'warn'</span> <span class="keyword">in</span> the remote repository to allow pushing int</span><br><span class="line"></span><br><span class="line">remote: error: its current branch; however, this is not recommended unless you</span><br><span class="line">remote: error: arranged to update its work tree to match what you pushed <span class="keyword">in</span> som</span><br><span class="line"></span><br><span class="line">remote: error: other way.</span><br><span class="line">remote: error:</span><br><span class="line">remote: error: To squelch this message and still keep the default behaviour, se</span><br><span class="line"></span><br><span class="line">remote: error: <span class="string">'receive.denyCurrentBranch'</span> configuration variable to <span class="string">'refuse'</span>.</span><br><span class="line">To ssh://root@192.168.1.8:/var/www/drupal/web</span><br><span class="line"> ! [remote rejected] master -&gt; master (branch is currently checked out)</span><br><span class="line">error: failed to push some refs to <span class="string">'ssh://root@192.168.1.8:/var/www/drupal/web'</span></span><br></pre></td></tr></table></figure>
+<p>经过研究发现是因为git仓库拒绝推送,根据提示使在服务器的仓库中用命令<code>git config receive.denyCurrentBranch = ignore</code> ,设置完成后尝试推送,成功,大喜! 然而测试更新文章时却发现推送成功,网站却没有更新,<br>再研究…….</p>
+<p>…..</p>
+<p>最终发现, 我使用git init 来初始化仓库时,虽然会自动在项目文件夹中生成work-tree ,然后,有新的版本推送过来后,work-tree的内容不会自动更新,需要在代码仓库中使用<code>git reset --hard</code>来跟新 WTF? 难道我每次推送完了还是要去服务器上手动更新?</p>
+<p>这个问题应该有办法解决吧? 经过研究…….</p>
+<p>……</p>
+<p>最终发现了git的hooks功能,该功能相当于一个回调函数,当有新版本被推送到达时触发执行. 于是我删除了原本的代码仓库, 在服务器的<code>root</code>目录下建立了代码仓库<code>git --bare init robocup3Book</code> 代码仓库,</p>
+<p>然后在仓库中的hooks文件夹中创建文件,post-receive文件,并写入内容:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]$ <span class="built_in">cd</span> /home/workspace/wwwroot.git/hooks</span><br><span class="line">[root@localhost]$ cat &gt; post-receive &lt;&lt;EOF</span><br><span class="line">&gt;<span class="comment">#!/bin/bash</span></span><br><span class="line">&gt;git --work-tree=/www/wwwroot/robocup3d checkout -f </span><br><span class="line">&gt;EOF</span><br><span class="line">[root@localhost]$ chmod +x post-receive</span><br></pre></td></tr></table></figure></p>
+<p>之后在hexo中执行<code>hexo d</code> 将web推送到仓库的master分支, git的hooks功能将会自动把work-tree加载到服务器文件夹下:<code>/www/wwwroot/robocup3d</code></p>
+<h2 id="hexo命令keng"><a href="#hexo命令keng" class="headerlink" title="hexo命令keng"></a>hexo命令keng</h2><p>执行<code>hexo new fileName</code> , 该命令会默认在_posts文件夹下新建一个笔记, 如果笔记太多岂不是非常乱?</p>
+<p>研究发现,在_posts文件夹下要生成子文件夹需要使用<code>hexo new -p dirname/fileName fileName</code> , fileName需要写两次…</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/hexo入坑/阿里云服务器搭建hexoblog/" data-id="cjv0x3vbg0008j5rw1hhljesk" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+
     </footer>
   </div>
   

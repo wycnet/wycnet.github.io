@@ -3,15 +3,20 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>wycBlog</title>
+  <title>tensorflow学习笔记-会话.md | wycBlog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="wycBlog">
-<meta property="og:url" content="http://yoursite.com/page/5/index.html">
+  <meta name="description" content="会话会话拥有并管理TensorFlow程序运行时的所有资源 当所有计算完成之后要关闭会话，帮助系统回收资源 12345678910111213import tensorflow as tf# 定义计算图tens1 = tf.constant([1,2,3])# 创建一个会话sess = tf.Session()# 使用会话来得到运算结果result= sess.run(tens1)print(re">
+<meta name="keywords" content="tensorflow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tensorflow学习笔记-会话.md">
+<meta property="og:url" content="http://yoursite.com/2019/04/27/csdn转移/1-tensorflow学习笔记-会话/index.html">
 <meta property="og:site_name" content="wycBlog">
+<meta property="og:description" content="会话会话拥有并管理TensorFlow程序运行时的所有资源 当所有计算完成之后要关闭会话，帮助系统回收资源 12345678910111213import tensorflow as tf# 定义计算图tens1 = tf.constant([1,2,3])# 创建一个会话sess = tf.Session()# 使用会话来得到运算结果result= sess.run(tens1)print(re">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-28T12:35:58.522Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="wycBlog">
+<meta name="twitter:title" content="tensorflow学习笔记-会话.md">
+<meta name="twitter:description" content="会话会话拥有并管理TensorFlow程序运行时的所有资源 当所有计算完成之后要关闭会话，帮助系统回收资源 12345678910111213import tensorflow as tf# 定义计算图tens1 = tf.constant([1,2,3])# 创建一个会话sess = tf.Session()# 使用会话来得到运算结果result= sess.run(tens1)print(re">
   
     <link rel="alternate" href="/atom.xml" title="wycBlog" type="application/atom+xml">
   
@@ -64,9 +69,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-csdn转移/1-tensorflow学习笔记-会话" class="article article-type-post" itemscope="" itemprop="blogPost">
+        <section id="main"><article id="post-csdn转移/1-tensorflow学习笔记-会话" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/04/27/csdn转移/1-tensorflow学习笔记-会话/" class="article-date">
   <time datetime="2019-04-27T11:41:25.000Z" itemprop="datePublished">2019-04-27</time>
@@ -83,8 +86,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/27/csdn转移/1-tensorflow学习笔记-会话/">tensorflow学习笔记-会话.md</a>
+    <h1 class="article-title" itemprop="name">
+      tensorflow学习笔记-会话.md
     </h1>
   
 
@@ -172,62 +175,85 @@
     </footer>
   </div>
   
-</article>
- 
-
-
-  
-    <article id="post-test" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/26/test/" class="article-date">
-  <time datetime="2019-04-26T05:52:17.000Z" itemprop="datePublished">2019-04-26</time>
-</a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/测试/">测试</a>►<a class="article-category-link" href="/categories/测试/12/">12</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/26/test/">test</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!-- Table of Contents -->
-        
-        <h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题一"><a href="#二级标题一" class="headerlink" title="二级标题一"></a>二级标题一</h2><h2 id="二级标题二"><a href="#二级标题二" class="headerlink" title="二级标题二"></a>二级标题二</h2><h2 id="二级标题三"><a href="#二级标题三" class="headerlink" title="二级标题三"></a>二级标题三</h2>
-      
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/04/26/test/" data-id="cjv0x3vab0000j5rw3ngr4err" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/te/">te</a></li></ul>
-
-    </footer>
   </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/28/hexo入坑/阿里云服务器搭建hexoblog/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          阿里云服务器搭建hexoblog
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/26/test/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">test</div>
+    </a>
+  
+</nav>
+
   
 </article>
  
-
-
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+  </div>
+ 
   
 
-
-  <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/4/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
-  </nav>
 </section>
            
     <aside id="sidebar">
@@ -236,42 +262,24 @@
 
   
     
-  
+    <div class="widget-wrap">
     
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title recent-posts">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2019/04/28/csdn转移/js对象/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2019/04/28/csdn转移/记忆化搜索与动态优化与背包问题/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2019/04/28/csdn转移/Fence Repair 栅栏分割/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2019/04/28/csdn转移/贪心算法-Aaruman's Army/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2019/04/28/csdn转移/贪心算法分析/">(no title)</a>
-          </li>
-        
-      </ul>
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#会话"><span class="toc-number">1.</span> <span class="toc-text">会话</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#会话模式一"><span class="toc-number">1.0.1.</span> <span class="toc-text">会话模式一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#会话模式二"><span class="toc-number">1.0.2.</span> <span class="toc-text">会话模式二</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#指定默认会话，需要手动指定"><span class="toc-number">1.0.3.</span> <span class="toc-text">指定默认会话，需要手动指定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#交互式环境下设置默认会话"><span class="toc-number">1.0.4.</span> <span class="toc-text">交互式环境下设置默认会话</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常量与变量"><span class="toc-number">1.1.</span> <span class="toc-text">常量与变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常量constant"><span class="toc-number">1.1.1.</span> <span class="toc-text">常量constant</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#变量-Variable"><span class="toc-number">1.1.2.</span> <span class="toc-text">变量 Variable</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#变量赋值"><span class="toc-number">1.1.3.</span> <span class="toc-text">变量赋值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#思考题"><span class="toc-number">1.1.4.</span> <span class="toc-text">思考题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#占位符"><span class="toc-number">1.2.</span> <span class="toc-text">占位符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#占位符-placeholder"><span class="toc-number">1.2.1.</span> <span class="toc-text">占位符 placeholder</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Feed提交数据和Fetch提取数据"><span class="toc-number">1.3.</span> <span class="toc-text">Feed提交数据和Fetch提取数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Feed提交数据"><span class="toc-number">1.3.1.</span> <span class="toc-text">Feed提交数据</span></a></li></ol></li></ol>
+          </div>
+      </div>
     </div>
-  </div>
 
+  
+    
+
+  
+    
+  
+    
   
     
 
