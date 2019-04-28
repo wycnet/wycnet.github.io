@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>wycBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="问题：Expedition（POJ2431） 你需要驾驶一辆卡车行驶L单位的距离。最开始时，卡车上有p单位的汽油。卡车每开一单位的距离需要消耗一单位的汽油。如果在途中车上的汽油耗尽，卡车就无法继续前行，因而无法到达终点。在途中一共有n个加油站。第i个加油站在距离起点Ai单位距离的地方，最多可以给卡车加Bi单位的汽油。假设卡车的燃料箱的容量是无限大的。那么请问卡车是否能够到达终点？如果可以需要加多少">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wycBlog">
+<meta property="og:url" content="http://yoursite.com/2019/04/28/csdn转移/Expedition (POJ2431)运用优先级队列解题/index.html">
+<meta property="og:site_name" content="wycBlog">
+<meta property="og:description" content="问题：Expedition（POJ2431） 你需要驾驶一辆卡车行驶L单位的距离。最开始时，卡车上有p单位的汽油。卡车每开一单位的距离需要消耗一单位的汽油。如果在途中车上的汽油耗尽，卡车就无法继续前行，因而无法到达终点。在途中一共有n个加油站。第i个加油站在距离起点Ai单位距离的地方，最多可以给卡车加Bi单位的汽油。假设卡车的燃料箱的容量是无限大的。那么请问卡车是否能够到达终点？如果可以需要加多少">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-26T10:27:03.067Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="wycBlog">
+<meta name="twitter:description" content="问题：Expedition（POJ2431） 你需要驾驶一辆卡车行驶L单位的距离。最开始时，卡车上有p单位的汽油。卡车每开一单位的距离需要消耗一单位的汽油。如果在途中车上的汽油耗尽，卡车就无法继续前行，因而无法到达终点。在途中一共有n个加油站。第i个加油站在距离起点Ai单位距离的地方，最多可以给卡车加Bi单位的汽油。假设卡车的燃料箱的容量是无限大的。那么请问卡车是否能够到达终点？如果可以需要加多少">
+  
+    <link rel="alternate" href="/atom.xml" title="wycBlog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">wycBlog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-csdn转移/Expedition (POJ2431)运用优先级队列解题" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/28/csdn转移/Expedition (POJ2431)运用优先级队列解题/" class="article-date">
+  <time datetime="2019-04-28T12:31:54.449Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>问题：Expedition（POJ2431）</p>
+<p>你需要驾驶一辆卡车行驶L单位的距离。最开始时，卡车上有p单位的汽油。卡车每开一单位的距离需要消耗一单位的汽油。如果在途中车上的汽油耗尽，卡车就无法继续前行，因而无法到达终点。在途中一共有n个加油站。第i个加油站在距离起点Ai单位距离的地方，最多可以给卡车加Bi单位的汽油。假设卡车的燃料箱的容量是无限大的。那么请问卡车是否能够到达终点？如果可以需要加多少次油？如果可以到达终点，输入最少加油次数，否则输出-1。</p>
+<p><strong>限制条件</strong><br> $1\leqslant N \leqslant 10000$<br> $1\leqslant L \leqslant 1000000, 1 \leqslant P \leqslant 1000000 $<br> $1 \leqslant A_i &lt;L, 1 \leqslant B_i \leqslant 100 $<br>输入样例：<br>N=4, L=25, P=10;  //4个加油站，路程25，起始油量10<br>A={10,14,20,21}<br>B={10,5,2,4}<br>输出样例：<br>2（第一个和第二个加油站加油）<br>输入示例中的N比较小，但是在实际情况中N可以很大，当N很大时，一般的算法将花费大量时间，所以一个较好的算法是本题的解题关键。<br>对于本题我们可换一个思路。先不考虑加油问题，当汽车没油时，再从路过的加油站加油（因为路过时可以加油，我们在路过时不知道是否要在该站加油）。<br>那么在车没油时，我们可以已经路过了多个加油站，要选择哪个加油站加油呢？根据题目可知，我么的目的是为了求加油次数最少，所以我们要选择油量最多的加油站。<br>所以在这里就需要求出路过的加油站中油最多的加油站。因为只需要求出油最多的一个，所以不需要全排序，而且经过的加油站在不断增加，有因此我么选择堆排序是最好的选择。</p>
+<blockquote>
+<p>有关堆排序的内容<br><a href="https://blog.csdn.net/qq_28120673/article/details/81066756" target="_blank" rel="noopener">https://blog.csdn.net/qq_28120673/article/details/81066756</a></p>
+</blockquote>
+<p>算法设计如下：</p>
+<ul>
+<li>在经过加油站$A_i$时，往优先级队列中加$B_i$</li>
+<li>当燃料耗尽时有两种选择<ul>
+<li>如果优先队列也为空，则无法到达终点</li>
+<li>优先队列不为空，从队列中取出最大元素，并用来给加油站加油</li>
+</ul>
+</li>
+</ul>
+<p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;queue&gt;</span><br><span class="line"></span><br><span class="line">#define  MAX_N 10000</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int L, P ,N;</span><br><span class="line">int A[MAX_N+1], B[MAX_N+1];</span><br><span class="line"></span><br><span class="line">void init()&#123;</span><br><span class="line">    cin&gt;&gt;N&gt;&gt;L&gt;&gt;P;</span><br><span class="line">    for(int i=0;i&lt;N;i++)&#123;</span><br><span class="line">       cin&gt;&gt;A[i];</span><br><span class="line">    &#125;</span><br><span class="line">    for(int i=0;i&lt;N;i++)</span><br><span class="line">    cin&gt;&gt;B[i];</span><br><span class="line">    A[N]=L; //为了计算方便，将终点也设为加油站</span><br><span class="line">    B[N]=0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int solve()&#123;</span><br><span class="line">    priority_queue&lt;int&gt; que;</span><br><span class="line">    int ans=0;//加油次数</span><br><span class="line">    int pos=0;//所在位置</span><br><span class="line">    int tank=P;//剩余油量</span><br><span class="line"></span><br><span class="line">    for(int i=0;i&lt;N;i++)&#123;</span><br><span class="line">        int d=A[i]-pos;</span><br><span class="line">       while (d&gt;tank)&#123;</span><br><span class="line">           if(que.empty()) &#123;</span><br><span class="line">              ans=-1;</span><br><span class="line">               return ans;</span><br><span class="line">           &#125;</span><br><span class="line">           tank+=que.top();</span><br><span class="line">           que.pop();</span><br><span class="line">           ans++;</span><br><span class="line">       &#125;</span><br><span class="line">       tank=tank-(A[i]-pos);</span><br><span class="line">       pos=A[i];</span><br><span class="line">       que.push(B[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    return ans;</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">    init();</span><br><span class="line">    cout&lt;&lt;solve();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/Expedition (POJ2431)运用优先级队列解题/" data-id="cjv0wzt85000881rwi4bv9ij1" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/28/csdn转移/优先队列和堆/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/28/csdn转移/Fence Repair (PKU 3253)/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/js对象/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/记忆化搜索与动态优化与背包问题/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/Fence Repair 栅栏分割/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/贪心算法-Aaruman's Army/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/贪心算法分析/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2019 wycan&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;1982659010@qq.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png">
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

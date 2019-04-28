@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>wycBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Node.js Stream流Stream是一个抽象接口，Node中有很多对象实现了这个接口。例如:对Http发起请求的request对象就是一个Stream，还有stdout.Node.js Stream有四种类型：  Readable-可读操作 Writable-可写操作 Dyplex-可读写操作 Transform-操作被写入的数据然后读出结果  所有的Stream对象都是EventEmit">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wycBlog">
+<meta property="og:url" content="http://yoursite.com/2019/04/28/csdn转移/nodejs笔记2-Stream/index.html">
+<meta property="og:site_name" content="wycBlog">
+<meta property="og:description" content="Node.js Stream流Stream是一个抽象接口，Node中有很多对象实现了这个接口。例如:对Http发起请求的request对象就是一个Stream，还有stdout.Node.js Stream有四种类型：  Readable-可读操作 Writable-可写操作 Dyplex-可读写操作 Transform-操作被写入的数据然后读出结果  所有的Stream对象都是EventEmit">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-26T10:28:14.958Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="wycBlog">
+<meta name="twitter:description" content="Node.js Stream流Stream是一个抽象接口，Node中有很多对象实现了这个接口。例如:对Http发起请求的request对象就是一个Stream，还有stdout.Node.js Stream有四种类型：  Readable-可读操作 Writable-可写操作 Dyplex-可读写操作 Transform-操作被写入的数据然后读出结果  所有的Stream对象都是EventEmit">
+  
+    <link rel="alternate" href="/atom.xml" title="wycBlog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">wycBlog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-csdn转移/nodejs笔记2-Stream" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/28/csdn转移/nodejs笔记2-Stream/" class="article-date">
+  <time datetime="2019-04-28T12:31:54.365Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h2 id="Node-js-Stream流"><a href="#Node-js-Stream流" class="headerlink" title="Node.js Stream流"></a>Node.js Stream流</h2><p>Stream是一个抽象接口，Node中有很多对象实现了这个接口。例如:对Http发起请求的request对象就是一个Stream，还有stdout.<br>Node.js Stream有四种类型：</p>
+<ol>
+<li>Readable-可读操作</li>
+<li>Writable-可写操作</li>
+<li>Dyplex-可读写操作</li>
+<li>Transform-操作被写入的数据然后读出结果</li>
+</ol>
+<p>所有的Stream对象都是EventEmitter的实例。常用的时间有：</p>
+<ol>
+<li>data-当有数据可读时触发。</li>
+<li>end-没有更多数据可读时触发。</li>
+<li>error-在接收和写入的过程中发生错误时触发。</li>
+<li>finish-所有数据已经被写入到底层系统时触发。</li>
+</ol>
+<h2 id="从流中读取数据"><a href="#从流中读取数据" class="headerlink" title="从流中读取数据"></a>从流中读取数据</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs=<span class="built_in">require</span>(<span class="string">'fs'</span>);<span class="comment">//创建流</span></span><br><span class="line"><span class="keyword">var</span> data=<span class="string">''</span>;</span><br><span class="line"><span class="comment">//创建可读流</span></span><br><span class="line"><span class="keyword">var</span> readerStream=fs.createReadStream(<span class="string">'input.txt'</span>);<span class="comment">//从文件中创建可读流。</span></span><br><span class="line"><span class="comment">//设置编码为utf8</span></span><br><span class="line">readerStream.setEncoding(<span class="string">'utf8'</span>);</span><br><span class="line"><span class="comment">//处理流事件</span></span><br><span class="line">readerStream.on(<span class="string">'data'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">chunk</span>)</span>&#123;</span><br><span class="line">    data+=chunk;</span><br><span class="line">&#125;);</span><br><span class="line">readStream.on(<span class="string">'end'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;);</span><br><span class="line">readerStream.on(<span class="string">'error'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">er</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err.stack);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"程序执行完毕"</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="写入流"><a href="#写入流" class="headerlink" title="写入流"></a>写入流</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs=<span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"><span class="keyword">var</span> data=<span class="string">"这是一个写入流的演示实例"</span>;</span><br><span class="line"><span class="comment">//创建写入流，写入到文件output.txt中</span></span><br><span class="line"><span class="keyword">var</span> writerStream =fs.createWriteStream(<span class="string">'output.txt'</span>);</span><br><span class="line"><span class="comment">//使用utf8编码写入数据</span></span><br><span class="line">writerStream.write(data,<span class="string">'utf8'</span>);</span><br><span class="line"><span class="comment">//标记文件末尾</span></span><br><span class="line">writerStream.end();</span><br><span class="line"><span class="comment">//</span></span><br></pre></td></tr></table></figure>
+<h2 id="管道流"><a href="#管道流" class="headerlink" title="管道流"></a>管道流</h2><p>管道流提供了一个输出流到输入流的机制。通常我们用于将一个流中获取的数据传递到 另外一个流。<br><em>下面的例子中我们使用流从一个文件中读取后复制到另外一个  文件中去。</em></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs=<span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="comment">//创建一个读流</span></span><br><span class="line"><span class="keyword">var</span> readerStream=fs.createReadStream(<span class="string">'input.txt'</span>);</span><br><span class="line"><span class="comment">//创建一个可写流</span></span><br><span class="line"><span class="keyword">var</span> writerStream=fs.createWriteStream(<span class="string">'output.txt'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//管道读写操作,将读取的文件写入到output.txt中</span></span><br><span class="line">readerStream.pipe(writerStream);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"程序执行完毕"</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="链式流"><a href="#链式流" class="headerlink" title="链式流"></a>链式流</h2><p>链式流是链接输出流到另外一个流并创建多个流的操作的机制。<br>下面是利用管道和压缩和解压文件。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> fs=<span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">var</span> zlib=<span class="built_in">require</span>(<span class="string">'zlib'</span>);</span><br><span class="line"><span class="comment">//压缩input.txt文件为input.txt.gz</span></span><br><span class="line">fs.createReadStream(<span class="string">'input.txt'</span>)</span><br><span class="line">    .pipe(zlib.createGzip())       <span class="comment">//先输出到压缩流，</span></span><br><span class="line">    .pipe(fs.createWriteStream(<span class="string">'imput.txt.gz'</span>));<span class="comment">//再输出到写入流</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'文件压缩完成'</span>);</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/nodejs笔记2-Stream/" data-id="cjv0wzt8l000t81rwfth1ta3l" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/28/csdn转移/使用Express框架开发网站/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/28/csdn转移/css笔记--css中需要注意的知识点/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Node-js-Stream流"><span class="toc-number">1.</span> <span class="toc-text">Node.js Stream流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#从流中读取数据"><span class="toc-number">2.</span> <span class="toc-text">从流中读取数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#写入流"><span class="toc-number">3.</span> <span class="toc-text">写入流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#管道流"><span class="toc-number">4.</span> <span class="toc-text">管道流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#链式流"><span class="toc-number">5.</span> <span class="toc-text">链式流</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2019 wycan&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;1982659010@qq.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png">
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

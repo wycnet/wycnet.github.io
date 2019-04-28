@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>wycBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="##特殊状态的枚举虽然生成可行空间多数采用深度优先搜索，但在装态空间比较特殊时其实可以简短的实现。比如，c++标准库中提供了next_permutation函数，它可以把n个元素共n!中不同的排列组合生成出来。又或者，通过使用位运算符，可以枚举出从n个元素中取出k个的所有情况，或某个集合的所有子集。 1234567891011121314151617181920212223242526272829">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wycBlog">
+<meta property="og:url" content="http://yoursite.com/2019/04/28/csdn转移/最基础的穷竭搜索（2）/index.html">
+<meta property="og:site_name" content="wycBlog">
+<meta property="og:description" content="##特殊状态的枚举虽然生成可行空间多数采用深度优先搜索，但在装态空间比较特殊时其实可以简短的实现。比如，c++标准库中提供了next_permutation函数，它可以把n个元素共n!中不同的排列组合生成出来。又或者，通过使用位运算符，可以枚举出从n个元素中取出k个的所有情况，或某个集合的所有子集。 1234567891011121314151617181920212223242526272829">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdn.net/20180712172524425?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:updated_time" content="2019-04-26T10:24:01.311Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="wycBlog">
+<meta name="twitter:description" content="##特殊状态的枚举虽然生成可行空间多数采用深度优先搜索，但在装态空间比较特殊时其实可以简短的实现。比如，c++标准库中提供了next_permutation函数，它可以把n个元素共n!中不同的排列组合生成出来。又或者，通过使用位运算符，可以枚举出从n个元素中取出k个的所有情况，或某个集合的所有子集。 1234567891011121314151617181920212223242526272829">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20180712172524425?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+  
+    <link rel="alternate" href="/atom.xml" title="wycBlog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">wycBlog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-csdn转移/最基础的穷竭搜索（2）" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/28/csdn转移/最基础的穷竭搜索（2）/" class="article-date">
+  <time datetime="2019-04-28T12:31:54.485Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>##特殊状态的枚举<br>虽然生成可行空间多数采用深度优先搜索，但在装态空间比较特殊时其实可以简短的实现。比如，c++标准库中提供了next_permutation函数，它可以把n个元素共n!中不同的排列组合生成出来。又或者，通过使用位运算符，可以枚举出从n个元素中取出k个的所有情况，或某个集合的所有子集。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line"></span><br><span class="line">#define MAX_N 1000</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">bool used[MAX_N];</span><br><span class="line">int perm[MAX_N];</span><br><span class="line"></span><br><span class="line">//生成&#123;0，1，2，3，4，……，n-1&#125;种排序</span><br><span class="line">void permutation1(int pos,int n)&#123;</span><br><span class="line">	if(pos == n)&#123;</span><br><span class="line">		//在这里编写处理perm的程序</span><br><span class="line">		for(int i=0;i&lt;n;i++) cout&lt;&lt;perm[i]&lt;&lt;&quot; &quot;;</span><br><span class="line">		cout&lt;&lt;endl;</span><br><span class="line">		return;</span><br><span class="line">	&#125;</span><br><span class="line">	//perm的第pos个位置，究竟使用哪一个元素循环</span><br><span class="line">	for(int i=0 ;i&lt;n;i++)&#123;</span><br><span class="line">		if(!used[i])&#123;</span><br><span class="line">			perm[pos]=i;</span><br><span class="line">			used[i]=true;</span><br><span class="line">			permutation1(pos+1,n);</span><br><span class="line">			used[i]=false;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int perm2[MAX_N];</span><br><span class="line">void permutation2(int n)&#123;</span><br><span class="line">	for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">		perm2[i]=i;</span><br><span class="line">	&#125;</span><br><span class="line">	do&#123;</span><br><span class="line">		//此处编写对perm2的操作</span><br><span class="line">		for(int i=0;i&lt;n;i++) cout&lt;&lt;perm2[i]&lt;&lt;&quot; &quot;;</span><br><span class="line">		cout&lt;&lt;endl;</span><br><span class="line">	&#125;while(next_permutation(perm2,perm2+n));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">	permutation1(0,5 );</span><br><span class="line">	permutation2(5);</span><br><span class="line">	return 0;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对于1~n-1的全排列，上述代码提供可两种方法：<br>permutation1方法使用了深度优先搜索算法，该算法为perm数组的每个位置从剩余的元素中挑选一个。<br>permutation2方法调用了C++ STL提供的<algorithm>头文件下提供的next_permutation方法。</algorithm></p>
+<p>##剪枝</p>
+<p>当我们使用穷竭搜索时，程序会把所有可能的情况都列出来，如果有n个数，那么算法是时间复杂度为O(n!)。这样一来，当n较大时，计算会消耗大量时间。<br>当我们进行深度优先搜索时，到某个状态时已经明确知道在往下搜索不会有解，这时可以跳过，这种行为就称为剪枝。</p>
+<p>之前有一个求部分和问题。</p>
+<p>例题：部分和问题：<br>给定整数 a­1 、a2 、…… 、an，判断是否可以从中选出若干数，使它们的和恰好为K。<br> 限制条件：1 ≤ n ≤ 20 ；-108≤ ai ≤ 108；-108≤ k≤108；<br>输入样例：n=4 </p>
+<pre><code>a={1，2，4，7}
+  k=13
+</code></pre><p>输出样例：Yes(13 = 2+4+7)</p>
+<p>//给出整数a1~an,判断是否可以从中找出若干，使它们的和为k</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line">int n,k, * a;  //n为输入数据个数，k为所要的求和，a*为输入的数据数组</span><br><span class="line">void init()&#123;</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	a=new int[n];</span><br><span class="line">	for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">		cin&gt;&gt;a[i];</span><br><span class="line">	&#125;</span><br><span class="line">	cin&gt;&gt;k;</span><br><span class="line">&#125;</span><br><span class="line">bool dfs(int i,int sum)&#123;</span><br><span class="line">	if(i==n) return sum=k;</span><br><span class="line">	if(dfs(i+1,sum) ) return true;</span><br><span class="line">	if(dfs(i+1,sum+a[i]))return true;</span><br><span class="line">	return true;</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">	init();</span><br><span class="line">	if(dfs(0,0)) cout&lt;&lt;&quot;Yes&quot;;</span><br><span class="line">	else cout&lt;&lt;&quot;No&quot;;</span><br><span class="line">	return 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>该算法其实很简单，如上，dfs只用了五行代码。</p>
+<p>假如我们输入的数组长度为5，它们分别为1、2、3、4、5，求它们任意和的总情况有多少种呢？</p>
+<p>我们可以这样分析，可以把他作为概率论的问题，从中任意挑几个数，1出现或不出现有两种情况，2出现或不出现有两种情况，……。说以总情况为2^5种。</p>
+<p>说以，我们可以以此来画一个二叉树，每层节点代表一个数，左边为不出现，右边为出现：</p>
+<p><img src="https://img-blog.csdn.net/20180712172524425?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<blockquote>
+<p>求部分和<a href="https://blog.csdn.net/qq_28120673/article/details/80781806" target="_blank" rel="noopener">https://blog.csdn.net/qq_28120673/article/details/80781806</a></p>
+</blockquote>
+<p>上述算法中dfs算法代码如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">bool dfs(int i,int sum)&#123;</span><br><span class="line">	if(i==n) return sum=k;</span><br><span class="line">	if(dfs(i+1,sum) ) return true;</span><br><span class="line">	if(dfs(i+1,sum+a[i]))return true;</span><br><span class="line">	return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>改进该算法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">bool dfs(int i,int sum)&#123;</span><br><span class="line">	if(i==n) return sum=k;</span><br><span class="line">	if(sum&gt;k) return false;//如果sum&gt;k时在往下加一定不会等于k</span><br><span class="line">	if(dfs(i+1,sum) ) return true;</span><br><span class="line">	if(dfs(i+1,sum+a[i]))return true;</span><br><span class="line">	return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/最基础的穷竭搜索（2）/" data-id="cjv0wzt8y001a81rwahhhg2y6" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/28/csdn转移/贪心算法分析/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/28/csdn转移/深度优先搜索解决Lake Counting （POJ No.2386)/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/js对象/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/记忆化搜索与动态优化与背包问题/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/Fence Repair 栅栏分割/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/贪心算法-Aaruman's Army/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/贪心算法分析/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2019 wycan&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;1982659010@qq.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png">
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

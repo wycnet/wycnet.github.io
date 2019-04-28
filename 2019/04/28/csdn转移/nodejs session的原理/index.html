@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>wycBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="nodejs session的原理CookieHTTP协议是没有状态的，但是很多情况下是需要保存一些信息的。比如在用户登录后再次访问网站，没法判断用户是否已经登陆过。因此在这中情况下，我们需要一种数据结构来保存用户信息。于是Cookies就诞生了。 cookies用于在浏览器段保存用户信息。 cookies的特点如下：  保存在客户端浏览器 大小最大为4Kb 如果使用了cookies，访问域名时，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wycBlog">
+<meta property="og:url" content="http://yoursite.com/2019/04/28/csdn转移/nodejs session的原理/index.html">
+<meta property="og:site_name" content="wycBlog">
+<meta property="og:description" content="nodejs session的原理CookieHTTP协议是没有状态的，但是很多情况下是需要保存一些信息的。比如在用户登录后再次访问网站，没法判断用户是否已经登陆过。因此在这中情况下，我们需要一种数据结构来保存用户信息。于是Cookies就诞生了。 cookies用于在浏览器段保存用户信息。 cookies的特点如下：  保存在客户端浏览器 大小最大为4Kb 如果使用了cookies，访问域名时，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-26T10:28:41.381Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="wycBlog">
+<meta name="twitter:description" content="nodejs session的原理CookieHTTP协议是没有状态的，但是很多情况下是需要保存一些信息的。比如在用户登录后再次访问网站，没法判断用户是否已经登陆过。因此在这中情况下，我们需要一种数据结构来保存用户信息。于是Cookies就诞生了。 cookies用于在浏览器段保存用户信息。 cookies的特点如下：  保存在客户端浏览器 大小最大为4Kb 如果使用了cookies，访问域名时，">
+  
+    <link rel="alternate" href="/atom.xml" title="wycBlog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">wycBlog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-csdn转移/nodejs session的原理" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/28/csdn转移/nodejs session的原理/" class="article-date">
+  <time datetime="2019-04-28T12:31:54.329Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h1 id="nodejs-session的原理"><a href="#nodejs-session的原理" class="headerlink" title="nodejs session的原理"></a>nodejs session的原理</h1><h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2><p>HTTP协议是没有状态的，但是很多情况下是需要保存一些信息的。比如在用户登录后再次访问网站，没法判断用户是否已经登陆过。因此在这中情况下，我们需要一种数据结构来保存用户信息。于是Cookies就诞生了。</p>
+<p>cookies用于在浏览器段保存用户信息。</p>
+<p>cookies的特点如下：</p>
+<ul>
+<li>保存在客户端浏览器</li>
+<li>大小最大为4Kb</li>
+<li>如果使用了cookies，访问域名时，浏览器会带上这个域名的cookies</li>
+</ul>
+<p>但用户每次向服务器提交信息时都会带上Cookis。Coolies的特性非常不好，比如要访问的是服务器上的静态资源，比如图片，改访问并不需要确认用户，然而浏览器还是会发送Cookis给服务器。</p>
+<h2 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h2><p>Session的作用和Cookie差不多，但是Session是保存在服务器端的。前面提到用户通过Cookie向服务器提交用户信息，服务器拿到用户信息后该怎么验证呢？查询一下数据库？？这样可以实现，但是如果每个用户每次访问都要提交从数据库验证一次，那么将对服务器性能的极大浪费。所以服务器端保存Session用来验证用户身份的合法性。</p>
+<p>Session的创建循序</p>
+<ol>
+<li>生成全局唯一标示符</li>
+<li>开辟数据存储空间。一般会在内存中开辟一块空间建立存储Session的数据结构，但是这样会有弊端：系统掉电，那么服务器端的Session将全部丢失。所以一般情况下会将Session保存在数据库或者文件夹中。</li>
+<li>将Session的全局唯一标示符发送给客户端。</li>
+</ol>
+<p>现在的问题是服务器怎么将Session的标示符发送给客户端呢。根据HTTP协议，数据的发送可以放在请求行、头域或Body里。</p>
+<p>服务器发送给客户端浏览器Session的唯一标示符保存在客户端的Cookies中。</p>
+<h2 id="Set-Cookie"><a href="#Set-Cookie" class="headerlink" title="Set-Cookie"></a>Set-Cookie</h2><p>服务器返回浏览器的请求中设置Cookie。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;Set-Cookie&quot;: &quot;session=r@rdegges.com&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>服务器会返回一个set-cookie的消息，通知浏览器要设置cookie了，于是浏览器会根据set-cookie里的字段来设置信息了，比如上图的信息就会设置<a href="mailto:session=r@rdegges.com" target="_blank" rel="noopener">session=r@rdegges.com</a></p>
+<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><p>现在我们用client-session中间件来配置Session</p>
+<ol>
+<li><p>安装模块<br><code>var session = require(&#39;client-sessions&#39;);</code></p>
+</li>
+<li><p>配置session</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">app.use(session(&#123;</span><br><span class="line">    cookieName: <span class="string">'session'</span>,  </span><br><span class="line">    secret: <span class="string">'random_string_goes_here'</span>, <span class="comment">//一个随机字符串，因为客户端的数据都是不安全的，所以需要进行加密</span></span><br><span class="line">    duration: <span class="number">30</span>*<span class="number">60</span>*<span class="number">1000</span>, <span class="comment">//session的过期时间，过期了就必须重新设置</span></span><br><span class="line">    activeDuration: <span class="number">5</span>* <span class="number">60</span>*<span class="number">1000</span>, <span class="comment">// 激活时间，比如设置为30分钟，那么只要30分钟内用户有服务器的交互，那么就会被重新激活。</span></span><br><span class="line">&#125;))</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="在Session中保存用户信息"><a href="#在Session中保存用户信息" class="headerlink" title="在Session中保存用户信息"></a>在Session中保存用户信息</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">app.post(<span class="string">'/login'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">    User.findOne(&#123;<span class="attr">email</span>:req.body.email&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">err,user</span>)</span>&#123; <span class="comment">//数据库中查找改用户</span></span><br><span class="line">        <span class="keyword">if</span>(!user)&#123; <span class="comment">//没有找到</span></span><br><span class="line">            res.render(<span class="string">'login.jade'</span>,&#123;<span class="attr">error</span>:<span class="string">'用户名或密码错误！'</span>&#125;)</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(req.body.password == user.password)&#123;</span><br><span class="line">                req.session.user == user <span class="comment">//将user信息保存到Session中</span></span><br><span class="line">                res.redirect(<span class="string">'/dashboard'</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            res.render(<span class="string">'login.jade'</span>,&#123;<span class="attr">error</span>:<span class="string">'用户名或密码错误!'</span>&#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="session层中间件"><a href="#session层中间件" class="headerlink" title="session层中间件"></a>session层中间件</h2><p>我们可以会在对每个请求做如下的检查，但是我们完全可以不必这样做。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">app.use(<span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (req.session &amp;&amp; req.session.user)  &#123;</span><br><span class="line">    User.findOne(&#123; <span class="attr">email</span>: req.session.user.email &#125;, <span class="function"><span class="keyword">function</span>(<span class="params">err, user</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (user) &#123;</span><br><span class="line">        req.user = user;</span><br><span class="line">        <span class="keyword">delete</span> req.user.password; <span class="comment">// delete the password from the session</span></span><br><span class="line">        req.session.user = user;  <span class="comment">//refresh the session value</span></span><br><span class="line">        res.locals.user = user;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// finishing processing the middleware and run the route</span></span><br><span class="line">      next();</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    next();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>如果需要是用户登录后才能访问的页面，那么我们可以设计一个检查是否登录的中间函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">requireLogin</span>(<span class="params">req,res,next</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!req.user)&#123;</span><br><span class="line">        res.redirect(<span class="string">'/login'</span>)</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        next();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">'/dashboard'</span>,requireLogion,<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">    res.render(<span class="string">'dashboard.jade)</span></span><br><span class="line"><span class="string">&#125;)</span></span><br></pre></td></tr></table></figure>
+<h2 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h2><p>我们可以在登出时重置Session</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/logout'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">    req.session.reset()</span><br><span class="line">    res.redirect(<span class="string">'/'</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Cookie和Session有各自的优缺点</p>
+<ol>
+<li>应用场景</li>
+</ol>
+<p>Cookie的典型应用为RememberMe 服务即用户的账户信息通过cookie的形式保存在客户端，当用户再次请求匹配的url时，账户信息会被传送到服务器端，交给相应的程序完成自动登录功能。当然亦可以保存一些客户端信息，如页面布局和搜索历史等。</p>
+<p>Session的典型应用场景是用户登录某网站之后，将其登录信息放入session，在以后的每次请求中查询相应的登录信息以确保该用户合法。当然还是有购物车等等经典场景；</p>
+<ol start="2">
+<li>安全性</li>
+</ol>
+<p>cookie将信息保存在客户端，如果不进行加密的话，无疑会暴露一些隐私信息，安全性很差，一般情况下敏感信息是经过加密后存储在cookie中，但很容易就会被窃取。而session只会将信息存储在服务端，如果存储在文件或数据库中，也有被窃取的可能，只是可能性比cookie小了太多。</p>
+<p>Session安全性方面比较突出的是存在会话劫持的问题，这是一种安全威胁，这在下文会进行更详细的说明。总体来讲，session的安全性要高于cookie；</p>
+<ol start="3">
+<li>性能</li>
+</ol>
+<p>Cookie存储在客户端，消耗的是客户端的I/O和内存，而session存储在服务端，消耗的是服务端的资源。但是session对服务器造成的压力比较集中，而cookie很好地分散了资源消耗，就这点来说，cookie是要优于session的；</p>
+<ol start="4">
+<li>时效性</li>
+</ol>
+<p>Cookie可以通过设置有效期使其较长时间内存在于客户端，而session一般只有比较短的有效期（用户主动销毁session或关闭浏览器后引发超时）；</p>
+<ol start="5">
+<li>其他</li>
+</ol>
+<p>Cookie的处理在开发中没有session方便。而且cookie在客户端是有数量和大小的限制的，而session的大小却只以硬件为限制，能存储的数据无疑大了太多。</p>
+<blockquote>
+<p>参考<a href="https://segmentfault.com/a/1190000010837077" target="_blank" rel="noopener">https://segmentfault.com/a/1190000010837077</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/nodejs session的原理/" data-id="cjv0wzt8k000r81rwq5ejw8vc" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/28/csdn转移/数学问题的解题窍门——辗转相除法/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/28/csdn转移/1-tensorflow学习笔记-会话/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#nodejs-session的原理"><span class="toc-number">1.</span> <span class="toc-text">nodejs session的原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Cookie"><span class="toc-number">1.1.</span> <span class="toc-text">Cookie</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Session"><span class="toc-number">1.2.</span> <span class="toc-text">Session</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Set-Cookie"><span class="toc-number">1.3.</span> <span class="toc-text">Set-Cookie</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实战"><span class="toc-number">1.4.</span> <span class="toc-text">实战</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在Session中保存用户信息"><span class="toc-number">1.5.</span> <span class="toc-text">在Session中保存用户信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#session层中间件"><span class="toc-number">1.6.</span> <span class="toc-text">session层中间件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安全性"><span class="toc-number">1.7.</span> <span class="toc-text">安全性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">1.8.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2019 wycan&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;1982659010@qq.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png">
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

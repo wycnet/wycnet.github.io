@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>wycBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="wycBlog">
+<meta property="og:url" content="http://yoursite.com/page/5/index.html">
+<meta property="og:site_name" content="wycBlog">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="wycBlog">
+  
+    <link rel="alternate" href="/atom.xml" title="wycBlog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">wycBlog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-hexo入坑/阿里云服务器搭建hexoblog" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/28/hexo入坑/阿里云服务器搭建hexoblog/" class="article-date">
+  <time datetime="2019-04-28T11:41:25.000Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/hexo入坑/">hexo入坑</a>►<a class="article-category-link" href="/categories/hexo入坑/阿里云服务器搭建hexoblog/">阿里云服务器搭建hexoblog</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/28/hexo入坑/阿里云服务器搭建hexoblog/">阿里云服务器搭建hexoblog</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>[toc]</p>
+<h1 id="使用阿里云服务器搭建hexoblog"><a href="#使用阿里云服务器搭建hexoblog" class="headerlink" title="使用阿里云服务器搭建hexoblog"></a>使用阿里云服务器搭建hexoblog</h1><h2 id="创建服务器坑"><a href="#创建服务器坑" class="headerlink" title="创建服务器坑"></a>创建服务器坑</h2><p>购买阿里云轻量级服务器,观看了各种镜像说明最终选择了镜像系统BT-Panel(宝塔Linux面板是一款使用方便、功能强大的服务器管理软件。面板集成一键配置：LAMP/LNMP/Tomcat/Node.js、网站、数据库、FTP、SSL，可以通过Web端轻松管理服务器。该镜像基于CentOS 7.3 64位操作系统。),根据教程设置并登录了宝塔系统,之后新建网站,网站名为/www/wwwroot.</p>
+<p>BT-Panel提供了ftp服务, 然而hexo有sftp,ftpsync,git 等推送方式,就是没有ftp方式,所以我就想能否用git仓库来搭建.</p>
+<p>期初想着把git仓库直接放在网站目录下,这样就可以直接将发布的笔记推送到服务器.于是在<code>/www/wwwroot/robocup3d</code> 目录下使用 <code>git init robocup3d</code>建立git仓库, 在推送的时候却出现了问题,</p>
+<ul>
+<li>git init 建立仓库会在目录下生成work-tree</li>
+<li>git –bare init 建立的仓库没有work-tree</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">remote: error: is denied, because it will make the index and work tree inconsis</span><br><span class="line">ent</span><br><span class="line">remote: error: with what you pushed, and will require <span class="string">'git reset --hard'</span> to mat</span><br><span class="line">h</span><br><span class="line">remote: error: the work tree to HEAD.</span><br><span class="line">remote: error:</span><br><span class="line">remote: error: You can <span class="built_in">set</span> <span class="string">'receive.denyCurrentBranch'</span> configuration variable t</span><br><span class="line"></span><br><span class="line">remote: error: <span class="string">'ignore'</span> or <span class="string">'warn'</span> <span class="keyword">in</span> the remote repository to allow pushing int</span><br><span class="line"></span><br><span class="line">remote: error: its current branch; however, this is not recommended unless you</span><br><span class="line">remote: error: arranged to update its work tree to match what you pushed <span class="keyword">in</span> som</span><br><span class="line"></span><br><span class="line">remote: error: other way.</span><br><span class="line">remote: error:</span><br><span class="line">remote: error: To squelch this message and still keep the default behaviour, se</span><br><span class="line"></span><br><span class="line">remote: error: <span class="string">'receive.denyCurrentBranch'</span> configuration variable to <span class="string">'refuse'</span>.</span><br><span class="line">To ssh://root@192.168.1.8:/var/www/drupal/web</span><br><span class="line"> ! [remote rejected] master -&gt; master (branch is currently checked out)</span><br><span class="line">error: failed to push some refs to <span class="string">'ssh://root@192.168.1.8:/var/www/drupal/web'</span></span><br></pre></td></tr></table></figure>
+<p>经过研究发现是因为git仓库拒绝推送,根据提示使在服务器的仓库中用命令<code>git config receive.denyCurrentBranch = ignore</code> ,设置完成后尝试推送,成功,大喜! 然而测试更新文章时却发现推送成功,网站却没有更新,<br>再研究…….</p>
+<p>…..</p>
+<p>最终发现, 我使用git init 来初始化仓库时,虽然会自动在项目文件夹中生成work-tree ,然后,有新的版本推送过来后,work-tree的内容不会自动更新,需要在代码仓库中使用<code>git reset --hard</code>来跟新 WTF? 难道我每次推送完了还是要去服务器上手动更新?</p>
+<p>这个问题应该有办法解决吧? 经过研究…….</p>
+<p>……</p>
+<p>最终发现了git的hooks功能,该功能相当于一个回调函数,当有新版本被推送到达时触发执行. 于是我删除了原本的代码仓库, 在服务器的<code>root</code>目录下建立了代码仓库<code>git --bare init robocup3Book</code> 代码仓库,</p>
+<p>然后在仓库中的hooks文件夹中创建文件,post-receive文件,并写入内容:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]$ <span class="built_in">cd</span> /home/workspace/wwwroot.git/hooks</span><br><span class="line">[root@localhost]$ cat &gt; post-receive &lt;&lt;EOF</span><br><span class="line">&gt;<span class="comment">#!/bin/bash</span></span><br><span class="line">&gt;git --work-tree=/www/wwwroot/robocup3d checkout -f </span><br><span class="line">&gt;EOF</span><br><span class="line">[root@localhost]$ chmod +x post-receive</span><br></pre></td></tr></table></figure></p>
+<p>之后在hexo中执行<code>hexo d</code> 将web推送到仓库的master分支, git的hooks功能将会自动把work-tree加载到服务器文件夹下:<code>/www/wwwroot/robocup3d</code></p>
+<h2 id="hexo命令keng"><a href="#hexo命令keng" class="headerlink" title="hexo命令keng"></a>hexo命令keng</h2><p>执行<code>hexo new fileName</code> , 该命令会默认在_posts文件夹下新建一个笔记, 如果笔记太多岂不是非常乱?</p>
+<p>研究发现,在_posts文件夹下要生成子文件夹需要使用<code>hexo new -p dirname/fileName fileName</code> , fileName需要写两次…</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/hexo入坑/阿里云服务器搭建hexoblog/" data-id="cjv0wzt88000a81rwp6nx4vft" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-test" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/26/test/" class="article-date">
+  <time datetime="2019-04-26T05:52:17.000Z" itemprop="datePublished">2019-04-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/测试/">测试</a>►<a class="article-category-link" href="/categories/测试/12/">12</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/26/test/">test</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题一"><a href="#二级标题一" class="headerlink" title="二级标题一"></a>二级标题一</h2><h2 id="二级标题二"><a href="#二级标题二" class="headerlink" title="二级标题二"></a>二级标题二</h2><h2 id="二级标题三"><a href="#二级标题三" class="headerlink" title="二级标题三"></a>二级标题三</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/26/test/" data-id="cjv0wzt6a000081rwvm7najoi" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/te/">te</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/page/4/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
+  </nav>
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/js对象/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/记忆化搜索与动态优化与背包问题/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/Fence Repair 栅栏分割/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/贪心算法-Aaruman's Army/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/贪心算法分析/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2019 wycan&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;1982659010@qq.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png">
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>wycBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="##Rence Repair 题目：农夫约翰为了修理栅栏，要将一块很长的木板分割成N块。准备切成的木板的长度为L1、L2、……、Ln. 未切割木板的长度恰好为切割木板的长度和。每次切断木板时，需要的开销为这块木板的长度。例如，长度为21的木板切割成5、8、8的三块木板。长为21的木板切割成13、8时，开销为21.再将长度为13的木板切割成长度5、8时，开销为13.于是合计开销为34。于是按题目要求">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wycBlog">
+<meta property="og:url" content="http://yoursite.com/2019/04/28/csdn转移/Fence Repair 栅栏分割/index.html">
+<meta property="og:site_name" content="wycBlog">
+<meta property="og:description" content="##Rence Repair 题目：农夫约翰为了修理栅栏，要将一块很长的木板分割成N块。准备切成的木板的长度为L1、L2、……、Ln. 未切割木板的长度恰好为切割木板的长度和。每次切断木板时，需要的开销为这块木板的长度。例如，长度为21的木板切割成5、8、8的三块木板。长为21的木板切割成13、8时，开销为21.再将长度为13的木板切割成长度5、8时，开销为13.于是合计开销为34。于是按题目要求">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdn.net/20180713101142811?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:updated_time" content="2019-04-26T10:23:30.004Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="wycBlog">
+<meta name="twitter:description" content="##Rence Repair 题目：农夫约翰为了修理栅栏，要将一块很长的木板分割成N块。准备切成的木板的长度为L1、L2、……、Ln. 未切割木板的长度恰好为切割木板的长度和。每次切断木板时，需要的开销为这块木板的长度。例如，长度为21的木板切割成5、8、8的三块木板。长为21的木板切割成13、8时，开销为21.再将长度为13的木板切割成长度5、8时，开销为13.于是合计开销为34。于是按题目要求">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20180713101142811?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+  
+    <link rel="alternate" href="/atom.xml" title="wycBlog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">wycBlog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-csdn转移/Fence Repair 栅栏分割" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/28/csdn转移/Fence Repair 栅栏分割/" class="article-date">
+  <time datetime="2019-04-28T12:31:54.509Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>##Rence Repair</p>
+<p>题目：<br>农夫约翰为了修理栅栏，要将一块很长的木板分割成N块。准备切成的木板的长度为L1、L2、……、Ln. 未切割木板的长度恰好为切割木板的长度和。每次切断木板时，需要的开销为这块木板的长度。例如，长度为21的木板切割成5、8、8的三块木板。长为21的木板切割成13、8时，开销为21.再将长度为13的木板切割成长度5、8时，开销为13.于是合计开销为34。于是按题目要求将木板切割完，最小的开销是多少？</p>
+<p><strong>限制条件：</strong><br><strong>1&lt;=N&lt;=2000</strong><br><strong>0&lt;=Li&lt;=5000</strong></p>
+<p>输入样例：<br>N=3, L={8, 5, 8}<br>输出样例：<br>34</p>
+<p>由于木板的切割顺序不确定，切割方法右很多，题目看似很难入手。然而，仔细考虑会发现我们可以用贪心算法来解决此问题。<br> 我们可以利用二叉树原理来描述切割木板。</p>
+<p><img src="https://img-blog.csdn.net/20180713101142811?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<p>根据这个二叉树的切割方法，可以计算出总开销：<br>    3<em>2+4</em>2+1<em>3+2</em>3+5*2=33<br>根据此二叉树我们可观察到，如果想要总开销最小，最短的板应该是最深的叶子节点，而且该叶子节点一定右兄弟节点，说以该兄弟节点一定是次短板。<br>因此我们可以哈夫曼编码的方式来构造二叉树：</p>
+<ul>
+<li>首先将L1~Ln排序</li>
+<li>取最短的两个节点合并</li>
+<li>重新排序，并重步骤二</li>
+</ul>
+<p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line"></span><br><span class="line">#define MAX_N 1000</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int N, L[MAX_N];</span><br><span class="line"></span><br><span class="line">void init()&#123;</span><br><span class="line">	cin&gt;&gt;N;</span><br><span class="line">	for(int i=0;i&lt;N;i++)&#123;</span><br><span class="line">		cin&gt;&gt;L[i];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bool complare(int a,int b)&#123;</span><br><span class="line">	return a&gt;b;</span><br><span class="line">&#125;</span><br><span class="line">void solve()&#123;   //利用sort函数排序</span><br><span class="line">	sort(L,L+N,complare); //从大到小排序</span><br><span class="line">		for(int i=0;i&lt;N;i++)&#123;</span><br><span class="line">			cout&lt;&lt;L[i]&lt;&lt;&quot; &quot;;</span><br><span class="line">		&#125;</span><br><span class="line">		cout&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">	int ans=0;</span><br><span class="line">	while(N!=1)&#123;  //循环合并最小的两个节点</span><br><span class="line">		L[N-2]+=L[N-1];</span><br><span class="line">		N--;</span><br><span class="line">		ans+=L[N-1];</span><br><span class="line">		sort(L,L+N,complare);</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void solve2()&#123; //第二种方法，设法每次找到最小的两个。</span><br><span class="line">	int ans=0;</span><br><span class="line">	while(N&gt;1)&#123;</span><br><span class="line">		int mii1 =0, mii2=1;</span><br><span class="line">		if(L[mii1] &gt;L[mii2]) swap(mii1,mii2);</span><br><span class="line">		//找出最小的两个数</span><br><span class="line">		for(int i=2;i&lt;N;i++)&#123;</span><br><span class="line">			if( L[i]&lt;L[mii1])&#123;</span><br><span class="line">				mii2=mii1;</span><br><span class="line">				mii1=i;</span><br><span class="line">			&#125;else if(L[i]&lt;L[mii2])&#123;</span><br><span class="line">				mii2=i;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		//合并两块板</span><br><span class="line">		int t=L[mii1]+L[mii2];</span><br><span class="line">		ans+=t;</span><br><span class="line"></span><br><span class="line">		if(mii1==N-1) &#123;</span><br><span class="line">			swap(mii1,mii2);</span><br><span class="line">		&#125;</span><br><span class="line">		L[mii1]=t;</span><br><span class="line">		L[mii2]=L[N-1];</span><br><span class="line">		N--;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">	init();</span><br><span class="line">	solve();</span><br><span class="line">//	solve2();</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/Fence Repair 栅栏分割/" data-id="cjv0wzt8a000e81rweyrdfwa6" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/28/csdn转移/记忆化搜索与动态优化与背包问题/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/28/csdn转移/贪心算法-Aaruman's Army/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/js对象/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/记忆化搜索与动态优化与背包问题/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/Fence Repair 栅栏分割/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/贪心算法-Aaruman's Army/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/贪心算法分析/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2019 wycan&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;1982659010@qq.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png">
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>wycBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="##单源最短路径问题单源最短路径是固定一个起点，求它到其他所以点的最短路径的问题。终点也固定的点叫做两点之间最短路径问题。因为两点之间的最短路径问题是单源最短路径问题的复杂度相同所以也归类为单元最短路径问题。用d[i]表示从起点s出发到顶点i的最短路径。$d[i] =min{d[j]+(从j到i的边的权值)|e=(j,i) 属于E};$如果给定是图是DAG(无圈有向图),就可以按拓扑序给顶点编号,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wycBlog">
+<meta property="og:url" content="http://yoursite.com/2019/04/28/csdn转移/最短路径问题/index.html">
+<meta property="og:site_name" content="wycBlog">
+<meta property="og:description" content="##单源最短路径问题单源最短路径是固定一个起点，求它到其他所以点的最短路径的问题。终点也固定的点叫做两点之间最短路径问题。因为两点之间的最短路径问题是单源最短路径问题的复杂度相同所以也归类为单元最短路径问题。用d[i]表示从起点s出发到顶点i的最短路径。$d[i] =min{d[j]+(从j到i的边的权值)|e=(j,i) 属于E};$如果给定是图是DAG(无圈有向图),就可以按拓扑序给顶点编号,">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdn.net/20180726172841610?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180726184033926?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180726190336648?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180726191440232?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180726191824788?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:updated_time" content="2019-04-26T10:27:25.211Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="wycBlog">
+<meta name="twitter:description" content="##单源最短路径问题单源最短路径是固定一个起点，求它到其他所以点的最短路径的问题。终点也固定的点叫做两点之间最短路径问题。因为两点之间的最短路径问题是单源最短路径问题的复杂度相同所以也归类为单元最短路径问题。用d[i]表示从起点s出发到顶点i的最短路径。$d[i] =min{d[j]+(从j到i的边的权值)|e=(j,i) 属于E};$如果给定是图是DAG(无圈有向图),就可以按拓扑序给顶点编号,">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20180726172841610?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+  
+    <link rel="alternate" href="/atom.xml" title="wycBlog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">wycBlog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-csdn转移/最短路径问题" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/28/csdn转移/最短路径问题/" class="article-date">
+  <time datetime="2019-04-28T12:31:54.413Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>##单源最短路径问题<br>单源最短路径是固定一个起点，求它到其他所以点的最短路径的问题。终点也固定的点叫做两点之间最短路径问题。因为两点之间的最短路径问题是单源最短路径问题的复杂度相同所以也归类为单元最短路径问题。<br>用d[i]表示从起点s出发到顶点i的最短路径。<br>$d[i] =min{d[j]+(从j到i的边的权值)|e=(j,i) 属于E};$<br>如果给定是图是DAG(无圈有向图),就可以按拓扑序给顶点编号,并利用这个递推关系式计算出d 。在这总情况下，记起点到i的最短距离为d[i]，设初始值为：d[s]=0;d[i]=INF 。然后不断使用这条递推关系不断更新d的值，就可以算出新的d。实际上这利用了深度优先搜索的思想。</p>
+<p>如下算法为Bellman-Ford算法。如果在图中不存在从s可达的负圈，那么最短路径不会经过同一个顶点两次，while(true)的循环最多执行|v|-1次，因此，复杂度是$O(|V| ×|E|)$。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">#define MAX_E 1000</span><br><span class="line">#define MAX_V 1000</span><br><span class="line">#define INF 1000000</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">struct  edge &#123; int from, to, cost&#125;;</span><br><span class="line"></span><br><span class="line">edge es[MAX_E];//边</span><br><span class="line">int d[MAX_V];//用来存储最短距离</span><br><span class="line">int V,E; //点和边的数量</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//从顶点s出发到所有点的最短距离，通过边来计算。</span><br><span class="line">void shortest_path(int s)&#123;</span><br><span class="line">    for(int i=0;i&lt;V;i++)&#123;</span><br><span class="line">        d[i]=INF;</span><br><span class="line">    &#125;</span><br><span class="line">    d[s]=0;//s是起点，从起点到起点距离当然是0；</span><br><span class="line">    while(true)&#123;</span><br><span class="line">        bool update=false;</span><br><span class="line">        for(int i=0;i&lt;E;i++)&#123;</span><br><span class="line">            edge e=es[i];</span><br><span class="line">            if(d[e.from]!=INF &amp;&amp; d[e.to]&gt;d[e.from]+e.cost)&#123;</span><br><span class="line">                d[e.to]=d[e.from]+e.cost;</span><br><span class="line">                update=true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if(!update) break;</span><br><span class="line">    &#125;        </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>反之，如果存在从s可达的负圈，那么在第|v|次循环中也会更新d的值，因此，也卡伊利用这个性质来检查负圈。如果一开始对所以顶点i，都把d[i]初始化为0，那么可以检查出所所有的负圈。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">bool findNegativeLoop()&#123;</span><br><span class="line">    memset(d,0, sizeof(d));</span><br><span class="line"></span><br><span class="line">    for(int i=0;i&lt;V;i++)&#123;</span><br><span class="line">        for(int j=0;j&lt;E;j++)&#123;</span><br><span class="line">            edge e=es[i];</span><br><span class="line">            if(d[e.to]&gt;d[e.from]+e.cost)&#123;</span><br><span class="line">                d[e.to]=d[e.from]+e.cost;</span><br><span class="line">                if(i==V-1) return false; //如果不存在负圈，那么最多循环V-1次结束，所以这里如果循环到了V次，那么一定</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>该算法时间复杂度为:$O(|V||E|)$</p>
+<p>##单源最短路径2——Dijkstra算法<br>在没有负边的情况下，在Bellman0Ford算法中，如果d[i]还不是最短距离的话，那么即使进行d[j]=d[i]+从i到j的权值更新，d[j]也不会变成最短距离。而且，即使d[i]没有变化，每一次循环都要检查一次从i出发的所以边。由此可知，算法很费时间。<br>现在对算法做如下修改：</p>
+<ul>
+<li>找到最短距离已经确定的顶点，从它出发更新相邻顶点的最短距离</li>
+<li>此后不需要再关心最短路径已经确认的顶点。</li>
+</ul>
+<p>该算法的代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#define MAX_V 1000</span><br><span class="line">#define INF 100000000000</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int cost[MAX_V][MAX_V]; //存储边的权值</span><br><span class="line">int d[MAX_V];//存储最短距离</span><br><span class="line">bool used[MAX_V];//标记该点是否已经用过，使用过表示该点已计算出最短距离</span><br><span class="line">int V; //顶点数量</span><br><span class="line"></span><br><span class="line">void dijkstra(int s)&#123;</span><br><span class="line">    fill(d,d+V,INF);</span><br><span class="line">    fill(used,used+V;false);</span><br><span class="line">    d[s]=0;</span><br><span class="line">    </span><br><span class="line">    while(true)&#123;</span><br><span class="line">        int v=-1;</span><br><span class="line">        for(int u=0;u&lt;V;u++)&#123; //从未使用的顶点中选择一个距离最短的顶点</span><br><span class="line">            if(! used[u] &amp;&amp; (v== -1 || d[u]&lt;d[v])) v=u;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        if(v==-1) break; //v==-1说明所以的顶点都已经计算完成了</span><br><span class="line">        </span><br><span class="line">        used[v]=true;    //将v标记为以访问过</span><br><span class="line">        </span><br><span class="line">        for(int u=0;u&lt;V;u++)&#123;  //更新与v相连的所以节点</span><br><span class="line">            d[u]=min(d[u],d[v]+cost[v][u]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用相邻矩阵实现的Dijkstra算法的时间复杂度为$O(|V|^2)$ 。实际上仔细观察会发现，该算法中while每次循环都要先查询距离最短的一个没有被使用的节点。我们如果在插入时就进行排序，那么会可以直接取出最小的值。</p>
+<p>优化后的算法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">#include &lt;queue&gt;</span><br><span class="line"></span><br><span class="line">#define MAX_V 1000</span><br><span class="line">#define INF 100000000000</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">struct edge &#123;</span><br><span class="line">    int to, cost;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">typedef pair&lt;int, int&gt; P;//first中存放距离，second中存放编号</span><br><span class="line"></span><br><span class="line">int V;</span><br><span class="line">vector&lt;edge&gt; G[MAX_V];</span><br><span class="line">int d[MAX_V];</span><br><span class="line"></span><br><span class="line">void dijkstra(int s) &#123;</span><br><span class="line">    //优先级队列，从小到大排列</span><br><span class="line">    priority_queue&lt;P, vector&lt;P&gt;, greater&lt;P&gt;&gt; que;</span><br><span class="line">    fill(d, d + V, INF);</span><br><span class="line">    d[s] = 0;</span><br><span class="line">    que.push(P(0, s));</span><br><span class="line"></span><br><span class="line">    while (!que.empty()) &#123;</span><br><span class="line">        P p = que.top();</span><br><span class="line">        que.pop();</span><br><span class="line">        int v = p.second;</span><br><span class="line">        if (d[v] &lt; p.first) continue;//在这种情况下说明此记录已经作废，例如第一次循环插入了P(3,4);第二次循环又插入了P(2,4),显然，第二次的数据应该</span><br><span class="line">                                                    //替换掉第一次数据，但是由于我们在这里使用了哦=优先级队列存储，如果要替换掉上一次的记录=会比较麻烦，所以我们不去除无效的数据，</span><br><span class="line">                                                    //当从队列中取出数据时再判断是否是无效的数据（在之前应当被替换的数据）。</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt; G[v].size(); i++) &#123;</span><br><span class="line">            edge e = G[v][i];</span><br><span class="line">            if (d[e.to] &gt; d[v] + e.cost) &#123;</span><br><span class="line">                d[e.to] = d[v] + e.cost;</span><br><span class="line">                que.push(P(d[e.to], e.to));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>该算法的时间复杂度为$O(|E|×log|V|)$</p>
+<p>上述的代码中，有一条语句<code>if(d[v]&lt;p.first)continue;</code> 该条代码分析如下：<br>在这种情况下说明此记录已经作废，例如第一次循环插入了P(3,4);第二次循环又插入了P(2,4),显然，第二次的数据应该替换掉第一次数据，但是由于我们在这里使用了哦=优先级队列存储，如果要替换掉上一次的记录=会比较麻烦，所以我们不去除无效的数据，当从队列中取出数据时再判断是否是无效的数据（在之前应当被替换的数据）。</p>
+<p>在优化之前的算法中，我们使用了bool used来标记那些最短距离已经被计算出来的节点，但是在优化算法中却没有看到类似的标记，这是为什么呢？其实原因很简单，优化之前的算法中，我们每次选取最短距离的点是从所有的点中选取的，所以到去除掉已经计算过的点；而优化算法中，是从优先级对接列中取出的点，优先级队列中的点是每次循环更新了距离的点，显然已经计算出最近距离的点不会在更新距离，所以就不会再出现在优先级队列中。因此优化算法中并不需要bool used 标记。</p>
+<p>##任意两点之间的最短距离——Floyd-Warshall算法</p>
+<p>Floayd-Warshall算法和Bellman-Ford算法一样可以处理边数为负数的情况，并且可以判断是否有负圈。<br>算法思路：<br>问题使用dp（动态规划）的方法来求解。<br>只使用顶点0～k和i、j的情况下，记i到j的最短路径长度为d[k+1][i][j] 。k=-1时认为只使用i和j，所以d[0][i][j]=cost[i][j] 。接下来我们将只使用0～k的问题规约到只是用0～k-1的情况。<br>只使用0～k的情况，我们可以将其分为两种情况：<br>1、进过顶点k一次。在这种情况下d[k][i][j]=d[k-1][i][k]+d[k-1][k][j]<br>2、完全不经过顶点k。d[k][i][j]=d[k-1][i][j].<br>将这两种情况合并我们就可以得到d[k][i][j]=min( d[k-1][i][j] ,  d[k-1][i][k]+d[k-1][k][j] )<br>简化该dp数组使用新值覆盖旧值：d[i][j]=min(d[i][j],d[i][k]+d[k][j]);</p>
+<p>算法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">#include &lt;queue&gt;</span><br><span class="line"></span><br><span class="line">#define MAX_V 1000</span><br><span class="line">#define INF 100000000000</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int d[MAX_V][MAX_V];  //d[u][v]表示边 e（u,v）的权值,边不存在设为INF</span><br><span class="line">int V;</span><br><span class="line"></span><br><span class="line">void floyd()&#123;</span><br><span class="line">    for(int k=0;k&lt;V;k++)&#123;</span><br><span class="line">        for(int i=0;i&lt;V;i++)&#123;</span><br><span class="line">            for(int j=0;j&lt;V;j++)&#123;</span><br><span class="line">                d[i][j]=min(d[i][j],d[i][k]+d[k][j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>算法分析：<br>最外层的循环V次，依次表示使用0~0号点、0～1号点、0～2号点……0～k号点的情况。<br>假设我们有一个4个节点的图，该图的边信息如下矩阵：<br><img src="https://img-blog.csdn.net/20180726172841610?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="初始矩阵"></p>
+<p>k=0时，表示只使用0号节点,d[i][j]=min(d[i][j],  d[i][0]+d[0][j])<br><img src="https://img-blog.csdn.net/20180726184033926?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="k=0"></p>
+<p>k=1时，表示只使用0,1号节点，由于k=0时，d[i][i]已经计算完毕，所以此时计算d[i][j],可以以使用公式d[i][j]=(d[i][j], d[i][1]+d[1][j])。<br><img src="https://img-blog.csdn.net/20180726190336648?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="k=1"></p>
+<p>k=2时：<br><img src="https://img-blog.csdn.net/20180726191440232?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="k=2"><br>k=3时：<br><img src="https://img-blog.csdn.net/20180726191824788?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="k=3"></p>
+<p>观察上述的计算过程可以发现，当k=a时，矩阵的第a行和第a列不会发生变化，其他位位置的值d[i][j]=min(d[i][j], d[i][a]+d[a][j] )。</p>
+<p>##路径还原</p>
+<p>前面的算法都是在求解最短的距离，但是有些情况下，会让你在求出最短距离的同时还要把最短路径求出（经过哪几个节点），这时候要怎么做呢？<br>可以采用一个数组pro[V]来保存每个节点的前驱节点。在这里我使用Dijkstra算法为例，在求解最短距离时满足d[j]=d[k]+cost[k][j]时，就说明j的前驱节点是k，那么就记录pro[j]=k;所以只需要在之前的代码中加入一行代码：<code>pro[u]=v;</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#define MAX_V 1000</span><br><span class="line">#define INF 100000000000</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int cost[MAX_V][MAX_V]; //存储边的权值</span><br><span class="line">int d[MAX_V];//存储最短距离</span><br><span class="line">bool used[MAX_V];//标记该点是否已经用过，使用过表示该点已计算出最短距离</span><br><span class="line">int V; //顶点数量</span><br><span class="line"></span><br><span class="line">int pro[V];//×××××××××××××新加入用来存储前驱节点</span><br><span class="line"></span><br><span class="line">void dijkstra(int s)&#123;</span><br><span class="line">    fill(d,d+V,INF);</span><br><span class="line">    fill(used,used+V;false);</span><br><span class="line">    d[s]=0;</span><br><span class="line">    </span><br><span class="line">    while(true)&#123;</span><br><span class="line">        int v=-1;</span><br><span class="line">        for(int u=0;u&lt;V;u++)&#123; //从未使用的顶点中选择一个距离最短的顶点</span><br><span class="line">            if(! used[u] &amp;&amp; (v== -1 || d[u]&lt;d[v])) v=u;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        if(v==-1) break; //v==-1说明所以的顶点都已经计算完成了</span><br><span class="line">        </span><br><span class="line">        used[v]=true;    //将v标记为以访问过</span><br><span class="line">        </span><br><span class="line">        for(int u=0;u&lt;V;u++)&#123;  //更新与v相连的所以节点</span><br><span class="line">            d[u]=min(d[u],d[v]+cost[v][u]);</span><br><span class="line">            //*************************************</span><br><span class="line">            pro[u]=v;  //**************在原有的Dijkstra算法中加入该行代码</span><br><span class="line">            //*************************************</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//取出最短路径</span><br><span class="line">vector&lt;int&gt; getPath(int t) &#123;</span><br><span class="line">    vector&lt;int&gt; path;</span><br><span class="line">    while (t != -1) &#123;</span><br><span class="line">        path.push_back(pro[t]);</span><br><span class="line">        t = pro[t];</span><br><span class="line">    &#125;</span><br><span class="line">    //path中保存的为倒序，现在给path倒过来</span><br><span class="line">    reverse(path.begin(), path.end());</span><br><span class="line">    return path;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/最短路径问题/" data-id="cjv0wzt8z001b81rwi2dicem3" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/28/csdn转移/图的概念/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/28/csdn转移/最小生成树/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/js对象/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/记忆化搜索与动态优化与背包问题/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/Fence Repair 栅栏分割/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/贪心算法-Aaruman's Army/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/贪心算法分析/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2019 wycan&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;1982659010@qq.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png">
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

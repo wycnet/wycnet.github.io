@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>wycBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091// 创建一个长度为 10、且用 0 填充的 Buff">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wycBlog">
+<meta property="og:url" content="http://yoursite.com/2019/04/28/csdn转移/nodejs笔记1-Buffer/index.html">
+<meta property="og:site_name" content="wycBlog">
+<meta property="og:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091// 创建一个长度为 10、且用 0 填充的 Buff">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-26T10:27:59.890Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="wycBlog">
+<meta name="twitter:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091// 创建一个长度为 10、且用 0 填充的 Buff">
+  
+    <link rel="alternate" href="/atom.xml" title="wycBlog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">wycBlog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-csdn转移/nodejs笔记1-Buffer" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/28/csdn转移/nodejs笔记1-Buffer/" class="article-date">
+  <time datetime="2019-04-28T12:31:54.377Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个长度为 10、且用 0 填充的 Buffer。</span></span><br><span class="line"><span class="keyword">const</span> buf1 = Buffer.alloc(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个长度为 10、且用 0x1 填充的 Buffer。 </span></span><br><span class="line"><span class="keyword">const</span> buf2 = Buffer.alloc(<span class="number">10</span>,<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个长度为 10、且未初始化的 Buffer。</span></span><br><span class="line"><span class="comment">// 这个方法比调用 Buffer.alloc() 更快，</span></span><br><span class="line"><span class="comment">// 但返回的 Buffer 实例可能包含旧数据，</span></span><br><span class="line"><span class="comment">// 因此需要使用 fill() 或 write() 重写。</span></span><br><span class="line"><span class="keyword">const</span> buf3 = Buffer.allocUnsafe(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个包含 [0x1, 0x2, 0x3] 的 Buffer。</span></span><br><span class="line"><span class="keyword">const</span> buf4 = Buffer.from([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个包含 UTF-8 字节 [0x74, 0xc3, 0xa9, 0x73, 0x74] 的 Buffer。</span></span><br><span class="line"><span class="keyword">const</span> buf5 = Buffer.from(<span class="string">'tést'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个包含 Latin-1 字节 [0x74, 0xe9, 0x73, 0x74] 的 Buffer。</span></span><br><span class="line"><span class="keyword">const</span> buf6 = Buffer.from(<span class="string">'tést'</span>, <span class="string">'latin1'</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//.............写入缓冲区</span></span><br><span class="line"><span class="comment">//写如Node缓冲区的语法如下：</span></span><br><span class="line"><span class="comment">//buf.write(string [,offset[,length]][,encoding]);</span></span><br><span class="line"><span class="comment">//string -写入缓冲区的字符串</span></span><br><span class="line"><span class="comment">//offset -写入的字节数，默认为buffer.length</span></span><br><span class="line"><span class="comment">//encoding -使用的编码，默认为utf8</span></span><br><span class="line"><span class="comment">// --该函数返回值为实际写入大大小</span></span><br><span class="line"></span><br><span class="line">buf =Buffer.alloc(<span class="number">256</span>);</span><br><span class="line">len=buf.write(<span class="string">'www.runoob.com'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"写入字节数："</span>+len);</span><br><span class="line"></span><br><span class="line"><span class="comment">//..............从缓冲区读取数据</span></span><br><span class="line"><span class="comment">// buf.toString([encoding[,start[,end]]]);</span></span><br><span class="line"><span class="comment">//encoding - 使用的编码，默认为utf8</span></span><br><span class="line"><span class="comment">//start - 指定开始读取索引的位置</span></span><br><span class="line"><span class="comment">//end - 结束的位置，默认为缓冲区的末尾</span></span><br><span class="line"><span class="comment">//-----返回值———— 解码缓冲区数据并使用指定的编码返回字符串</span></span><br><span class="line"></span><br><span class="line">buf =Buffer.alloc(<span class="number">26</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">26</span>;i++)&#123;</span><br><span class="line">    buf[i]=i+<span class="number">97</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(buf.toString(<span class="string">'ascii'</span>));</span><br><span class="line"><span class="built_in">console</span>.log(buf.toString(<span class="string">'ascii'</span>,<span class="number">0</span>,<span class="number">5</span>));</span><br><span class="line"><span class="built_in">console</span>.log(buf.toString(<span class="string">'utf8'</span>,<span class="number">0</span>,<span class="number">5</span>));</span><br><span class="line"><span class="built_in">console</span>.log(buf.toString(<span class="literal">undefined</span>,<span class="number">0</span>,<span class="number">5</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">//缓冲区合并</span></span><br><span class="line"><span class="comment">//Buffer.concat(list[,totalLength]);</span></span><br><span class="line"><span class="comment">//list - 用于合并Buffer对象的数组</span></span><br><span class="line"><span class="comment">//totalLength - 指定合并后Buffer对象的总长度</span></span><br><span class="line"><span class="comment">//...返回值,多个成员合并后的新对象</span></span><br><span class="line"><span class="keyword">var</span> buffer1=Buffer.from(<span class="string">'菜鸟教程'</span>);</span><br><span class="line"><span class="keyword">var</span> buffer2=Buffer.from(<span class="string">'www.runoob.com'</span>);</span><br><span class="line"><span class="keyword">var</span> buffer3=Buffer.concat([buffer1,buffer2]);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'buffer3内容:'</span>+buffer3.toString());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> <span class="comment">//.....缓冲区裁剪</span></span><br><span class="line"> <span class="comment">//buf.slice([start[,end]]);</span></span><br><span class="line"> <span class="comment">//start - 数字，可选，默认为0</span></span><br><span class="line"> <span class="comment">//end - 数字，可选，默认：buffer.length</span></span><br><span class="line"> <span class="comment">//返回值，返回一个新的缓冲区，它和旧的缓冲区指向同一块内存。</span></span><br><span class="line"><span class="keyword">var</span> buffer1=Buffer.from(<span class="string">'runoob'</span>);</span><br><span class="line"><span class="keyword">var</span> buffer2=buffer1.slice(<span class="number">0</span>,<span class="number">2</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'buffer2 content:'</span>+buffer2.toString());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//....缓冲区长度</span></span><br><span class="line"><span class="comment">//buf.length</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//方法参考</span></span><br><span class="line"><span class="comment">//Node.js Buffer 常用方法：</span></span><br><span class="line">......</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//将Buffer转化为JSON对象</span></span><br><span class="line"><span class="comment">//buf.toJSON();</span></span><br><span class="line"><span class="comment">//当字符串化一个Buffer实例时，JSON.stringify()会隐式的调用toJSON()方法</span></span><br><span class="line"><span class="keyword">const</span> buf=Buffer.from([<span class="number">0x1</span>,<span class="number">0x2</span>,<span class="number">0x3</span>,<span class="number">0x4</span>]);</span><br><span class="line"><span class="keyword">const</span> json=<span class="built_in">JSON</span>.stringify(buf);</span><br><span class="line"><span class="built_in">console</span>.log(json);</span><br><span class="line"></span><br><span class="line">cosnt copy=<span class="built_in">JSON</span>.parse(json,(key,value)=&gt;&#123;</span><br><span class="line">    <span class="keyword">return</span> value &amp;&amp; value.type === <span class="string">'Buffer'</span> ? Buffer.from(value.data) : value;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(copy);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/nodejs笔记1-Buffer/" data-id="cjv0wzt8k000s81rwpfy1mvy1" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/28/csdn转移/设计模式--单例模式/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/28/csdn转移/使用Express框架开发网站/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/js对象/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/记忆化搜索与动态优化与背包问题/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/Fence Repair 栅栏分割/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/贪心算法-Aaruman's Army/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/贪心算法分析/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2019 wycan&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;1982659010@qq.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png">
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

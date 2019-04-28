@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>wycBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最小生成树生成树的定义：在一个图中寻到这样一种子图：去除子图中的一些边，剩下的节点和边可以构成一棵树，那么这课树就是生成树。 最小生成树：如果边上有权值，那么是的权值最小的生成树就叫做最小生成树（MST）。 常用的最小生成树算法为Kruskal算法和Prim算法。 最小生成树示例图：  Prim算法Prim算法和Dijkstra算法十分相似，都是从某个顶点出发不断添加边的算法。 算法思想：  我们">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wycBlog">
+<meta property="og:url" content="http://yoursite.com/2019/04/28/csdn转移/最小生成树/index.html">
+<meta property="og:site_name" content="wycBlog">
+<meta property="og:description" content="最小生成树生成树的定义：在一个图中寻到这样一种子图：去除子图中的一些边，剩下的节点和边可以构成一棵树，那么这课树就是生成树。 最小生成树：如果边上有权值，那么是的权值最小的生成树就叫做最小生成树（MST）。 常用的最小生成树算法为Kruskal算法和Prim算法。 最小生成树示例图：  Prim算法Prim算法和Dijkstra算法十分相似，都是从某个顶点出发不断添加边的算法。 算法思想：  我们">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdn.net/20180801162845283?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:updated_time" content="2019-04-26T10:27:30.935Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="wycBlog">
+<meta name="twitter:description" content="最小生成树生成树的定义：在一个图中寻到这样一种子图：去除子图中的一些边，剩下的节点和边可以构成一棵树，那么这课树就是生成树。 最小生成树：如果边上有权值，那么是的权值最小的生成树就叫做最小生成树（MST）。 常用的最小生成树算法为Kruskal算法和Prim算法。 最小生成树示例图：  Prim算法Prim算法和Dijkstra算法十分相似，都是从某个顶点出发不断添加边的算法。 算法思想：  我们">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20180801162845283?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+  
+    <link rel="alternate" href="/atom.xml" title="wycBlog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">wycBlog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-csdn转移/最小生成树" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/28/csdn转移/最小生成树/" class="article-date">
+  <time datetime="2019-04-28T12:31:54.409Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h2 id="最小生成树"><a href="#最小生成树" class="headerlink" title="最小生成树"></a>最小生成树</h2><p>生成树的定义：在一个图中寻到这样一种子图：去除子图中的一些边，剩下的节点和边可以构成一棵树，那么这课树就是生成树。</p>
+<p>最小生成树：如果边上有权值，那么是的权值最小的生成树就叫做最小生成树（MST）。</p>
+<p>常用的最小生成树算法为Kruskal算法和Prim算法。</p>
+<p>最小生成树示例图：</p>
+<p><img src="https://img-blog.csdn.net/20180801162845283?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<h3 id="Prim算法"><a href="#Prim算法" class="headerlink" title="Prim算法"></a>Prim算法</h3><p>Prim算法和Dijkstra算法十分相似，都是从某个顶点出发不断添加边的算法。</p>
+<p>算法思想：</p>
+<ol>
+<li>我们选取一个顶点v作为起点树T;</li>
+<li>然后贪心的选取T和其它顶点之间连接的最小权值的边，并把它加入到T中。</li>
+<li>不断重复操作2，直到所有的顶点被选择完。</li>
+</ol>
+<p>那么如何查找到最小权值的边呢？把已选顶点集合X和顶点V连接的最小权值记为mincost[v]。在向X里添加 顶点u时，只需要查看和u相连的边就可以了。对于每条边，更新mincost[v]=min(mincost[v], 边(u,v)的权值 )即可。</p>
+<p>如果每次都遍历未包含在X中的点mincost[v]，需要时间复杂度$O(|V|_2)$ 。如果使用堆来维护那么时间复杂度就是$O(|E|log|V|)$。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_V 1000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 999999999</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> cost[MAX_V][MAX_V]; <span class="comment">//存放边的权值</span></span><br><span class="line"><span class="keyword">int</span> mincost[MAX_V]; <span class="comment">//从集合X出发的边到每个顶点的最小权值</span></span><br><span class="line"><span class="keyword">bool</span> used[MAX_V];  <span class="comment">//顶点是否已经包含到X中</span></span><br><span class="line"><span class="keyword">int</span> V;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;  <span class="comment">//按要求输入数据</span></span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">prim</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; V; i++) &#123;</span><br><span class="line">        mincost[i] = INF;</span><br><span class="line">        used[i] = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    mincost[<span class="number">0</span>] = <span class="number">0</span>; <span class="comment">//选取零号节点作为起始点</span></span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;  <span class="comment">//用来记录总权值</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> v = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> u = <span class="number">0</span>; u &lt; V; u++) &#123;  <span class="comment">//选取权值最小的点，初始时会选中0号点</span></span><br><span class="line">            <span class="keyword">if</span> (!used[u] &amp;&amp; (v == <span class="number">-1</span> || mincost[u] &lt; mincost[v])) v = u;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (v == <span class="number">-1</span>) <span class="keyword">break</span>; <span class="comment">//如果v还是-1说明所有的点都被用过了</span></span><br><span class="line">        used[v] = <span class="literal">true</span>;  <span class="comment">//标记v被使用</span></span><br><span class="line">        res += mincost[v];  <span class="comment">//记录总权值，很显然第一次循环时v=0，mincost[0]=0;</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> u = <span class="number">0</span>; u &lt; V; u++) &#123;  <span class="comment">//更新所有点到X（已选点的集合）,因为新加入了节点v,所以将原来的距离和cost[v][u]比较。</span></span><br><span class="line">            mincost[u] = min(mincost[u], cost[v][u]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Kruskal算法"><a href="#Kruskal算法" class="headerlink" title="Kruskal算法"></a>Kruskal算法</h3><p>算法思路：</p>
+<ol>
+<li>按照边的权值顺序从小到大选择边，如果选中的边加入到已选边中不会产生圈，那么就把该边加入到已选边中。</li>
+<li>重复步骤1，直到所有的顶点被选则。</li>
+</ol>
+<p>该算法的重点在于如何检查是否存在圈。每次选中边检查该边的两个顶点是否在已选顶点中，如果连个都在，那么一定会产生圈。</p>
+<p>该算法主要是在边排序上花费时间，算法的时间复杂度是$O(|E|log|V|)$ 。</p>
+<p>算法实现如下：</p>
+<p>bigncaji.h头文件</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//bingcaji.h</span></span><br><span class="line"><span class="comment">// Created by wyc on 18-7-19.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> UNTITLED2_BINGCAJI_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> UNTITLED2_BINGCAJI_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>  MAXN 1000</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> par[MAXN], ranks[MAXN];  <span class="comment">//par表示parent代表父亲编号，par[x]指的是x的父节点编号</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//初始化n个元素</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">initUnionFind</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        par[i] = i;</span><br><span class="line">        ranks[i] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//查询树的根</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (par[x] == x) &#123;</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> par[x] = find(par[x]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//合并x和y所属的集合</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">unite</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">    x = find(x);</span><br><span class="line">    y = find(y);</span><br><span class="line">    <span class="keyword">if</span> (x == y) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span> (ranks[x] &lt; ranks[y]) &#123;</span><br><span class="line">        par[x] = y;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        par[y] = x;</span><br><span class="line">        <span class="keyword">if</span> (ranks[x] == ranks[y]) ranks[x]++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//x和y是否属于同一集合</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">same</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> find(x) ==find(y);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">//UNTITLED2_BINGCAJI_H</span></span></span><br></pre></td></tr></table></figure>
+<p>main.cpp文件</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"bingcaji.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_V 1000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 999999999</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span>&#123;</span><span class="keyword">int</span> u,v,cost;&#125;;</span><br><span class="line">edge es[MAX_V];</span><br><span class="line"><span class="keyword">int</span> V,E;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">comp</span><span class="params">(<span class="keyword">const</span> edge &amp; e1, <span class="keyword">const</span> edge &amp; e2)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> e1.cost &lt;e2.cost;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;V&gt;&gt;E;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;E;i++)&#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;es[i].u&gt;&gt;es[i].v&gt;&gt;es[i].cost;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">kruskal</span><span class="params">()</span></span>&#123;</span><br><span class="line">    sort(es,es+E,comp); <span class="comment">//按照从小到达排序</span></span><br><span class="line">    initUnionFind(V);</span><br><span class="line">    <span class="keyword">int</span> res=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;E;i++)&#123;</span><br><span class="line">        edge e=es[i];</span><br><span class="line">        <span class="keyword">if</span>(! same(e.u,e.v))&#123;</span><br><span class="line">            unite(e.u,e.v);</span><br><span class="line">            res+=e.cost;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    init();</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;kruskal();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 测试数据 ,该数据即为文章开始的图，输入为V E  边（u,v,cost）</span></span><br><span class="line"><span class="comment">8   11</span></span><br><span class="line"><span class="comment">0 2 2</span></span><br><span class="line"><span class="comment">1 2 3</span></span><br><span class="line"><span class="comment">2 3 4</span></span><br><span class="line"><span class="comment">2 5 1</span></span><br><span class="line"><span class="comment">3 4 3</span></span><br><span class="line"><span class="comment">5 6 5</span></span><br><span class="line"><span class="comment">3 6 7</span></span><br><span class="line"><span class="comment">3 7 9</span></span><br><span class="line"><span class="comment">6 7 8</span></span><br><span class="line"><span class="comment">6 4 1</span></span><br><span class="line"><span class="comment">4 7 5</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/最小生成树/" data-id="cjv0wzt8x001981rwjqzronis" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/28/csdn转移/最短路径问题/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/28/csdn转移/次最短路径Roadblocks(POJNo.3255)/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#最小生成树"><span class="toc-number">1.</span> <span class="toc-text">最小生成树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Prim算法"><span class="toc-number">1.1.</span> <span class="toc-text">Prim算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Kruskal算法"><span class="toc-number">1.2.</span> <span class="toc-text">Kruskal算法</span></a></li></ol></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2019 wycan&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;1982659010@qq.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png">
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>wycBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="##二叉搜索树的结构 二叉树的性质：性质一：在二叉树的i层上至多有2 i-1个节点（i&amp;gt;=1）至少有1个性质二：深度为k的二叉树至多有2k-1个节点，至少为k个性质三：对任何一棵二叉树T，如果终端结点树为n，度为2的结点为n2,度为0的结点为n0 则n0=n2+n1性质四：具有n个节点的完全二叉树的深度为[log2n]+1向下取整性质五：如果有一颗有n个节点的完全二叉树的节点按层次序编号，对">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wycBlog">
+<meta property="og:url" content="http://yoursite.com/2019/04/28/csdn转移/二叉搜索树/index.html">
+<meta property="og:site_name" content="wycBlog">
+<meta property="og:description" content="##二叉搜索树的结构 二叉树的性质：性质一：在二叉树的i层上至多有2 i-1个节点（i&amp;gt;=1）至少有1个性质二：深度为k的二叉树至多有2k-1个节点，至少为k个性质三：对任何一棵二叉树T，如果终端结点树为n，度为2的结点为n2,度为0的结点为n0 则n0=n2+n1性质四：具有n个节点的完全二叉树的深度为[log2n]+1向下取整性质五：如果有一颗有n个节点的完全二叉树的节点按层次序编号，对">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdn.net/20180718185902656?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:updated_time" content="2019-04-26T10:27:11.447Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="wycBlog">
+<meta name="twitter:description" content="##二叉搜索树的结构 二叉树的性质：性质一：在二叉树的i层上至多有2 i-1个节点（i&amp;gt;=1）至少有1个性质二：深度为k的二叉树至多有2k-1个节点，至少为k个性质三：对任何一棵二叉树T，如果终端结点树为n，度为2的结点为n2,度为0的结点为n0 则n0=n2+n1性质四：具有n个节点的完全二叉树的深度为[log2n]+1向下取整性质五：如果有一颗有n个节点的完全二叉树的节点按层次序编号，对">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20180718185902656?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+  
+    <link rel="alternate" href="/atom.xml" title="wycBlog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">wycBlog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-csdn转移/二叉搜索树" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/28/csdn转移/二叉搜索树/" class="article-date">
+  <time datetime="2019-04-28T12:31:54.433Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>##二叉搜索树的结构</p>
+<p>二叉树的性质：<br><strong>性质一：</strong>在二叉树的i层上至多有2 i-1个节点（i&gt;=1）至少有1个<br><strong>性质二：</strong>深度为k的二叉树至多有2k-1个节点，至少为k个<br><strong>性质三：</strong>对任何一棵二叉树T，如果终端结点树为n，度为2的结点为n2,度为0的结点为n0 则n0=n2+n1<br><strong>性质四：</strong>具有n个节点的完全二叉树的深度为[log2n]+1向下取整<br><strong>性质五：</strong>如果有一颗有n个节点的完全二叉树的节点按层次序编号，对任一层的节点i（1&lt;=i&lt;=n）有</p>
+<ol>
+<li>如果i=1，则节点是二叉树的根，无双亲，如果i&gt;1，则其双亲节点为[i/2]，向下取整</li>
+<li>如果2i&gt;n那么节点i没有左孩子，否则其左孩子为2i</li>
+<li>如果2i+1&gt;n那么节点没有右孩子，否则右孩子为2i+1</li>
+</ol>
+<p>二叉搜索树能够高效的处理一下操作：</p>
+<ul>
+<li>插入一个数值</li>
+<li>查询是否包含某个数值</li>
+<li>删除某个数值</li>
+</ul>
+<p>二叉搜索树存储数据的方法：<br><strong>任意节点左子树上的所有节点都比自己小，而右子树上的所有节点都比自己大。</strong><br>如下图为一个二叉搜索树</p>
+<p><img src="https://img-blog.csdn.net/20180718185902656?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="二叉搜索树"></p>
+<p>在二叉搜索树中查找和插入操作都从树的顶端开始比较，如果比当前节点小则搜索左子树，比当前节点大则搜索右子树。最多比较此时为二叉树的高度。<br>在二叉搜索树中查询和插入比较简单，那么要怎么删除数据呢？<br>如果删除的是叶子节点，那么操作比较简单。<br>一般需要根据下面的情况进行处理：</p>
+<ul>
+<li><em>要删除的节点没有左孩子，那么把右孩子提上去</em></li>
+<li><em>需要删除的节点的左孩子没有右孩子，那么把左孩子提上去，右孩子作为左孩子的左孩子的右孩子</em></li>
+<li><em>以上都不满足的话，就把做左儿子的子孙中最大的节点提到需要删除的节点上</em></li>
+</ul>
+<p>###二叉搜索树的复杂度</p>
+<p>二叉搜索树的搜索时间与层数成正比，如果有n个元素，品均每次操作的时间为$O(logn)$。</p>
+<p>###二叉搜索树的实现</p>
+<p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">struct node &#123;</span><br><span class="line">    int val;</span><br><span class="line">    node *lch, *rch;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">//插入数值</span><br><span class="line">node *insert(node *p, int x) &#123;</span><br><span class="line">    if (p == nullptr) &#123;</span><br><span class="line">        node *q = new node;</span><br><span class="line">        q-&gt;val = x;</span><br><span class="line">        q-&gt;lch = nullptr;</span><br><span class="line">        q-&gt;rch = nullptr;</span><br><span class="line">        return q;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        if (p-&gt;val &gt; x) &#123;</span><br><span class="line">            p-&gt;lch = insert(p-&gt;lch, x);</span><br><span class="line">        &#125; else if (p-&gt;val &lt; x) &#123;</span><br><span class="line">            p-&gt;rch = insert(p-&gt;rch, x);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//删除数值</span><br><span class="line">node *remove(node *p, int x) &#123;</span><br><span class="line">    if (p == nullptr) &#123;</span><br><span class="line">        return nullptr;</span><br><span class="line">    &#125; else if (x &lt; p-&gt;val) p-&gt;lch = remove(p-&gt;lch, x);</span><br><span class="line">    else if (x &gt; p-&gt;val) p-&gt;rch = remove(p-&gt;rch, x);</span><br><span class="line">    else if (p-&gt;lch == nullptr) &#123;</span><br><span class="line">        node *q = p-&gt;rch;</span><br><span class="line">        delete p;</span><br><span class="line">        return q;</span><br><span class="line">    &#125; else if (p-&gt;lch-&gt;rch == nullptr) &#123;</span><br><span class="line">        node *q = p-&gt;lch;</span><br><span class="line">        node *u = p-&gt;rch;</span><br><span class="line">        delete p;</span><br><span class="line">        q-&gt;rch = u;</span><br><span class="line">        return q;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        node *q;</span><br><span class="line">        for (q = p-&gt;lch; q-&gt;rch-&gt;rch != nullptr; q = q-&gt;rch);</span><br><span class="line">        node *r = q-&gt;rch; //r为要移动的节点,r没有右孩子</span><br><span class="line">        node *u = r-&gt;lch; //u为r的左孩子</span><br><span class="line">        q-&gt;rch = u;          //将r的左孩子接在r的位置上</span><br><span class="line">        r-&gt;lch = p-&gt;lch;</span><br><span class="line">        r-&gt;rch = p-&gt;rch;</span><br><span class="line">        return p;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//查找</span><br><span class="line">bool find(node *p, int x) &#123;</span><br><span class="line">    if (p == nullptr) &#123;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">    if (p-&gt;val == x) &#123;</span><br><span class="line">        return true;</span><br><span class="line">    &#125; else if (p-&gt;val &gt; x) &#123;</span><br><span class="line">        return find(p-&gt;lch, x);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        return find(p-&gt;rch, x);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>在实际的使用中我们一般不自己构造二叉搜索树，c++的STL标库中的set容器就是使用的二叉搜索树来实现的</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/二叉搜索树/" data-id="cjv0wzt8t001181rwswcoj1m4" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/28/csdn转移/Fence Repair (PKU 3253)/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/28/csdn转移/图的概念/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/js对象/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/记忆化搜索与动态优化与背包问题/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/Fence Repair 栅栏分割/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/贪心算法-Aaruman's Army/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/贪心算法分析/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2019 wycan&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;1982659010@qq.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png">
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

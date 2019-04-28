@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>wycBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="问题： 某街区共有R条道路、N个路口。道路可以双向通行。问1号路口到N号路口的次短路的长度是多少？次短路指的是比最短路长度长的次短路径。同一条边可以经过多次。 限制条件 $1 \leqslant N \leqslant 5000$ $1 \leqslant R \leqslant 100000$ 输入示例： N=4 R=4 1 2 100             //1 2表示节点，100表示1、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wycBlog">
+<meta property="og:url" content="http://yoursite.com/2019/04/28/csdn转移/次最短路径Roadblocks(POJNo.3255)/index.html">
+<meta property="og:site_name" content="wycBlog">
+<meta property="og:description" content="问题： 某街区共有R条道路、N个路口。道路可以双向通行。问1号路口到N号路口的次短路的长度是多少？次短路指的是比最短路长度长的次短路径。同一条边可以经过多次。 限制条件 $1 \leqslant N \leqslant 5000$ $1 \leqslant R \leqslant 100000$ 输入示例： N=4 R=4 1 2 100             //1 2表示节点，100表示1、">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdn.net/201808012020197?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:updated_time" content="2019-04-26T10:27:35.383Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="wycBlog">
+<meta name="twitter:description" content="问题： 某街区共有R条道路、N个路口。道路可以双向通行。问1号路口到N号路口的次短路的长度是多少？次短路指的是比最短路长度长的次短路径。同一条边可以经过多次。 限制条件 $1 \leqslant N \leqslant 5000$ $1 \leqslant R \leqslant 100000$ 输入示例： N=4 R=4 1 2 100             //1 2表示节点，100表示1、">
+<meta name="twitter:image" content="https://img-blog.csdn.net/201808012020197?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+  
+    <link rel="alternate" href="/atom.xml" title="wycBlog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">wycBlog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-csdn转移/次最短路径Roadblocks(POJNo.3255)" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/28/csdn转移/次最短路径Roadblocks(POJNo.3255)/" class="article-date">
+  <time datetime="2019-04-28T12:31:54.401Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>问题：</p>
+<p>某街区共有R条道路、N个路口。道路可以双向通行。问1号路口到N号路口的次短路的长度是多少？次短路指的是比最短路长度长的次短路径。同一条边可以经过多次。</p>
+<p><strong>限制条件</strong></p>
+<p><strong>$1 \leqslant N \leqslant 5000$</strong></p>
+<p>$1 \leqslant R \leqslant 100000$</p>
+<p>输入示例：</p>
+<p>N=4</p>
+<p>R=4</p>
+<p>1 2 100             //1 2表示节点，100表示1、2之间距离</p>
+<p>2 4 200</p>
+<p>2 3 250</p>
+<p>3 4 100</p>
+<p><img src="https://img-blog.csdn.net/201808012020197?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<p>输出示例：</p>
+<p>450</p>
+<p>思考：</p>
+<p>求最短路径我们有Bellman-Ford、Dijkstra、Floyd算法。但是本题是求次最短路径。Dijkstra算法的思路是依次去确定尚未确定的顶点中距离最小的顶点。Dijkstra算法不断更新每个节点的最短路径，如果能够多加入有个缓存，存储上一次的最短距离，比如，设置d[MAX_V]、oldD[AMX_V]两个存储最短距离，每次更新d数组之前，将d中的数据全部复制发给oldD数组，那么当d不在更新时，d中存储的是最短路径，oldD中存储的是次最短路径。</p>
+<p>首先来看看Dijkstra算法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_V 1000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 100000000000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> to, cost;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; P;<span class="comment">//first中存放距离，second中存放编号</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> V;</span><br><span class="line"><span class="built_in">vector</span>&lt;edge&gt; G[MAX_V];</span><br><span class="line"><span class="keyword">int</span> d[MAX_V];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dijkstra</span><span class="params">(<span class="keyword">int</span> s)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//优先级队列，从小到大排列</span></span><br><span class="line">    priority_queue&lt;P, <span class="built_in">vector</span>&lt;P&gt;, greater&lt;P&gt;&gt; que;</span><br><span class="line">    fill(d, d + V, INF);</span><br><span class="line">    d[s] = <span class="number">0</span>;</span><br><span class="line">    que.push(P(<span class="number">0</span>, s));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (!que.empty()) &#123;</span><br><span class="line">        P p = que.top();</span><br><span class="line">        que.pop();</span><br><span class="line">        <span class="keyword">int</span> v = p.second;</span><br><span class="line">        <span class="keyword">if</span> (d[v] &lt; p.first) <span class="keyword">continue</span>;<span class="comment">//在这种情况下说明此记录已经作废，例如第一次循环插入了P(3,4);第二次循环又插入了P(2,4),显然，第二次的数据应该</span></span><br><span class="line">                                                    <span class="comment">//替换掉第一次数据，但是由于我们在这里使用了哦=优先级队列存储，如果要替换掉上一次的记录=会比较麻烦，所以我们不去除无效的数据，</span></span><br><span class="line">                                                    <span class="comment">//当从队列中取出数据时再判断是否是无效的数据（在之前应当被替换的数据）。</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; G[v].size(); i++) &#123;</span><br><span class="line">            edge e = G[v][i];</span><br><span class="line">            <span class="keyword">if</span> (d[e.to] &gt; d[v] + e.cost) &#123;</span><br><span class="line">                d[e.to] = d[v] + e.cost;</span><br><span class="line">                que.push(P(d[e.to], e.to));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>之前关于最短路径的介绍：</p>
+<p><a href="https://blog.csdn.net/qq_28120673/article/details/81224205" target="_blank" rel="noopener">https://blog.csdn.net/qq_28120673/article/details/81224205</a></p>
+</blockquote>
+<p>修改Dijkstra算法，加入oldD[MAX_V];</p>
+<p>算法如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_V 1000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF  9999999</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> to, cost;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; P;<span class="comment">//first中存放距离，second中存放编号</span></span><br><span class="line"><span class="keyword">int</span> V;</span><br><span class="line"><span class="built_in">vector</span>&lt;edge&gt; G[MAX_V];  <span class="comment">//图用邻接表表示</span></span><br><span class="line"><span class="keyword">int</span> d[MAX_V];</span><br><span class="line"><span class="keyword">int</span> oldD[MAX_V];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N,R; <span class="comment">//N个路口，R条道路</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;N&gt;&gt;R;</span><br><span class="line">    V=N;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;V;i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> a,b,c;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b&gt;&gt;c;</span><br><span class="line">        edge* e=<span class="keyword">new</span> edge;</span><br><span class="line">        e-&gt;to=b<span class="number">-1</span>;</span><br><span class="line">        e-&gt;cost=c;</span><br><span class="line">        G[a<span class="number">-1</span>].push_back(*e);</span><br><span class="line"></span><br><span class="line">        edge* e1=<span class="keyword">new</span> edge;</span><br><span class="line">        e1-&gt;to=a<span class="number">-1</span>;</span><br><span class="line">        e1-&gt;cost=c;</span><br><span class="line">        G[b<span class="number">-1</span>].push_back(*e1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dijkstra</span><span class="params">(<span class="keyword">int</span> s)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//优先级队列，从小到大排列</span></span><br><span class="line">    priority_queue&lt;P, <span class="built_in">vector</span>&lt;P&gt;, greater&lt;P&gt;&gt; que;</span><br><span class="line">    fill(d, d + V, INF);</span><br><span class="line">    fill(oldD,oldD+V,INF);</span><br><span class="line">    d[s] = <span class="number">0</span>;</span><br><span class="line">    que.push(P(<span class="number">0</span>, s));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (!que.empty()) &#123;</span><br><span class="line">        P p = que.top();</span><br><span class="line">        que.pop();</span><br><span class="line">        <span class="keyword">int</span> v = p.second;</span><br><span class="line">        <span class="keyword">if</span> (d[v] &lt; p.first) <span class="keyword">continue</span>;<span class="comment">//在这种情况下说明此记录已经作废，例如第一次循环插入了P(3,4);第二次循环又插入了P(2,4),显然，第二次的数据应该</span></span><br><span class="line">        <span class="comment">//替换掉第一次数据，但是由于我们在这里使用了优先级队列存储，如果要替换掉上一次的记录=会比较麻烦，所以我们不去除无效的数据，</span></span><br><span class="line">        <span class="comment">//当从队列中取出数据时再判断是否是无效的数据（在之前应当被替换的数据）。</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; G[v].size(); i++) &#123;</span><br><span class="line">            edge e = G[v][i];</span><br><span class="line">            <span class="keyword">int</span> d2=d[v]+e.cost;</span><br><span class="line">            <span class="keyword">if</span> (d[e.to] &gt; d2) &#123;</span><br><span class="line">                swap(d[e.to],d2);</span><br><span class="line">                que.push(P(d[e.to], e.to));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(oldD[e.to]&gt;d2 &amp;&amp; d[e.to]&lt;d2)&#123; <span class="comment">//上一个if执行过后，d[e.to]一定不会大于d2,所以这里排除，d[e.to]==d2的情况。</span></span><br><span class="line">                oldD[e.to]=d2;</span><br><span class="line">                que.push(P(oldD[e.to],e.to));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    init();</span><br><span class="line">    dijkstra(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;V;i++)&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;oldD[i]&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;V;i++)&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;d[i]&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*  注意这里的节点是从1开始编号，而算法中是从0开始编号</span></span><br><span class="line"><span class="comment"> 4 4   </span></span><br><span class="line"><span class="comment"> 1 2 100</span></span><br><span class="line"><span class="comment"> 2 4 200</span></span><br><span class="line"><span class="comment"> 2 3 250</span></span><br><span class="line"><span class="comment"> 3 4 100</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/次最短路径Roadblocks(POJNo.3255)/" data-id="cjv0wzt90001d81rw3jt185b2" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/28/csdn转移/最小生成树/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/28/csdn转移/系统分区与系统引导/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/js对象/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/记忆化搜索与动态优化与背包问题/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/Fence Repair 栅栏分割/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/贪心算法-Aaruman's Army/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/贪心算法分析/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2019 wycan&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;1982659010@qq.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png">
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

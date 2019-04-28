@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>wycBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="##什么是图图是右顶点和边组成。顶点表示对象，边表示两个对象的连接关系。一般的表示方法：顶点集合是V、边的集合是E,图记做G=(V , E), 连接两点u和v的边记做e=(u,v)。 ##图的种类图一般分为两种：  无向图 有向图  ####无向图相邻：两个顶点之间有边。路径：相邻顶点序列称为路径。圈：起点和终点重合的路径称为圈。连通图：任意两点之间都有路径连接的图叫做连通图。度：顶点连接的边数叫">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wycBlog">
+<meta property="og:url" content="http://yoursite.com/2019/04/28/csdn转移/图的概念/index.html">
+<meta property="og:site_name" content="wycBlog">
+<meta property="og:description" content="##什么是图图是右顶点和边组成。顶点表示对象，边表示两个对象的连接关系。一般的表示方法：顶点集合是V、边的集合是E,图记做G=(V , E), 连接两点u和v的边记做e=(u,v)。 ##图的种类图一般分为两种：  无向图 有向图  ####无向图相邻：两个顶点之间有边。路径：相邻顶点序列称为路径。圈：起点和终点重合的路径称为圈。连通图：任意两点之间都有路径连接的图叫做连通图。度：顶点连接的边数叫">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdn.net/20180722152718964?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/2018072214475911?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:updated_time" content="2019-04-26T10:27:21.291Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="wycBlog">
+<meta name="twitter:description" content="##什么是图图是右顶点和边组成。顶点表示对象，边表示两个对象的连接关系。一般的表示方法：顶点集合是V、边的集合是E,图记做G=(V , E), 连接两点u和v的边记做e=(u,v)。 ##图的种类图一般分为两种：  无向图 有向图  ####无向图相邻：两个顶点之间有边。路径：相邻顶点序列称为路径。圈：起点和终点重合的路径称为圈。连通图：任意两点之间都有路径连接的图叫做连通图。度：顶点连接的边数叫">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20180722152718964?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+  
+    <link rel="alternate" href="/atom.xml" title="wycBlog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">wycBlog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-csdn转移/图的概念" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/28/csdn转移/图的概念/" class="article-date">
+  <time datetime="2019-04-28T12:31:54.421Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>##什么是图<br>图是右顶点和边组成。顶点表示对象，边表示两个对象的连接关系。<br>一般的表示方法：顶点集合是V、边的集合是E,图记做G=(V , E), 连接两点u和v的边记做e=(u,v)。</p>
+<p>##图的种类<br>图一般分为两种：</p>
+<ul>
+<li>无向图</li>
+<li>有向图</li>
+</ul>
+<p>####无向图<br>相邻：两个顶点之间有边。<br>路径：相邻顶点序列称为路径。<br>圈：起点和终点重合的路径称为圈。<br>连通图：任意两点之间都有路径连接的图叫做连通图。<br>度：顶点连接的边数叫做这个顶点的度。<br>树：没有圈的连通图叫做树。<br>森林：没有圈的非连通图叫做森林。</p>
+<p><strong>树的重要性质:一棵树的边数恰好是顶点数-1；反之，边数等于顶点数-1的连通图就是一颗树。</strong></p>
+<p>####有向图<br>DAG：没有圈的有向图叫做DAG。<br>拓扑序：对于每个顶点我们给它一个编号，第i号顶点叫做$v_i$。那么存在从顶点$v_i$到顶点$v_j$的边时就有i&lt;j成立，这样的编号方式叫做拓扑序。</p>
+<p><strong>采用拓扑排序的好处：把图中的顶点按照拓扑序从左到右排序，那么所以的边都是从左指向右的。因此，通过这样的编号方式，有些DAG问题就可以DP(动态规划)来解决。</strong></p>
+<p>##图的表示</p>
+<ul>
+<li>邻接矩阵</li>
+<li>邻接表</li>
+</ul>
+<p>####邻接矩阵<br> 近接矩阵用|V| × |V|的二维数组来表示图。g[i][j]表示顶点i和顶点j的关系。</p>
+<p>####邻接表<br>用邻接矩阵表示稀疏图会浪费大量的内存空间。在邻接表中，是通过把从一个顶点出发与它相邻的所有节点用链表保存起来。所以只需要O(|V|+|E|)的内存空间。<br>邻接表的存储方法：<br>可以使用vector数组实现，比如:      <code>vector &lt;int&gt; G[MAX_N];</code> G[0]表示0号节点，该容器中的节点都是0号节点的邻接节点。G[1]表示1号节点，该容器中的所以节点都是1号节点的邻接节点。</p>
+<p><strong>总结：稀疏图用邻接表，稠密图用近接矩阵。</strong></p>
+<p>##图的搜索<br>尝试用图的知识来解题<br>问题：二分图判定<br>给定一个具有n个顶点的图。要给图上的每个顶点染色，并且要使相邻顶点的颜色不同。问题是能否用最多两种颜色来染色？题目保证没有重边和自环。<br><strong>限制条件</strong><br>$1 \leqslant n \leqslant 100 $</p>
+<p>输入样例：<br>n=3；    //表示顶点数<br>0  1  2      -1   //第一个数字表示顶点号，最后一个表示换行标志，中间表示该顶点的邻接点<br>1  0  2      -1<br>2  1  0      -1<br>该图形为：<br><img src="https://img-blog.csdn.net/20180722152718964?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>输出样例：<br>No；</p>
+<p>相邻顶点染成 不同颜色的问题叫做图的着色问题。对图进行染色所需要的最小颜色称为最小着色数。最小着色数2的图称为二分图。<br><img src="https://img-blog.csdn.net/2018072214475911?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="最小着色数是5"></p>
+<p>如果只有两种颜色，那么确定一种颜色之后，和它相邻的顶点的颜色就确定了。因此选择任意一个顶点出发，依次给相邻顶点着色，就可以判断是否被两种颜色染色了。使用深度优先搜索（DFS)可以简单实现。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">#define MAX_V 1000</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">vector&lt;int&gt; G[MAX_V]; //存储图,使用vector表结构</span><br><span class="line">int V;//顶点数</span><br><span class="line">int color[MAX_V] &#123;&#125;; //顶点颜色</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">void init()&#123;</span><br><span class="line">    cin&gt;&gt;V;</span><br><span class="line">    int vec;</span><br><span class="line">    for(int i=0;i&lt;V;i++)&#123;</span><br><span class="line">        cin&gt;&gt;vec;</span><br><span class="line">        while(true)&#123;</span><br><span class="line">            int temp;</span><br><span class="line">            cin&gt;&gt;temp;</span><br><span class="line">            if(temp == -1)&#123;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">            G[vec].push_back(temp);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">bool dfs(int v,int c)&#123;</span><br><span class="line">    color[v]=c;//顶点v染成c颜色</span><br><span class="line">    for(int i=0;i&lt;G[v].size();i++)&#123;</span><br><span class="line">        if(color[G[v][i]]==c) return false;  //如果邻接点被染成了c则返回false</span><br><span class="line">        if(color[G[v][i]]==0)&#123;      //如果邻接点被没有染色，则染色成-c.</span><br><span class="line">            if(!dfs(G[v][i],-c))&#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return  true;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void solve()&#123;</span><br><span class="line">    for(int i=0;i&lt;V;i++)&#123;</span><br><span class="line">        if(color[i]==0)&#123;</span><br><span class="line">            if(!dfs(i,1)) &#123;</span><br><span class="line">                cout&lt;&lt;&quot;No\n&quot;;</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt; &quot;Yes\n&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">    init();</span><br><span class="line">    solve();</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*输入示例</span><br><span class="line"> 4</span><br><span class="line">0 1 3 -1</span><br><span class="line">1 0 2 -1</span><br><span class="line">2 1 3 -1</span><br><span class="line">3 0 2 -1</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/图的概念/" data-id="cjv0wzt8x001881rwv0dn6dp8" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/28/csdn转移/二叉搜索树/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/28/csdn转移/最短路径问题/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/js对象/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/记忆化搜索与动态优化与背包问题/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/Fence Repair 栅栏分割/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/贪心算法-Aaruman's Army/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/贪心算法分析/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2019 wycan&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;1982659010@qq.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png">
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

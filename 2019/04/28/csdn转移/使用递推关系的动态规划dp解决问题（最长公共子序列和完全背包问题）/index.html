@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>wycBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="##最长公共子序列问题问题：给定两个字符串$ S_1S_2……S_1 $和$t_1t_2……t_n$ 。求出这两个字符串最长公共秩序了的长度。字符串$S_1S_2……S_n$ 的秩序了可以表示为$S_{i1} S_{i2}……S_{im}(i1&amp;lt;i2&amp;lt;……im)$的序列。 限制条件$1 \leqslant n \leqslant 1000$ 输入样例：n=4m=4         //">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wycBlog">
+<meta property="og:url" content="http://yoursite.com/2019/04/28/csdn转移/使用递推关系的动态规划dp解决问题（最长公共子序列和完全背包问题）/index.html">
+<meta property="og:site_name" content="wycBlog">
+<meta property="og:description" content="##最长公共子序列问题问题：给定两个字符串$ S_1S_2……S_1 $和$t_1t_2……t_n$ 。求出这两个字符串最长公共秩序了的长度。字符串$S_1S_2……S_n$ 的秩序了可以表示为$S_{i1} S_{i2}……S_{im}(i1&amp;lt;i2&amp;lt;……im)$的序列。 限制条件$1 \leqslant n \leqslant 1000$ 输入样例：n=4m=4         //">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-26T10:26:43.196Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="wycBlog">
+<meta name="twitter:description" content="##最长公共子序列问题问题：给定两个字符串$ S_1S_2……S_1 $和$t_1t_2……t_n$ 。求出这两个字符串最长公共秩序了的长度。字符串$S_1S_2……S_n$ 的秩序了可以表示为$S_{i1} S_{i2}……S_{im}(i1&amp;lt;i2&amp;lt;……im)$的序列。 限制条件$1 \leqslant n \leqslant 1000$ 输入样例：n=4m=4         //">
+  
+    <link rel="alternate" href="/atom.xml" title="wycBlog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">wycBlog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-csdn转移/使用递推关系的动态规划dp解决问题（最长公共子序列和完全背包问题）" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/28/csdn转移/使用递推关系的动态规划dp解决问题（最长公共子序列和完全背包问题）/" class="article-date">
+  <time datetime="2019-04-28T12:31:54.469Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>##最长公共子序列问题<br>问题：<br>给定两个字符串$ S_1S_2……S_1 $和$t_1t_2……t_n$ 。求出这两个字符串最长公共秩序了的长度。字符串$S_1S_2……S_n$ 的秩序了可以表示为<br>$S_{i1} S_{i2}……S_{im}(i1&lt;i2&lt;……im)$的序列。</p>
+<p>限制条件<br>$1 \leqslant n \leqslant 1000$</p>
+<p>输入样例：<br>n=4<br>m=4         //n、m分别为两个字符串的长度<br>s=”abcd”<br>t=”becd”</p>
+<p>输出样例<br>3（”bcd“）</p>
+<p>这个问题是经典的最长公共子序列问题。虽然算法不难实现，但是我们今天将尝试使用动态规划来解决此问题。<br>dp[i][j] :=s1……si 和 t1……tj对应的LCS的长度，<br>由此，$s_1……s_{i+i}$ 和 $ t_1……t_{j+1}对应的公共子列可能是下列三者中的一个：</p>
+<ul>
+<li>当$s_{i+1}=t_{j+1} $时，在$s_1……s_i$和$t_1……t_j$的公共子列末尾加-上$s_{i+1}$ </li>
+<li>$s_1……s_i$和$t_1……t_{j+1}$的公共子列</li>
+<li><p>$s_1……s_{i+1}$和$t_1……t_j$的公共子列</p>
+<p>所以有以下递推关系成立：</p>
+</li>
+</ul>
+<p>$$dp[i+1][j+1]=\left{<br>\begin{aligned}<br> max(dp[i][j]+1, dp[i][j+1],dp[i+1][j]),(s_{i+1}=t_{j+1})\<br>max( dp[i][j+1], dp[ii+1][j]),(其他)<br>\end{aligned}<br>\right.<br>$$</p>
+<p>分析可发现：$ dp[i+1][j+1]=max(dp[i][j]+1, dp[i][j+1],dp[i+1][j])$其实可以直接换成：<br>$ dp[i+1][j+1]=dp[i][j]+1$</p>
+<p>公式的时间复杂度为$O(nm)$公式中dp[n][m]表示的就是LCS的长度。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">j\i</th>
+<th style="text-align:right">0</th>
+<th style="text-align:right">1(b)</th>
+<th style="text-align:left">2(e)</th>
+<th>3(c)</th>
+<th>4(d)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>0</strong></td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:left">0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>1(a)</strong></td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:left">0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>2(b)</strong></td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+<td style="text-align:left">1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>3(c)</strong></td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+<td style="text-align:left">1</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>4(d)</strong></td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+<td style="text-align:left">1</td>
+<td>2</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p>代码如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#define MAX_N 10000</span><br><span class="line">#define  MAX_M 10000</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int n ,m;</span><br><span class="line">char s[MAX_N] , t[MAX_M];</span><br><span class="line">int dp[MAX_N+1][MAX_M+1];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">void init()&#123;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    for(int i=0;i&lt;n;i++)</span><br><span class="line">    cin&gt;&gt;s[i];</span><br><span class="line"></span><br><span class="line">    for(int i=0;i&lt;m;i++)</span><br><span class="line">        cin&gt;&gt;t[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void solve()&#123;</span><br><span class="line">    for(int i=0 ;i&lt;n ; i++)&#123;</span><br><span class="line">        for(int j=0;j&lt;m;j++)&#123;</span><br><span class="line">            if(s[i]==t[j])&#123;</span><br><span class="line">                dp[i+1][j+1]=dp[i][j]+1;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                dp[i+1][j+1]=max(dp[i][j+1], dp[i+1][j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;dp[n][m];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">    init();</span><br><span class="line">    solve();</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>##进一步探讨递推关系<br>问题：完全背包问题<br>有n种重量和价值分别为$w_i,v_i$的物品。从这些物品中挑选总重量不超过w的物品，求出挑选物品的总价值的最大值。在这里，每种物品可以任意选多件。<br><strong>限制条件</strong></p>
+<ul>
+<li>$1\leqslant n \leqslant 100$</li>
+<li>$1 \leqslant w_i,v_i \leqslant 100$</li>
+<li>$1 \leqslant W \leqslant 1000$</li>
+</ul>
+<p>输入样例：<br>n=3<br>(w,v)={(3,4), (4,5), (2,3)}<br>w=7<br>输出样例：<br>10（0号物品选1个，2号物品选两个）</p>
+<p>这了例题中，和之前的不同之处在于每种物品可以选任意多个。</p>
+<blockquote>
+<p>[上一个背包问题]<a href="https://blog.csdn.net/qq_28120673/article/details/81037700" target="_blank" rel="noopener">https://blog.csdn.net/qq_28120673/article/details/81037700</a></p>
+</blockquote>
+<p>首先尝试写出递推关系式<br>设dp[i+1][j] 表示从前i种物品中总重量不超过j的最大总价值。那么递推关系为：<br>$dp[0][j]=0$<br>$dp[i+1][j]=max{dp[i][j-k \times w[i]]+ k \times v[i] | 0\leqslant k}$</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#define MAX_N 100</span><br><span class="line">#define  MAX_M 100</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int  n,W;</span><br><span class="line">int w[MAX_N],v[MAX_N];</span><br><span class="line">int dp[MAX_N+1][MAX_M+1];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">void init()&#123;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">        cin&gt;&gt;w[i]&gt;&gt;v[i];</span><br><span class="line">    &#125;</span><br><span class="line">    cin&gt;&gt;W;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void solve()&#123;</span><br><span class="line">  for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">      for(int j=0;j&lt;=W;j++)&#123;</span><br><span class="line">          for(int k=0;k*w[i] &lt;= j; k++)&#123;</span><br><span class="line">              dp[i+1][j]=max( dp[i+1][j],dp[i][j-k*w[i]]+k*v[i] );</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  cout&lt;&lt;dp[n][W];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">    init();</span><br><span class="line">    solve();</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>该算法的核心为三重循环</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">      for(int j=0;j&lt;=W;j++)&#123;</span><br><span class="line">          for(int k=0;k*w[i] &lt;= j; k++)&#123;</span><br><span class="line">              dp[i+1][j]=max( dp[i+1][j],dp[i][j-k*w[i]]+k*v[i] );</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，dp[i][j],表示的是选取i个物品种类，当i等于0时表示没有选物品，此时dp[0][j]=0,这个值的设定是在数组初始化就设置的，其目的为递推提供初始值。j表示物品的总重量，很显然物品的重量不能是负数，所以j-k<em>w[i]&gt;=0, 即第三个循环中k</em>w[i]&lt;=j;<br>显而易见的是前两个循序是遍历所有物品种类和数量的组合（这里并不是排列，可以想成将物品按编号从1～n排列。i表示只从编号1～i中抽取物品，编号在这范围内可以抽也可以不抽，），然后第三个循环不容易理解（花了我半天的时间才看懂，泪奔～～～）。<br>$dp[i+1][j] = max( dp[i+1][j] , dp[i][j -k<em>w[i]] +k </em>v[i] );$<br>分析：<br>首先回顾一下示例数据：<br>n= 3<br>( w, v ) = { (3,4), (4,5), (2,3) }<br>w = 7</p>
+<p>假如dp[i][0~n]的最大值已经求出当，当我们要求dp[i+1][…]的时候（实际上当求dp[i+1][..]的时候，dp[i][…]已近求出）可以认为是在挑选k件i号物品后，然后在前i件物品中挑选，显然dp[i][..]最大值我们已近知道，所以选出k*v[i]+dp[i][…]的最大值就是dp[i+1][…]的最大值。</p>
+<p>下面分析递推过程：</p>
+<ol>
+<li>dp[1][0]<br> 当j=0；每个物品的重都大于0，所以，k=0时，dp[1][0]=dp[0][0]=0;<br> 同理，可得，dp[1][1]=dp[1][2]=0;</li>
+<li>dp[1][3]<br> 当k=0，dp[1][3]=dp[0][3]=0;<br> 当k=1，dp[1][3]=dp[0][1<em>3]+1</em>4=4;<br> 当k=2… ,k*w[i]&gt;3</li>
+<li>dp[2][0]<br> 显然j=0,1,2时dp[i][j]=0;</li>
+<li>dp[2][3]<br> 当k=0，dp[2][3]=0;<br> 当k=1，dp[2][3]=dp[1][3-1<em>3]+1</em>3=3;<br> 当k为其他值时，k*w[1]&gt;j;<br> 同理我们可以求出dp[2][4]=dp[2][5]=5, dp[2][6]=8, dp[2][7]=9。</li>
+<li>dp[3][0]<br> 因为w[2]=2，所以，dp[3][0]=dp[3][1]=0; </li>
+<li>dp[3][2]<br> 当k=1，k<em>w[2]=2&lt;=j , 所以dp[3][2]=dp[2][2- 1</em>2]+v[2]=3;<br> 当k=其他值时，均超出范围。</li>
+<li><p>dp[3][3]<br> 当k=0,dp[3][3]=dp[2][3]=4;<br> 当k=1, dp[3][3]=dp[2][1]+v[2]=3;<br> 当k=其他值将超出范围；<br> 所以dp[3][3]最大值为3.<br>8.dp[3][4]<br> 当k=0, dp[3][4]=dp[2][4]=5;<br> 当k=1，dp[3][4]=dp[2][4-1<em>2]+v[2]=dp[2][2]+3=3;<br> 当k=2，dp[3][4]=dp[2][4-2</em>2]+2<em>v[2]=dp[2][0]+2</em>v[2]=6;<br> 当k=其他值，将超出范围控制。</p>
+<p>同理可以得出dp[3][5]=7,dp[3][6]=7,dp[3][7]=10。</p>
+</li>
+</ol>
+<p>###算法到这里就完了？<br>并不是这样，其实我们还可以进一步优化它。<br>上面的算法中我们使用了三重循环。k的循环最大为W，所以最大时间复杂度为$O(nW^2)$ 。该算法中其实有一些多余的计算，接下来我们将多余的计算去除。<br>在dp[i+1][j]的计算中选择k(k&gt;=1)个的情况，与dp[i+1][j-w[i]]中选择k-1的情况是相同的，所以dp[i+1][j]的递推式中k&gt;=1的部分在计算中已经在dp[i+1][j-w[i]]的计算中完成了。为啥会这样呢，这个问题要从dp[][]的意义分析，dp[i+1][j-w[i]]表示在前i+1个物品中选择，即0～i号物品中选择。j-w[i]表示已选择一个i号物品，所以当k&gt;=1时，一定至少选择了一个i号物品。说以dp[i+1][j-w[i]] ，包含了dp[i+1][j-k*w[i]],(k&gt;=1)的情况。</p>
+<p>改进后代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">void solve2()&#123;</span><br><span class="line">    for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">        for(int j=0;j&lt;=W;j++)&#123;</span><br><span class="line">            if(j&lt;w[i])&#123;</span><br><span class="line">                dp[i+1][j]=dp[i][j];</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                dp[i+1][j]=max(dp[i][j], dp[i+1][j-w[i]] +v[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;&quot; \n&quot;&lt;&lt;dp[n][W] &lt;&lt;&quot;\n&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/使用递推关系的动态规划dp解决问题（最长公共子序列和完全背包问题）/" data-id="cjv0wzt8u001481rwh0vzdczz" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/28/csdn转移/深度优先搜索解决Lake Counting （POJ No.2386)/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/28/csdn转移/动态优化的再次优化，将dp数组从二维改为一维/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/js对象/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/记忆化搜索与动态优化与背包问题/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/Fence Repair 栅栏分割/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/贪心算法-Aaruman's Army/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/贪心算法分析/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2019 wycan&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;1982659010@qq.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png">
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>wycBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="##Rence Repair 题目：农夫约翰为了修理栅栏，要将一块很长的木板分割成N块。准备切成的木板的长度为L1、L2、……、Ln. 未切割木板的长度恰好为切割木板的长度和。每次切断木板时，需要的开销为这块木板的长度。例如，长度为21的木板切割成5、8、8的三块木板。长为21的木板切割成13、8时，开销为21.再将长度为13的木板切割成长度5、8时，开销为13.于是合计开销为34。于是按题目要求">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wycBlog">
+<meta property="og:url" content="http://yoursite.com/2019/04/28/csdn转移/Fence Repair (PKU 3253)/index.html">
+<meta property="og:site_name" content="wycBlog">
+<meta property="og:description" content="##Rence Repair 题目：农夫约翰为了修理栅栏，要将一块很长的木板分割成N块。准备切成的木板的长度为L1、L2、……、Ln. 未切割木板的长度恰好为切割木板的长度和。每次切断木板时，需要的开销为这块木板的长度。例如，长度为21的木板切割成5、8、8的三块木板。长为21的木板切割成13、8时，开销为21.再将长度为13的木板切割成长度5、8时，开销为13.于是合计开销为34。于是按题目要求">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-26T10:27:07.535Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="wycBlog">
+<meta name="twitter:description" content="##Rence Repair 题目：农夫约翰为了修理栅栏，要将一块很长的木板分割成N块。准备切成的木板的长度为L1、L2、……、Ln. 未切割木板的长度恰好为切割木板的长度和。每次切断木板时，需要的开销为这块木板的长度。例如，长度为21的木板切割成5、8、8的三块木板。长为21的木板切割成13、8时，开销为21.再将长度为13的木板切割成长度5、8时，开销为13.于是合计开销为34。于是按题目要求">
+  
+    <link rel="alternate" href="/atom.xml" title="wycBlog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">wycBlog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-csdn转移/Fence Repair (PKU 3253)" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/28/csdn转移/Fence Repair (PKU 3253)/" class="article-date">
+  <time datetime="2019-04-28T12:31:54.441Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>##Rence Repair</p>
+<p>题目：<br>农夫约翰为了修理栅栏，要将一块很长的木板分割成N块。准备切成的木板的长度为L1、L2、……、Ln. 未切割木板的长度恰好为切割木板的长度和。每次切断木板时，需要的开销为这块木板的长度。例如，长度为21的木板切割成5、8、8的三块木板。长为21的木板切割成13、8时，开销为21.再将长度为13的木板切割成长度5、8时，开销为13.于是合计开销为34。于是按题目要求将木板切割完，最小的开销是多少？</p>
+<p>限制条件：<br>1&lt;=N&lt;=2000<br>0&lt;=Li&lt;=5000</p>
+<p>输入样例：<br>N=3, L={8, 5, 8}<br>输出样例：<br>34</p>
+<p>Rence Repair问题在前面已经学习了使用贪心算法并构造哈弗曼数来解决此问题：</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/qq_28120673/article/details/81028306" target="_blank" rel="noopener">https://blog.csdn.net/qq_28120673/article/details/81028306</a></p>
+</blockquote>
+<p>现在我们可以使用优先队列来完成此题目：<br>该问题主要算法是：</p>
+<ol>
+<li>每次从所有的木板中取出最小的木板，长度相加的L</li>
+<li>记录ans+=L;</li>
+<li><p>判断优先级队列是否为空，如果为不为空就空则转步骤一；如果为空则输出ans.</p>
+<p>代码如下：</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;queue&gt;</span><br><span class="line"></span><br><span class="line">#define MAX_N  1000</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int  N,L[MAX_N];</span><br><span class="line">priority_queue&lt;int, vector&lt;int&gt;, greater&lt;int&gt;&gt; que;  //从小到大取出数据的优先级队列</span><br><span class="line"></span><br><span class="line">void init()&#123;</span><br><span class="line">    cin&gt;&gt;N;</span><br><span class="line">    for(int i=0;i&lt;N;i++)&#123;</span><br><span class="line">        cin&gt;&gt;L[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int solve()&#123;</span><br><span class="line">    for(int i=0;i&lt;N;i++)&#123;</span><br><span class="line">        que.push(L[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    int ans=0;</span><br><span class="line">    while(!que.empty())&#123;</span><br><span class="line">        int a=que.top();</span><br><span class="line">        que.pop();</span><br><span class="line">        int b=que.top();</span><br><span class="line">        que.pop();</span><br><span class="line">        int t=a+b;</span><br><span class="line">        ans+=t;</span><br><span class="line">        if(!que.empty()) que.push(t);</span><br><span class="line">    &#125;</span><br><span class="line">    return ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">    init();</span><br><span class="line">    cout&lt;&lt;solve();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>###关于priority_queue是知识<br>priority_queue优先级队列，其底层是采用堆来实现的。<br>它有两种构造方法：<br> <code>1、priority_queue&lt;int&gt; q</code><br>    该构造，默认为构造大根堆，即队首取出的是最大值<br><code>2、 priority_queue&lt;int, vector&lt;int&gt;, less&lt;int&gt; &gt;</code><br>   该构造方法中的第三个参数表示构造大根堆还是小根堆。<code>less&lt;int&gt;</code> 表示构造大根堆，<code>greater&lt;int&gt;</code>表示数字小的优先级大。                       <code>priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt; &gt;;</code>表示数字小的优先级大。在上面的例子中，我们在priority_queue中加入的是int数据，可以直接比大小。如果我们使用类作为队列的数据，那么队列怎么比较大小呢？我们有两种方法实现类的排序：<br><strong>方法一：重载运算符 ‘&lt;’ </strong><br>例如声明类People：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Peolpe&#123;</span><br><span class="line">	private:</span><br><span class="line">		int age;</span><br><span class="line">		bool sex;</span><br><span class="line">		//...</span><br><span class="line">	private:</span><br><span class="line">		 // &quot;&lt;&quot; 表示 price 大的优先级高</span><br><span class="line">		friend bool operator&lt;(const People &amp; p) const &#123;</span><br><span class="line">			return(this.age&lt;p.age);</span><br><span class="line">		&#125; </span><br><span class="line">&#125;</span><br><span class="line">//调用构造方法：</span><br><span class="line">priority_queue&lt;People&gt; que;</span><br></pre></td></tr></table></figure></p>
+<p><strong>方法二：在类的外部定义重载 </strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">struct cmp&#123;</span><br><span class="line">	 // &quot;&lt;&quot; 表示 price 大的优先级高</span><br><span class="line">        bool operator() (People p1,people p2)&#123;</span><br><span class="line">            return p1.age &lt; p2.age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//调用构造方法：</span><br><span class="line">priority_queue&lt;People, vector&lt;People&gt;,cmp &gt; que;</span><br></pre></td></tr></table></figure>
+<p>参考priority_queue：</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/pzhu_cg_csdn/article/details/79166858" target="_blank" rel="noopener">https://blog.csdn.net/pzhu_cg_csdn/article/details/79166858</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/Fence Repair (PKU 3253)/" data-id="cjv0wzt89000b81rwtizfmfhz" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/28/csdn转移/Expedition (POJ2431)运用优先级队列解题/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/28/csdn转移/二叉搜索树/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/js对象/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/记忆化搜索与动态优化与背包问题/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/Fence Repair 栅栏分割/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/贪心算法-Aaruman's Army/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/贪心算法分析/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2019 wycan&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;1982659010@qq.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png">
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

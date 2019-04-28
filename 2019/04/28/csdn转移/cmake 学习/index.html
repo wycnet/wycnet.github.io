@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>wycBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="cmake什么是cmakec/c++的编译工具有多种，例如：GNU make，QT的qmake，微软的 msmake等。各种make工具的跨平台支持并不好。 cmake就是专门针对跨平台而设计的，它首先允许开发者编写一种平台无关的CMakeLists.txt文件来制定整个编译流程，然后根据目标用户的平台进一步生成本地需要的Makefile文件。 在linux平台下使用CMake并编译流程：  编写">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wycBlog">
+<meta property="og:url" content="http://yoursite.com/2019/04/28/csdn转移/cmake 学习/index.html">
+<meta property="og:site_name" content="wycBlog">
+<meta property="og:description" content="cmake什么是cmakec/c++的编译工具有多种，例如：GNU make，QT的qmake，微软的 msmake等。各种make工具的跨平台支持并不好。 cmake就是专门针对跨平台而设计的，它首先允许开发者编写一种平台无关的CMakeLists.txt文件来制定整个编译流程，然后根据目标用户的平台进一步生成本地需要的Makefile文件。 在linux平台下使用CMake并编译流程：  编写">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-26T10:28:32.810Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="wycBlog">
+<meta name="twitter:description" content="cmake什么是cmakec/c++的编译工具有多种，例如：GNU make，QT的qmake，微软的 msmake等。各种make工具的跨平台支持并不好。 cmake就是专门针对跨平台而设计的，它首先允许开发者编写一种平台无关的CMakeLists.txt文件来制定整个编译流程，然后根据目标用户的平台进一步生成本地需要的Makefile文件。 在linux平台下使用CMake并编译流程：  编写">
+  
+    <link rel="alternate" href="/atom.xml" title="wycBlog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">wycBlog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-csdn转移/cmake 学习" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/28/csdn转移/cmake 学习/" class="article-date">
+  <time datetime="2019-04-28T12:31:54.337Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h1 id="cmake"><a href="#cmake" class="headerlink" title="cmake"></a>cmake</h1><h2 id="什么是cmake"><a href="#什么是cmake" class="headerlink" title="什么是cmake"></a>什么是cmake</h2><p>c/c++的编译工具有多种，例如：GNU make，QT的qmake，微软的 msmake等。各种make工具的跨平台支持并不好。</p>
+<p>cmake就是专门针对跨平台而设计的，它首先允许开发者编写一种平台无关的CMakeLists.txt文件来制定整个编译流程，然后根据目标用户的平台进一步生成本地需要的Makefile文件。</p>
+<p>在linux平台下使用CMake并编译流程：</p>
+<ol>
+<li>编写CMake配置文件CmakeLists.txt</li>
+<li>执行<code>cmake path</code> 或者<code>ccmake path</code> 生成Makefile文件。<code>path</code>是CMakeLists.txt所在的目录。</li>
+<li>使用<code>make</code>命令进行编译</li>
+</ol>
+<h2 id="单个文件的情况"><a href="#单个文件的情况" class="headerlink" title="单个文件的情况"></a>单个文件的情况</h2><p>如果我们只有一个main.cpp文件</p>
+<p>编写CMakeLists文件如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#Cmake 最低版本要求</span><br><span class="line">cmake——minimum_required (VERSION 2.8)</span><br><span class="line"></span><br><span class="line">#项目信息--项目名称</span><br><span class="line">project (projectDemo)</span><br><span class="line"></span><br><span class="line">#指定生成目标--将main.cpp编译成Demo可执行文件</span><br><span class="line">add——executable(Demo mian.cpp)</span><br></pre></td></tr></table></figure></p>
+<p>在当前项目中执行<code>cmake .</code> ，会发现文件夹中多出来几个文件cmakeCache.txt , cmake_install.cmake, CMakefiles</p>
+<p>然后执行<code>make</code>命令，编译出可执行文件：Demo</p>
+<p>最后运行Demo  ，<code>./Demo</code></p>
+<h2 id="同一个目录多个文件"><a href="#同一个目录多个文件" class="headerlink" title="同一个目录多个文件"></a>同一个目录多个文件</h2><p>假如我们有如下的工程目录</p>
+<ul>
+<li>Demo<ul>
+<li>main.cpp</li>
+<li>people.cpp</li>
+<li>people.h</li>
+</ul>
+</li>
+</ul>
+<p>CMakeLists.txt文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># CMake 最低版本号要求</span><br><span class="line">cmake_minimum_required (VERSION 2.8)</span><br><span class="line"># 项目信息</span><br><span class="line">project (Demo)</span><br><span class="line"># 指定生成目标</span><br><span class="line">add_executable(Demo main.cpp people.cpp)</span><br></pre></td></tr></table></figure>
+<p>观察发现，我们只是在<code>add_executable()`</code>方法中添加了一个源文件</p>
+<p>如果我们只有两三个源文件，这样写完全没有问题，但是通常项目中远不止这几个源文件，这时我们要使用另外一种方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># CMake 最低版本号要求</span><br><span class="line">cmake_minimum_required (VERSION 2.8)</span><br><span class="line"># 项目信息</span><br><span class="line">project (Demo)</span><br><span class="line"></span><br><span class="line"># 查找当前目录下的所有源文件</span><br><span class="line"># 并将名称保存到 DIR_SRCS 变量</span><br><span class="line">aux_source_directory(. DIR_SRCS)</span><br><span class="line"></span><br><span class="line"># 指定生成目标</span><br><span class="line">add_executable(Demo $&#123;DIR_SRCS&#125;)</span><br></pre></td></tr></table></figure>
+<p>上述代码中，    <code>aux_source_directory(.DIR_SRCS)</code> 方法将当前目录下所有源文件名称保存到一个数组中：DIR_SRCS，<br>然后将DIR_SRCS当作参数传递给<code>add_executable()</code>函数。</p>
+<blockquote>
+<p>${DIR_SRCS} 是shell的变量赋值语法，详情参考  <a href="https://blog.csdn.net/qq_28120673/article/details/82888391" target="_blank" rel="noopener">https://blog.csdn.net/qq_28120673/article/details/82888391</a></p>
+</blockquote>
+<h2 id="多个目录，多个源文件"><a href="#多个目录，多个源文件" class="headerlink" title="多个目录，多个源文件"></a>多个目录，多个源文件</h2><p>假如我们有如下目录</p>
+<ul>
+<li>Demo<ul>
+<li>main.cpp</li>
+<li>animal<ul>
+<li>people.cpp</li>
+<li>dog.cpp</li>
+<li>dog.h</li>
+<li>people.h</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>CMakeLists.txt文件如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># CMake 最低版本号要求</span><br><span class="line">cmake_minimum_required (VERSION 2.8)</span><br><span class="line"></span><br><span class="line"># 项目信息</span><br><span class="line">project (Demo)</span><br><span class="line"></span><br><span class="line"># 查找当前目录下的所有源文件</span><br><span class="line"># 并将名称保存到 DIR_SRCS 变量</span><br><span class="line">aux_source_directory(. DIR_SRCS)</span><br><span class="line"></span><br><span class="line"># 添加 animal子目录</span><br><span class="line">add_subdirectory(animal)</span><br><span class="line"></span><br><span class="line"># 指定生成目标 </span><br><span class="line">add_executable(Demo $&#123;DIR_SRCS&#125;)</span><br><span class="line"></span><br><span class="line"># 添加链接库--指明该项目需要一个链接库animal链接库在animal文件夹中的CMakeLists.txt文件中定义</span><br><span class="line">target_link_libraries(Demo animal)</span><br></pre></td></tr></table></figure></p>
+<p>另外我们还需要在animal目录中添加CMakeLists.txt文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 查找当前目录下的所有源文件</span><br><span class="line"># 并将名称保存到 DIR_LIB_SRCS 变量</span><br><span class="line">aux_source_directory(. DIR_LIB_SRCS)</span><br><span class="line"># 生成链接库</span><br><span class="line">add_library (animal $&#123;DIR_LIB_SRCS&#125;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>参考 <a href="http://www.hahack.com/codes/cmake/" target="_blank" rel="noopener">http://www.hahack.com/codes/cmake/</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/cmake 学习/" data-id="cjv0wzt8d000i81rwl0nfi88d" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/28/csdn转移/shell学习之shell变量/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/28/csdn转移/数学问题的解题窍门——辗转相除法/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#cmake"><span class="toc-number">1.</span> <span class="toc-text">cmake</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是cmake"><span class="toc-number">1.1.</span> <span class="toc-text">什么是cmake</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单个文件的情况"><span class="toc-number">1.2.</span> <span class="toc-text">单个文件的情况</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#同一个目录多个文件"><span class="toc-number">1.3.</span> <span class="toc-text">同一个目录多个文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多个目录，多个源文件"><span class="toc-number">1.4.</span> <span class="toc-text">多个目录，多个源文件</span></a></li></ol></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2019 wycan&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;1982659010@qq.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png">
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

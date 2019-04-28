@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>wycBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="shell脚本shell是一个用c语言编写的程序，是用户用来操作linux系统的语言，俗称命令行。 我的第一个shell脚本新建一个文本，将其命名为test.sh。在文本中编写代码： 12#！/bin/bashecho “hello wang” 在test.sh文件夹中打开终端输入bash test.sh 或者 ./test.sh 就可以运行脚本。 shell变量定义变量时，变量名不能加美元符号：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wycBlog">
+<meta property="og:url" content="http://yoursite.com/2019/04/28/csdn转移/shell学习之shell变量/index.html">
+<meta property="og:site_name" content="wycBlog">
+<meta property="og:description" content="shell脚本shell是一个用c语言编写的程序，是用户用来操作linux系统的语言，俗称命令行。 我的第一个shell脚本新建一个文本，将其命名为test.sh。在文本中编写代码： 12#！/bin/bashecho “hello wang” 在test.sh文件夹中打开终端输入bash test.sh 或者 ./test.sh 就可以运行脚本。 shell变量定义变量时，变量名不能加美元符号：">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-26T10:28:29.098Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="wycBlog">
+<meta name="twitter:description" content="shell脚本shell是一个用c语言编写的程序，是用户用来操作linux系统的语言，俗称命令行。 我的第一个shell脚本新建一个文本，将其命名为test.sh。在文本中编写代码： 12#！/bin/bashecho “hello wang” 在test.sh文件夹中打开终端输入bash test.sh 或者 ./test.sh 就可以运行脚本。 shell变量定义变量时，变量名不能加美元符号：">
+  
+    <link rel="alternate" href="/atom.xml" title="wycBlog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">wycBlog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-csdn转移/shell学习之shell变量" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/28/csdn转移/shell学习之shell变量/" class="article-date">
+  <time datetime="2019-04-28T12:31:54.341Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h1 id="shell脚本"><a href="#shell脚本" class="headerlink" title="shell脚本"></a>shell脚本</h1><p>shell是一个用c语言编写的程序，是用户用来操作linux系统的语言，俗称命令行。</p>
+<h2 id="我的第一个shell脚本"><a href="#我的第一个shell脚本" class="headerlink" title="我的第一个shell脚本"></a>我的第一个shell脚本</h2><p>新建一个文本，将其命名为test.sh。在文本中编写代码：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">！/bin/bash</span></span><br><span class="line">echo “hello wang”</span><br></pre></td></tr></table></figure>
+<p>在test.sh文件夹中打开终端输入<code>bash test.sh</code> 或者 <code>./test.sh</code> 就可以运行脚本。</p>
+<h2 id="shell变量"><a href="#shell变量" class="headerlink" title="shell变量"></a>shell变量</h2><p>定义变量时，变量名不能加美元符号：</p>
+<p><code>my_name = &quot;wycan&quot;</code></p>
+<p>注意：</p>
+<ol>
+<li>变量名自能是英文字母、数字和下划线的组合，首字母不能以数字开头。</li>
+<li>变量名中间不能有空格，一般使用下划线链接</li>
+<li>不能使用bash保留的关键字</li>
+<li>不能使用标点符号</li>
+</ol>
+<p>除了使用显示赋值，还可以使用语句赋值：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for file in 'ls /etc'</span><br><span class="line">或者</span><br><span class="line">for file in $(ls /etc)</span><br></pre></td></tr></table></figure></p>
+<h3 id="使用变量"><a href="#使用变量" class="headerlink" title="使用变量"></a>使用变量</h3><p>变量定义后，如果要使用变量，需要在变量前加上# ,这于其他编程语言有所不同。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#！/bin/bash</span></span><br><span class="line">my_name=<span class="string">"wycan"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$my_name</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;my_name&#125;</span></span><br></pre></td></tr></table></figure>
+<p>变量名外面的花括号是可选的，加不加都行，加花括号是为了帮助解释器识别变量的边界，比如下面这种情况：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> skill <span class="keyword">in</span> Ada Coffe Action Java; <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"I am good at <span class="variable">$&#123;skill&#125;</span>Script"</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="只读变量"><a href="#只读变量" class="headerlink" title="只读变量"></a>只读变量</h3><p>使用readonly命令可以将变量定义为只读变量，只读变量的值不能被改变。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">my_name=<span class="string">"wycan"</span></span><br><span class="line"><span class="built_in">readonly</span> myUrl</span><br><span class="line">my_name=<span class="string">"wycan"</span>    //在这里尝试修改会出错</span><br></pre></td></tr></table></figure>
+<h3 id="删除变量"><a href="#删除变量" class="headerlink" title="删除变量"></a>删除变量</h3><p>使用unset命令可以删除变量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">my_name=<span class="string">"wycan"</span></span><br><span class="line"><span class="built_in">unset</span> my_name</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$my_name</span></span><br></pre></td></tr></table></figure>
+<p>该代码不会输出任何信息</p>
+<h3 id="变量类型"><a href="#变量类型" class="headerlink" title="变量类型"></a>变量类型</h3><ol>
+<li>局部变量 <ul>
+<li>局部变量在脚本或命令中定义，仅在当前shell实例中有效，其他shell启动的程序不能访问局部变量。–局部变量在脚本或命令中定义，仅在当前shell实例中有效，其他shell启动的程序不能访问局部变量。</li>
+</ul>
+</li>
+<li>环境变量<ul>
+<li>所有的程序，包括shell启动的程序，都能访问环境变量，有些程序需要环境变量来保证其正常运行。必要的时候shell脚本也可以定义环境变量。</li>
+</ul>
+</li>
+<li>shell变量<ul>
+<li>shell变量是由shell程序设置的特殊变量。shell变量中有一部分是环境变量，有一部分是局部变量，这些变量保证了shell的正常运行</li>
+</ul>
+</li>
+</ol>
+<h3 id="shell中的字符串"><a href="#shell中的字符串" class="headerlink" title="shell中的字符串"></a>shell中的字符串</h3><p>shell中字符串可以使用单引号也可以使用双引号</p>
+<p>但是shell对单引号是有限制的</p>
+<ul>
+<li>单引号中的字符串会原样输出，不会识别其中的变量</li>
+<li>单引号字符串中不能出现单独的单引号</li>
+</ul>
+<p>双引号：</p>
+<ul>
+<li>双引号里可以有变量</li>
+<li>双引号里可以出现转义符</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">my_name=<span class="string">'wycan'</span></span><br><span class="line">str=<span class="string">"hello my name is <span class="variable">$&#123;my_name&#125;</span> ! \n"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$str</span></span><br></pre></td></tr></table></figure>
+<p>输出结果为：<br><code>hello my name is wycan</code></p>
+<h3 id="拼接字符串"><a href="#拼接字符串" class="headerlink" title="拼接字符串"></a>拼接字符串</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#bin/bash</span></span><br><span class="line">your_name=<span class="string">"runoob"</span></span><br><span class="line"><span class="comment"># 使用双引号拼接</span></span><br><span class="line">greeting=<span class="string">"hello, "</span><span class="variable">$your_name</span><span class="string">" !"</span></span><br><span class="line">greeting_1=<span class="string">"hello, <span class="variable">$&#123;your_name&#125;</span> !"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$greeting</span>  <span class="variable">$greeting_1</span></span><br><span class="line"><span class="comment"># 使用单引号拼接</span></span><br><span class="line">greeting_2=<span class="string">'hello, '</span><span class="variable">$your_name</span><span class="string">' !'</span></span><br><span class="line">greeting_3=<span class="string">'hello, $&#123;your_name&#125; !'</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$greeting_2</span>  <span class="variable">$greeting_3</span></span><br></pre></td></tr></table></figure>
+<p>输出结果为：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hello, runoob ! hello, runoob !</span><br><span class="line">hello, runoob ! hello, <span class="variable">$&#123;your_name&#125;</span> !</span><br></pre></td></tr></table></figure></p>
+<h3 id="获取字符串长度"><a href="#获取字符串长度" class="headerlink" title="获取字符串长度"></a>获取字符串长度</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">str=<span class="string">"wycan"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;#str&#125;</span></span><br></pre></td></tr></table></figure>
+<p>输出：4</p>
+<h3 id="提取子字符串"><a href="#提取子字符串" class="headerlink" title="提取子字符串"></a>提取子字符串</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">str=<span class="string">"study shell is wery happy"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;str:1:4&#125;</span></span><br></pre></td></tr></table></figure>
+<p>输出 tudy</p>
+<h3 id="查找子字符串"><a href="#查找子字符串" class="headerlink" title="查找子字符串"></a>查找子字符串</h3><p>查找字符 i 或 o 的位置(哪个字母先出现就计算哪个)：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string=<span class="string">"runoob is a great site"</span></span><br><span class="line"><span class="built_in">echo</span> `expr index <span class="string">"<span class="variable">$string</span>"</span> io`</span><br></pre></td></tr></table></figure></p>
+<p> 输出 4<br>需要注意的是<code>echo `expr index &quot;$string&quot; io`</code> 中不是单引号<code>‘</code> ，而是反引号<code>`</code></p>
+<h3 id="shell数组"><a href="#shell数组" class="headerlink" title="shell数组"></a>shell数组</h3><p>bash只支持一维数组，并且不限制数组的大小，数组下标从0开始</p>
+<h4 id="定义数组"><a href="#定义数组" class="headerlink" title="定义数组"></a>定义数组</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array_name=(value0 value1 value2 value3)</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">array_name[0]=value0</span><br><span class="line">array_name[1]=value1</span><br><span class="line">array_name[n]=valuen</span><br></pre></td></tr></table></figure>
+<h4 id="读取数组"><a href="#读取数组" class="headerlink" title="读取数组"></a>读取数组</h4><p><code>${数组名[下标]}</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">value=<span class="variable">$&#123;array_name[0]&#125;</span>    <span class="comment"># 读取数组的第一个</span></span><br></pre></td></tr></table></figure>
+<p><strong>使用@符号可以获取数组中所有元素</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">value=<span class="variable">$&#123;array_name[@]&#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id="获取数组的长度"><a href="#获取数组的长度" class="headerlink" title="获取数组的长度"></a>获取数组的长度</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 取得数组元素的个数</span></span><br><span class="line">length=<span class="variable">$&#123;#array_name[@]&#125;</span></span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">length=<span class="variable">$&#123;#array_name[*]&#125;</span></span><br><span class="line"><span class="comment"># 取得数组单个元素的长度</span></span><br><span class="line">lengthn=<span class="variable">$&#123;#array_name[n]&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="shell-注释"><a href="#shell-注释" class="headerlink" title="shell 注释"></a>shell 注释</h3><p>shell有三种注释方法</p>
+<p>1.单行注释， 以<code>#</code> 开头的行就是注释，会被解释器忽略<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 这是注释内容</span></span><br></pre></td></tr></table></figure></p>
+<ol start="2">
+<li>多行注释格式1<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">:&lt;&lt;EOF</span><br><span class="line">注释内容...</span><br><span class="line">注释内容...</span><br><span class="line">注释内容...</span><br><span class="line">EOF</span><br><span class="line">```	</span><br><span class="line"></span><br><span class="line">3. 多行注释2</span><br><span class="line">```bash</span><br><span class="line">:&lt;&lt;<span class="string">'</span></span><br><span class="line"><span class="string">注释内容...</span></span><br><span class="line"><span class="string">注释内容...</span></span><br><span class="line"><span class="string">注释内容...</span></span><br><span class="line"><span class="string">'</span></span><br><span class="line"></span><br><span class="line">:&lt;&lt;!</span><br><span class="line">注释内容...</span><br><span class="line">注释内容...</span><br><span class="line">注释内容...</span><br><span class="line">!</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/shell学习之shell变量/" data-id="cjv0wzt8s001081rwuyunuvs5" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/28/csdn转移/Ubuntu系统基础知识/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/28/csdn转移/cmake 学习/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#shell脚本"><span class="toc-number">1.</span> <span class="toc-text">shell脚本</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#我的第一个shell脚本"><span class="toc-number">1.1.</span> <span class="toc-text">我的第一个shell脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#shell变量"><span class="toc-number">1.2.</span> <span class="toc-text">shell变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用变量"><span class="toc-number">1.2.1.</span> <span class="toc-text">使用变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#只读变量"><span class="toc-number">1.2.2.</span> <span class="toc-text">只读变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除变量"><span class="toc-number">1.2.3.</span> <span class="toc-text">删除变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#变量类型"><span class="toc-number">1.2.4.</span> <span class="toc-text">变量类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#shell中的字符串"><span class="toc-number">1.2.5.</span> <span class="toc-text">shell中的字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拼接字符串"><span class="toc-number">1.2.6.</span> <span class="toc-text">拼接字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取字符串长度"><span class="toc-number">1.2.7.</span> <span class="toc-text">获取字符串长度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#提取子字符串"><span class="toc-number">1.2.8.</span> <span class="toc-text">提取子字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查找子字符串"><span class="toc-number">1.2.9.</span> <span class="toc-text">查找子字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#shell数组"><span class="toc-number">1.2.10.</span> <span class="toc-text">shell数组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义数组"><span class="toc-number">1.2.10.1.</span> <span class="toc-text">定义数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#读取数组"><span class="toc-number">1.2.10.2.</span> <span class="toc-text">读取数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取数组的长度"><span class="toc-number">1.2.10.3.</span> <span class="toc-text">获取数组的长度</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#shell-注释"><span class="toc-number">1.2.11.</span> <span class="toc-text">shell 注释</span></a></li></ol></li></ol></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2019 wycan&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;1982659010@qq.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png">
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

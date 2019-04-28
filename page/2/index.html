@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>wycBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="wycBlog">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+<meta property="og:site_name" content="wycBlog">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="wycBlog">
+  
+    <link rel="alternate" href="/atom.xml" title="wycBlog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">wycBlog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-csdn转移/Expedition (POJ2431)运用优先级队列解题" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/28/csdn转移/Expedition (POJ2431)运用优先级队列解题/" class="article-date">
+  <time datetime="2019-04-28T12:31:54.449Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>问题：Expedition（POJ2431）</p>
+<p>你需要驾驶一辆卡车行驶L单位的距离。最开始时，卡车上有p单位的汽油。卡车每开一单位的距离需要消耗一单位的汽油。如果在途中车上的汽油耗尽，卡车就无法继续前行，因而无法到达终点。在途中一共有n个加油站。第i个加油站在距离起点Ai单位距离的地方，最多可以给卡车加Bi单位的汽油。假设卡车的燃料箱的容量是无限大的。那么请问卡车是否能够到达终点？如果可以需要加多少次油？如果可以到达终点，输入最少加油次数，否则输出-1。</p>
+<p><strong>限制条件</strong><br> $1\leqslant N \leqslant 10000$<br> $1\leqslant L \leqslant 1000000, 1 \leqslant P \leqslant 1000000 $<br> $1 \leqslant A_i &lt;L, 1 \leqslant B_i \leqslant 100 $<br>输入样例：<br>N=4, L=25, P=10;  //4个加油站，路程25，起始油量10<br>A={10,14,20,21}<br>B={10,5,2,4}<br>输出样例：<br>2（第一个和第二个加油站加油）<br>输入示例中的N比较小，但是在实际情况中N可以很大，当N很大时，一般的算法将花费大量时间，所以一个较好的算法是本题的解题关键。<br>对于本题我们可换一个思路。先不考虑加油问题，当汽车没油时，再从路过的加油站加油（因为路过时可以加油，我们在路过时不知道是否要在该站加油）。<br>那么在车没油时，我们可以已经路过了多个加油站，要选择哪个加油站加油呢？根据题目可知，我么的目的是为了求加油次数最少，所以我们要选择油量最多的加油站。<br>所以在这里就需要求出路过的加油站中油最多的加油站。因为只需要求出油最多的一个，所以不需要全排序，而且经过的加油站在不断增加，有因此我么选择堆排序是最好的选择。</p>
+<blockquote>
+<p>有关堆排序的内容<br><a href="https://blog.csdn.net/qq_28120673/article/details/81066756" target="_blank" rel="noopener">https://blog.csdn.net/qq_28120673/article/details/81066756</a></p>
+</blockquote>
+<p>算法设计如下：</p>
+<ul>
+<li>在经过加油站$A_i$时，往优先级队列中加$B_i$</li>
+<li>当燃料耗尽时有两种选择<ul>
+<li>如果优先队列也为空，则无法到达终点</li>
+<li>优先队列不为空，从队列中取出最大元素，并用来给加油站加油</li>
+</ul>
+</li>
+</ul>
+<p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;queue&gt;</span><br><span class="line"></span><br><span class="line">#define  MAX_N 10000</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int L, P ,N;</span><br><span class="line">int A[MAX_N+1], B[MAX_N+1];</span><br><span class="line"></span><br><span class="line">void init()&#123;</span><br><span class="line">    cin&gt;&gt;N&gt;&gt;L&gt;&gt;P;</span><br><span class="line">    for(int i=0;i&lt;N;i++)&#123;</span><br><span class="line">       cin&gt;&gt;A[i];</span><br><span class="line">    &#125;</span><br><span class="line">    for(int i=0;i&lt;N;i++)</span><br><span class="line">    cin&gt;&gt;B[i];</span><br><span class="line">    A[N]=L; //为了计算方便，将终点也设为加油站</span><br><span class="line">    B[N]=0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int solve()&#123;</span><br><span class="line">    priority_queue&lt;int&gt; que;</span><br><span class="line">    int ans=0;//加油次数</span><br><span class="line">    int pos=0;//所在位置</span><br><span class="line">    int tank=P;//剩余油量</span><br><span class="line"></span><br><span class="line">    for(int i=0;i&lt;N;i++)&#123;</span><br><span class="line">        int d=A[i]-pos;</span><br><span class="line">       while (d&gt;tank)&#123;</span><br><span class="line">           if(que.empty()) &#123;</span><br><span class="line">              ans=-1;</span><br><span class="line">               return ans;</span><br><span class="line">           &#125;</span><br><span class="line">           tank+=que.top();</span><br><span class="line">           que.pop();</span><br><span class="line">           ans++;</span><br><span class="line">       &#125;</span><br><span class="line">       tank=tank-(A[i]-pos);</span><br><span class="line">       pos=A[i];</span><br><span class="line">       que.push(B[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    return ans;</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">    init();</span><br><span class="line">    cout&lt;&lt;solve();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/Expedition (POJ2431)运用优先级队列解题/" data-id="cjv0wzt85000881rwi4bv9ij1" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-csdn转移/Fence Repair (PKU 3253)" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/28/csdn转移/Fence Repair (PKU 3253)/" class="article-date">
+  <time datetime="2019-04-28T12:31:54.441Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>##Rence Repair</p>
+<p>题目：<br>农夫约翰为了修理栅栏，要将一块很长的木板分割成N块。准备切成的木板的长度为L1、L2、……、Ln. 未切割木板的长度恰好为切割木板的长度和。每次切断木板时，需要的开销为这块木板的长度。例如，长度为21的木板切割成5、8、8的三块木板。长为21的木板切割成13、8时，开销为21.再将长度为13的木板切割成长度5、8时，开销为13.于是合计开销为34。于是按题目要求将木板切割完，最小的开销是多少？</p>
+<p>限制条件：<br>1&lt;=N&lt;=2000<br>0&lt;=Li&lt;=5000</p>
+<p>输入样例：<br>N=3, L={8, 5, 8}<br>输出样例：<br>34</p>
+<p>Rence Repair问题在前面已经学习了使用贪心算法并构造哈弗曼数来解决此问题：</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/qq_28120673/article/details/81028306" target="_blank" rel="noopener">https://blog.csdn.net/qq_28120673/article/details/81028306</a></p>
+</blockquote>
+<p>现在我们可以使用优先队列来完成此题目：<br>该问题主要算法是：</p>
+<ol>
+<li>每次从所有的木板中取出最小的木板，长度相加的L</li>
+<li>记录ans+=L;</li>
+<li><p>判断优先级队列是否为空，如果为不为空就空则转步骤一；如果为空则输出ans.</p>
+<p>代码如下：</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;queue&gt;</span><br><span class="line"></span><br><span class="line">#define MAX_N  1000</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int  N,L[MAX_N];</span><br><span class="line">priority_queue&lt;int, vector&lt;int&gt;, greater&lt;int&gt;&gt; que;  //从小到大取出数据的优先级队列</span><br><span class="line"></span><br><span class="line">void init()&#123;</span><br><span class="line">    cin&gt;&gt;N;</span><br><span class="line">    for(int i=0;i&lt;N;i++)&#123;</span><br><span class="line">        cin&gt;&gt;L[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int solve()&#123;</span><br><span class="line">    for(int i=0;i&lt;N;i++)&#123;</span><br><span class="line">        que.push(L[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    int ans=0;</span><br><span class="line">    while(!que.empty())&#123;</span><br><span class="line">        int a=que.top();</span><br><span class="line">        que.pop();</span><br><span class="line">        int b=que.top();</span><br><span class="line">        que.pop();</span><br><span class="line">        int t=a+b;</span><br><span class="line">        ans+=t;</span><br><span class="line">        if(!que.empty()) que.push(t);</span><br><span class="line">    &#125;</span><br><span class="line">    return ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">    init();</span><br><span class="line">    cout&lt;&lt;solve();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>###关于priority_queue是知识<br>priority_queue优先级队列，其底层是采用堆来实现的。<br>它有两种构造方法：<br> <code>1、priority_queue&lt;int&gt; q</code><br>    该构造，默认为构造大根堆，即队首取出的是最大值<br><code>2、 priority_queue&lt;int, vector&lt;int&gt;, less&lt;int&gt; &gt;</code><br>   该构造方法中的第三个参数表示构造大根堆还是小根堆。<code>less&lt;int&gt;</code> 表示构造大根堆，<code>greater&lt;int&gt;</code>表示数字小的优先级大。                       <code>priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt; &gt;;</code>表示数字小的优先级大。在上面的例子中，我们在priority_queue中加入的是int数据，可以直接比大小。如果我们使用类作为队列的数据，那么队列怎么比较大小呢？我们有两种方法实现类的排序：<br><strong>方法一：重载运算符 ‘&lt;’ </strong><br>例如声明类People：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Peolpe&#123;</span><br><span class="line">	private:</span><br><span class="line">		int age;</span><br><span class="line">		bool sex;</span><br><span class="line">		//...</span><br><span class="line">	private:</span><br><span class="line">		 // &quot;&lt;&quot; 表示 price 大的优先级高</span><br><span class="line">		friend bool operator&lt;(const People &amp; p) const &#123;</span><br><span class="line">			return(this.age&lt;p.age);</span><br><span class="line">		&#125; </span><br><span class="line">&#125;</span><br><span class="line">//调用构造方法：</span><br><span class="line">priority_queue&lt;People&gt; que;</span><br></pre></td></tr></table></figure></p>
+<p><strong>方法二：在类的外部定义重载 </strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">struct cmp&#123;</span><br><span class="line">	 // &quot;&lt;&quot; 表示 price 大的优先级高</span><br><span class="line">        bool operator() (People p1,people p2)&#123;</span><br><span class="line">            return p1.age &lt; p2.age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//调用构造方法：</span><br><span class="line">priority_queue&lt;People, vector&lt;People&gt;,cmp &gt; que;</span><br></pre></td></tr></table></figure>
+<p>参考priority_queue：</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/pzhu_cg_csdn/article/details/79166858" target="_blank" rel="noopener">https://blog.csdn.net/pzhu_cg_csdn/article/details/79166858</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/Fence Repair (PKU 3253)/" data-id="cjv0wzt89000b81rwtizfmfhz" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-csdn转移/二叉搜索树" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/28/csdn转移/二叉搜索树/" class="article-date">
+  <time datetime="2019-04-28T12:31:54.433Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>##二叉搜索树的结构</p>
+<p>二叉树的性质：<br><strong>性质一：</strong>在二叉树的i层上至多有2 i-1个节点（i&gt;=1）至少有1个<br><strong>性质二：</strong>深度为k的二叉树至多有2k-1个节点，至少为k个<br><strong>性质三：</strong>对任何一棵二叉树T，如果终端结点树为n，度为2的结点为n2,度为0的结点为n0 则n0=n2+n1<br><strong>性质四：</strong>具有n个节点的完全二叉树的深度为[log2n]+1向下取整<br><strong>性质五：</strong>如果有一颗有n个节点的完全二叉树的节点按层次序编号，对任一层的节点i（1&lt;=i&lt;=n）有</p>
+<ol>
+<li>如果i=1，则节点是二叉树的根，无双亲，如果i&gt;1，则其双亲节点为[i/2]，向下取整</li>
+<li>如果2i&gt;n那么节点i没有左孩子，否则其左孩子为2i</li>
+<li>如果2i+1&gt;n那么节点没有右孩子，否则右孩子为2i+1</li>
+</ol>
+<p>二叉搜索树能够高效的处理一下操作：</p>
+<ul>
+<li>插入一个数值</li>
+<li>查询是否包含某个数值</li>
+<li>删除某个数值</li>
+</ul>
+<p>二叉搜索树存储数据的方法：<br><strong>任意节点左子树上的所有节点都比自己小，而右子树上的所有节点都比自己大。</strong><br>如下图为一个二叉搜索树</p>
+<p><img src="https://img-blog.csdn.net/20180718185902656?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="二叉搜索树"></p>
+<p>在二叉搜索树中查找和插入操作都从树的顶端开始比较，如果比当前节点小则搜索左子树，比当前节点大则搜索右子树。最多比较此时为二叉树的高度。<br>在二叉搜索树中查询和插入比较简单，那么要怎么删除数据呢？<br>如果删除的是叶子节点，那么操作比较简单。<br>一般需要根据下面的情况进行处理：</p>
+<ul>
+<li><em>要删除的节点没有左孩子，那么把右孩子提上去</em></li>
+<li><em>需要删除的节点的左孩子没有右孩子，那么把左孩子提上去，右孩子作为左孩子的左孩子的右孩子</em></li>
+<li><em>以上都不满足的话，就把做左儿子的子孙中最大的节点提到需要删除的节点上</em></li>
+</ul>
+<p>###二叉搜索树的复杂度</p>
+<p>二叉搜索树的搜索时间与层数成正比，如果有n个元素，品均每次操作的时间为$O(logn)$。</p>
+<p>###二叉搜索树的实现</p>
+<p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">struct node &#123;</span><br><span class="line">    int val;</span><br><span class="line">    node *lch, *rch;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">//插入数值</span><br><span class="line">node *insert(node *p, int x) &#123;</span><br><span class="line">    if (p == nullptr) &#123;</span><br><span class="line">        node *q = new node;</span><br><span class="line">        q-&gt;val = x;</span><br><span class="line">        q-&gt;lch = nullptr;</span><br><span class="line">        q-&gt;rch = nullptr;</span><br><span class="line">        return q;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        if (p-&gt;val &gt; x) &#123;</span><br><span class="line">            p-&gt;lch = insert(p-&gt;lch, x);</span><br><span class="line">        &#125; else if (p-&gt;val &lt; x) &#123;</span><br><span class="line">            p-&gt;rch = insert(p-&gt;rch, x);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//删除数值</span><br><span class="line">node *remove(node *p, int x) &#123;</span><br><span class="line">    if (p == nullptr) &#123;</span><br><span class="line">        return nullptr;</span><br><span class="line">    &#125; else if (x &lt; p-&gt;val) p-&gt;lch = remove(p-&gt;lch, x);</span><br><span class="line">    else if (x &gt; p-&gt;val) p-&gt;rch = remove(p-&gt;rch, x);</span><br><span class="line">    else if (p-&gt;lch == nullptr) &#123;</span><br><span class="line">        node *q = p-&gt;rch;</span><br><span class="line">        delete p;</span><br><span class="line">        return q;</span><br><span class="line">    &#125; else if (p-&gt;lch-&gt;rch == nullptr) &#123;</span><br><span class="line">        node *q = p-&gt;lch;</span><br><span class="line">        node *u = p-&gt;rch;</span><br><span class="line">        delete p;</span><br><span class="line">        q-&gt;rch = u;</span><br><span class="line">        return q;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        node *q;</span><br><span class="line">        for (q = p-&gt;lch; q-&gt;rch-&gt;rch != nullptr; q = q-&gt;rch);</span><br><span class="line">        node *r = q-&gt;rch; //r为要移动的节点,r没有右孩子</span><br><span class="line">        node *u = r-&gt;lch; //u为r的左孩子</span><br><span class="line">        q-&gt;rch = u;          //将r的左孩子接在r的位置上</span><br><span class="line">        r-&gt;lch = p-&gt;lch;</span><br><span class="line">        r-&gt;rch = p-&gt;rch;</span><br><span class="line">        return p;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//查找</span><br><span class="line">bool find(node *p, int x) &#123;</span><br><span class="line">    if (p == nullptr) &#123;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">    if (p-&gt;val == x) &#123;</span><br><span class="line">        return true;</span><br><span class="line">    &#125; else if (p-&gt;val &gt; x) &#123;</span><br><span class="line">        return find(p-&gt;lch, x);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        return find(p-&gt;rch, x);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>在实际的使用中我们一般不自己构造二叉搜索树，c++的STL标库中的set容器就是使用的二叉搜索树来实现的</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/二叉搜索树/" data-id="cjv0wzt8t001181rwswcoj1m4" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-csdn转移/图的概念" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/28/csdn转移/图的概念/" class="article-date">
+  <time datetime="2019-04-28T12:31:54.421Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>##什么是图<br>图是右顶点和边组成。顶点表示对象，边表示两个对象的连接关系。<br>一般的表示方法：顶点集合是V、边的集合是E,图记做G=(V , E), 连接两点u和v的边记做e=(u,v)。</p>
+<p>##图的种类<br>图一般分为两种：</p>
+<ul>
+<li>无向图</li>
+<li>有向图</li>
+</ul>
+<p>####无向图<br>相邻：两个顶点之间有边。<br>路径：相邻顶点序列称为路径。<br>圈：起点和终点重合的路径称为圈。<br>连通图：任意两点之间都有路径连接的图叫做连通图。<br>度：顶点连接的边数叫做这个顶点的度。<br>树：没有圈的连通图叫做树。<br>森林：没有圈的非连通图叫做森林。</p>
+<p><strong>树的重要性质:一棵树的边数恰好是顶点数-1；反之，边数等于顶点数-1的连通图就是一颗树。</strong></p>
+<p>####有向图<br>DAG：没有圈的有向图叫做DAG。<br>拓扑序：对于每个顶点我们给它一个编号，第i号顶点叫做$v_i$。那么存在从顶点$v_i$到顶点$v_j$的边时就有i&lt;j成立，这样的编号方式叫做拓扑序。</p>
+<p><strong>采用拓扑排序的好处：把图中的顶点按照拓扑序从左到右排序，那么所以的边都是从左指向右的。因此，通过这样的编号方式，有些DAG问题就可以DP(动态规划)来解决。</strong></p>
+<p>##图的表示</p>
+<ul>
+<li>邻接矩阵</li>
+<li>邻接表</li>
+</ul>
+<p>####邻接矩阵<br> 近接矩阵用|V| × |V|的二维数组来表示图。g[i][j]表示顶点i和顶点j的关系。</p>
+<p>####邻接表<br>用邻接矩阵表示稀疏图会浪费大量的内存空间。在邻接表中，是通过把从一个顶点出发与它相邻的所有节点用链表保存起来。所以只需要O(|V|+|E|)的内存空间。<br>邻接表的存储方法：<br>可以使用vector数组实现，比如:      <code>vector &lt;int&gt; G[MAX_N];</code> G[0]表示0号节点，该容器中的节点都是0号节点的邻接节点。G[1]表示1号节点，该容器中的所以节点都是1号节点的邻接节点。</p>
+<p><strong>总结：稀疏图用邻接表，稠密图用近接矩阵。</strong></p>
+<p>##图的搜索<br>尝试用图的知识来解题<br>问题：二分图判定<br>给定一个具有n个顶点的图。要给图上的每个顶点染色，并且要使相邻顶点的颜色不同。问题是能否用最多两种颜色来染色？题目保证没有重边和自环。<br><strong>限制条件</strong><br>$1 \leqslant n \leqslant 100 $</p>
+<p>输入样例：<br>n=3；    //表示顶点数<br>0  1  2      -1   //第一个数字表示顶点号，最后一个表示换行标志，中间表示该顶点的邻接点<br>1  0  2      -1<br>2  1  0      -1<br>该图形为：<br><img src="https://img-blog.csdn.net/20180722152718964?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>输出样例：<br>No；</p>
+<p>相邻顶点染成 不同颜色的问题叫做图的着色问题。对图进行染色所需要的最小颜色称为最小着色数。最小着色数2的图称为二分图。<br><img src="https://img-blog.csdn.net/2018072214475911?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="最小着色数是5"></p>
+<p>如果只有两种颜色，那么确定一种颜色之后，和它相邻的顶点的颜色就确定了。因此选择任意一个顶点出发，依次给相邻顶点着色，就可以判断是否被两种颜色染色了。使用深度优先搜索（DFS)可以简单实现。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">#define MAX_V 1000</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">vector&lt;int&gt; G[MAX_V]; //存储图,使用vector表结构</span><br><span class="line">int V;//顶点数</span><br><span class="line">int color[MAX_V] &#123;&#125;; //顶点颜色</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">void init()&#123;</span><br><span class="line">    cin&gt;&gt;V;</span><br><span class="line">    int vec;</span><br><span class="line">    for(int i=0;i&lt;V;i++)&#123;</span><br><span class="line">        cin&gt;&gt;vec;</span><br><span class="line">        while(true)&#123;</span><br><span class="line">            int temp;</span><br><span class="line">            cin&gt;&gt;temp;</span><br><span class="line">            if(temp == -1)&#123;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">            G[vec].push_back(temp);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">bool dfs(int v,int c)&#123;</span><br><span class="line">    color[v]=c;//顶点v染成c颜色</span><br><span class="line">    for(int i=0;i&lt;G[v].size();i++)&#123;</span><br><span class="line">        if(color[G[v][i]]==c) return false;  //如果邻接点被染成了c则返回false</span><br><span class="line">        if(color[G[v][i]]==0)&#123;      //如果邻接点被没有染色，则染色成-c.</span><br><span class="line">            if(!dfs(G[v][i],-c))&#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return  true;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void solve()&#123;</span><br><span class="line">    for(int i=0;i&lt;V;i++)&#123;</span><br><span class="line">        if(color[i]==0)&#123;</span><br><span class="line">            if(!dfs(i,1)) &#123;</span><br><span class="line">                cout&lt;&lt;&quot;No\n&quot;;</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt; &quot;Yes\n&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">    init();</span><br><span class="line">    solve();</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*输入示例</span><br><span class="line"> 4</span><br><span class="line">0 1 3 -1</span><br><span class="line">1 0 2 -1</span><br><span class="line">2 1 3 -1</span><br><span class="line">3 0 2 -1</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/图的概念/" data-id="cjv0wzt8x001881rwv0dn6dp8" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-csdn转移/最短路径问题" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/28/csdn转移/最短路径问题/" class="article-date">
+  <time datetime="2019-04-28T12:31:54.413Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>##单源最短路径问题<br>单源最短路径是固定一个起点，求它到其他所以点的最短路径的问题。终点也固定的点叫做两点之间最短路径问题。因为两点之间的最短路径问题是单源最短路径问题的复杂度相同所以也归类为单元最短路径问题。<br>用d[i]表示从起点s出发到顶点i的最短路径。<br>$d[i] =min{d[j]+(从j到i的边的权值)|e=(j,i) 属于E};$<br>如果给定是图是DAG(无圈有向图),就可以按拓扑序给顶点编号,并利用这个递推关系式计算出d 。在这总情况下，记起点到i的最短距离为d[i]，设初始值为：d[s]=0;d[i]=INF 。然后不断使用这条递推关系不断更新d的值，就可以算出新的d。实际上这利用了深度优先搜索的思想。</p>
+<p>如下算法为Bellman-Ford算法。如果在图中不存在从s可达的负圈，那么最短路径不会经过同一个顶点两次，while(true)的循环最多执行|v|-1次，因此，复杂度是$O(|V| ×|E|)$。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">#define MAX_E 1000</span><br><span class="line">#define MAX_V 1000</span><br><span class="line">#define INF 1000000</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">struct  edge &#123; int from, to, cost&#125;;</span><br><span class="line"></span><br><span class="line">edge es[MAX_E];//边</span><br><span class="line">int d[MAX_V];//用来存储最短距离</span><br><span class="line">int V,E; //点和边的数量</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//从顶点s出发到所有点的最短距离，通过边来计算。</span><br><span class="line">void shortest_path(int s)&#123;</span><br><span class="line">    for(int i=0;i&lt;V;i++)&#123;</span><br><span class="line">        d[i]=INF;</span><br><span class="line">    &#125;</span><br><span class="line">    d[s]=0;//s是起点，从起点到起点距离当然是0；</span><br><span class="line">    while(true)&#123;</span><br><span class="line">        bool update=false;</span><br><span class="line">        for(int i=0;i&lt;E;i++)&#123;</span><br><span class="line">            edge e=es[i];</span><br><span class="line">            if(d[e.from]!=INF &amp;&amp; d[e.to]&gt;d[e.from]+e.cost)&#123;</span><br><span class="line">                d[e.to]=d[e.from]+e.cost;</span><br><span class="line">                update=true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if(!update) break;</span><br><span class="line">    &#125;        </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>反之，如果存在从s可达的负圈，那么在第|v|次循环中也会更新d的值，因此，也卡伊利用这个性质来检查负圈。如果一开始对所以顶点i，都把d[i]初始化为0，那么可以检查出所所有的负圈。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">bool findNegativeLoop()&#123;</span><br><span class="line">    memset(d,0, sizeof(d));</span><br><span class="line"></span><br><span class="line">    for(int i=0;i&lt;V;i++)&#123;</span><br><span class="line">        for(int j=0;j&lt;E;j++)&#123;</span><br><span class="line">            edge e=es[i];</span><br><span class="line">            if(d[e.to]&gt;d[e.from]+e.cost)&#123;</span><br><span class="line">                d[e.to]=d[e.from]+e.cost;</span><br><span class="line">                if(i==V-1) return false; //如果不存在负圈，那么最多循环V-1次结束，所以这里如果循环到了V次，那么一定</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>该算法时间复杂度为:$O(|V||E|)$</p>
+<p>##单源最短路径2——Dijkstra算法<br>在没有负边的情况下，在Bellman0Ford算法中，如果d[i]还不是最短距离的话，那么即使进行d[j]=d[i]+从i到j的权值更新，d[j]也不会变成最短距离。而且，即使d[i]没有变化，每一次循环都要检查一次从i出发的所以边。由此可知，算法很费时间。<br>现在对算法做如下修改：</p>
+<ul>
+<li>找到最短距离已经确定的顶点，从它出发更新相邻顶点的最短距离</li>
+<li>此后不需要再关心最短路径已经确认的顶点。</li>
+</ul>
+<p>该算法的代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#define MAX_V 1000</span><br><span class="line">#define INF 100000000000</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int cost[MAX_V][MAX_V]; //存储边的权值</span><br><span class="line">int d[MAX_V];//存储最短距离</span><br><span class="line">bool used[MAX_V];//标记该点是否已经用过，使用过表示该点已计算出最短距离</span><br><span class="line">int V; //顶点数量</span><br><span class="line"></span><br><span class="line">void dijkstra(int s)&#123;</span><br><span class="line">    fill(d,d+V,INF);</span><br><span class="line">    fill(used,used+V;false);</span><br><span class="line">    d[s]=0;</span><br><span class="line">    </span><br><span class="line">    while(true)&#123;</span><br><span class="line">        int v=-1;</span><br><span class="line">        for(int u=0;u&lt;V;u++)&#123; //从未使用的顶点中选择一个距离最短的顶点</span><br><span class="line">            if(! used[u] &amp;&amp; (v== -1 || d[u]&lt;d[v])) v=u;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        if(v==-1) break; //v==-1说明所以的顶点都已经计算完成了</span><br><span class="line">        </span><br><span class="line">        used[v]=true;    //将v标记为以访问过</span><br><span class="line">        </span><br><span class="line">        for(int u=0;u&lt;V;u++)&#123;  //更新与v相连的所以节点</span><br><span class="line">            d[u]=min(d[u],d[v]+cost[v][u]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用相邻矩阵实现的Dijkstra算法的时间复杂度为$O(|V|^2)$ 。实际上仔细观察会发现，该算法中while每次循环都要先查询距离最短的一个没有被使用的节点。我们如果在插入时就进行排序，那么会可以直接取出最小的值。</p>
+<p>优化后的算法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">#include &lt;queue&gt;</span><br><span class="line"></span><br><span class="line">#define MAX_V 1000</span><br><span class="line">#define INF 100000000000</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">struct edge &#123;</span><br><span class="line">    int to, cost;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">typedef pair&lt;int, int&gt; P;//first中存放距离，second中存放编号</span><br><span class="line"></span><br><span class="line">int V;</span><br><span class="line">vector&lt;edge&gt; G[MAX_V];</span><br><span class="line">int d[MAX_V];</span><br><span class="line"></span><br><span class="line">void dijkstra(int s) &#123;</span><br><span class="line">    //优先级队列，从小到大排列</span><br><span class="line">    priority_queue&lt;P, vector&lt;P&gt;, greater&lt;P&gt;&gt; que;</span><br><span class="line">    fill(d, d + V, INF);</span><br><span class="line">    d[s] = 0;</span><br><span class="line">    que.push(P(0, s));</span><br><span class="line"></span><br><span class="line">    while (!que.empty()) &#123;</span><br><span class="line">        P p = que.top();</span><br><span class="line">        que.pop();</span><br><span class="line">        int v = p.second;</span><br><span class="line">        if (d[v] &lt; p.first) continue;//在这种情况下说明此记录已经作废，例如第一次循环插入了P(3,4);第二次循环又插入了P(2,4),显然，第二次的数据应该</span><br><span class="line">                                                    //替换掉第一次数据，但是由于我们在这里使用了哦=优先级队列存储，如果要替换掉上一次的记录=会比较麻烦，所以我们不去除无效的数据，</span><br><span class="line">                                                    //当从队列中取出数据时再判断是否是无效的数据（在之前应当被替换的数据）。</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt; G[v].size(); i++) &#123;</span><br><span class="line">            edge e = G[v][i];</span><br><span class="line">            if (d[e.to] &gt; d[v] + e.cost) &#123;</span><br><span class="line">                d[e.to] = d[v] + e.cost;</span><br><span class="line">                que.push(P(d[e.to], e.to));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>该算法的时间复杂度为$O(|E|×log|V|)$</p>
+<p>上述的代码中，有一条语句<code>if(d[v]&lt;p.first)continue;</code> 该条代码分析如下：<br>在这种情况下说明此记录已经作废，例如第一次循环插入了P(3,4);第二次循环又插入了P(2,4),显然，第二次的数据应该替换掉第一次数据，但是由于我们在这里使用了哦=优先级队列存储，如果要替换掉上一次的记录=会比较麻烦，所以我们不去除无效的数据，当从队列中取出数据时再判断是否是无效的数据（在之前应当被替换的数据）。</p>
+<p>在优化之前的算法中，我们使用了bool used来标记那些最短距离已经被计算出来的节点，但是在优化算法中却没有看到类似的标记，这是为什么呢？其实原因很简单，优化之前的算法中，我们每次选取最短距离的点是从所有的点中选取的，所以到去除掉已经计算过的点；而优化算法中，是从优先级对接列中取出的点，优先级队列中的点是每次循环更新了距离的点，显然已经计算出最近距离的点不会在更新距离，所以就不会再出现在优先级队列中。因此优化算法中并不需要bool used 标记。</p>
+<p>##任意两点之间的最短距离——Floyd-Warshall算法</p>
+<p>Floayd-Warshall算法和Bellman-Ford算法一样可以处理边数为负数的情况，并且可以判断是否有负圈。<br>算法思路：<br>问题使用dp（动态规划）的方法来求解。<br>只使用顶点0～k和i、j的情况下，记i到j的最短路径长度为d[k+1][i][j] 。k=-1时认为只使用i和j，所以d[0][i][j]=cost[i][j] 。接下来我们将只使用0～k的问题规约到只是用0～k-1的情况。<br>只使用0～k的情况，我们可以将其分为两种情况：<br>1、进过顶点k一次。在这种情况下d[k][i][j]=d[k-1][i][k]+d[k-1][k][j]<br>2、完全不经过顶点k。d[k][i][j]=d[k-1][i][j].<br>将这两种情况合并我们就可以得到d[k][i][j]=min( d[k-1][i][j] ,  d[k-1][i][k]+d[k-1][k][j] )<br>简化该dp数组使用新值覆盖旧值：d[i][j]=min(d[i][j],d[i][k]+d[k][j]);</p>
+<p>算法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">#include &lt;queue&gt;</span><br><span class="line"></span><br><span class="line">#define MAX_V 1000</span><br><span class="line">#define INF 100000000000</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int d[MAX_V][MAX_V];  //d[u][v]表示边 e（u,v）的权值,边不存在设为INF</span><br><span class="line">int V;</span><br><span class="line"></span><br><span class="line">void floyd()&#123;</span><br><span class="line">    for(int k=0;k&lt;V;k++)&#123;</span><br><span class="line">        for(int i=0;i&lt;V;i++)&#123;</span><br><span class="line">            for(int j=0;j&lt;V;j++)&#123;</span><br><span class="line">                d[i][j]=min(d[i][j],d[i][k]+d[k][j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>算法分析：<br>最外层的循环V次，依次表示使用0~0号点、0～1号点、0～2号点……0～k号点的情况。<br>假设我们有一个4个节点的图，该图的边信息如下矩阵：<br><img src="https://img-blog.csdn.net/20180726172841610?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="初始矩阵"></p>
+<p>k=0时，表示只使用0号节点,d[i][j]=min(d[i][j],  d[i][0]+d[0][j])<br><img src="https://img-blog.csdn.net/20180726184033926?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="k=0"></p>
+<p>k=1时，表示只使用0,1号节点，由于k=0时，d[i][i]已经计算完毕，所以此时计算d[i][j],可以以使用公式d[i][j]=(d[i][j], d[i][1]+d[1][j])。<br><img src="https://img-blog.csdn.net/20180726190336648?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="k=1"></p>
+<p>k=2时：<br><img src="https://img-blog.csdn.net/20180726191440232?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="k=2"><br>k=3时：<br><img src="https://img-blog.csdn.net/20180726191824788?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="k=3"></p>
+<p>观察上述的计算过程可以发现，当k=a时，矩阵的第a行和第a列不会发生变化，其他位位置的值d[i][j]=min(d[i][j], d[i][a]+d[a][j] )。</p>
+<p>##路径还原</p>
+<p>前面的算法都是在求解最短的距离，但是有些情况下，会让你在求出最短距离的同时还要把最短路径求出（经过哪几个节点），这时候要怎么做呢？<br>可以采用一个数组pro[V]来保存每个节点的前驱节点。在这里我使用Dijkstra算法为例，在求解最短距离时满足d[j]=d[k]+cost[k][j]时，就说明j的前驱节点是k，那么就记录pro[j]=k;所以只需要在之前的代码中加入一行代码：<code>pro[u]=v;</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#define MAX_V 1000</span><br><span class="line">#define INF 100000000000</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int cost[MAX_V][MAX_V]; //存储边的权值</span><br><span class="line">int d[MAX_V];//存储最短距离</span><br><span class="line">bool used[MAX_V];//标记该点是否已经用过，使用过表示该点已计算出最短距离</span><br><span class="line">int V; //顶点数量</span><br><span class="line"></span><br><span class="line">int pro[V];//×××××××××××××新加入用来存储前驱节点</span><br><span class="line"></span><br><span class="line">void dijkstra(int s)&#123;</span><br><span class="line">    fill(d,d+V,INF);</span><br><span class="line">    fill(used,used+V;false);</span><br><span class="line">    d[s]=0;</span><br><span class="line">    </span><br><span class="line">    while(true)&#123;</span><br><span class="line">        int v=-1;</span><br><span class="line">        for(int u=0;u&lt;V;u++)&#123; //从未使用的顶点中选择一个距离最短的顶点</span><br><span class="line">            if(! used[u] &amp;&amp; (v== -1 || d[u]&lt;d[v])) v=u;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        if(v==-1) break; //v==-1说明所以的顶点都已经计算完成了</span><br><span class="line">        </span><br><span class="line">        used[v]=true;    //将v标记为以访问过</span><br><span class="line">        </span><br><span class="line">        for(int u=0;u&lt;V;u++)&#123;  //更新与v相连的所以节点</span><br><span class="line">            d[u]=min(d[u],d[v]+cost[v][u]);</span><br><span class="line">            //*************************************</span><br><span class="line">            pro[u]=v;  //**************在原有的Dijkstra算法中加入该行代码</span><br><span class="line">            //*************************************</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//取出最短路径</span><br><span class="line">vector&lt;int&gt; getPath(int t) &#123;</span><br><span class="line">    vector&lt;int&gt; path;</span><br><span class="line">    while (t != -1) &#123;</span><br><span class="line">        path.push_back(pro[t]);</span><br><span class="line">        t = pro[t];</span><br><span class="line">    &#125;</span><br><span class="line">    //path中保存的为倒序，现在给path倒过来</span><br><span class="line">    reverse(path.begin(), path.end());</span><br><span class="line">    return path;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/最短路径问题/" data-id="cjv0wzt8z001b81rwi2dicem3" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-csdn转移/最小生成树" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/28/csdn转移/最小生成树/" class="article-date">
+  <time datetime="2019-04-28T12:31:54.409Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h2 id="最小生成树"><a href="#最小生成树" class="headerlink" title="最小生成树"></a>最小生成树</h2><p>生成树的定义：在一个图中寻到这样一种子图：去除子图中的一些边，剩下的节点和边可以构成一棵树，那么这课树就是生成树。</p>
+<p>最小生成树：如果边上有权值，那么是的权值最小的生成树就叫做最小生成树（MST）。</p>
+<p>常用的最小生成树算法为Kruskal算法和Prim算法。</p>
+<p>最小生成树示例图：</p>
+<p><img src="https://img-blog.csdn.net/20180801162845283?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<h3 id="Prim算法"><a href="#Prim算法" class="headerlink" title="Prim算法"></a>Prim算法</h3><p>Prim算法和Dijkstra算法十分相似，都是从某个顶点出发不断添加边的算法。</p>
+<p>算法思想：</p>
+<ol>
+<li>我们选取一个顶点v作为起点树T;</li>
+<li>然后贪心的选取T和其它顶点之间连接的最小权值的边，并把它加入到T中。</li>
+<li>不断重复操作2，直到所有的顶点被选择完。</li>
+</ol>
+<p>那么如何查找到最小权值的边呢？把已选顶点集合X和顶点V连接的最小权值记为mincost[v]。在向X里添加 顶点u时，只需要查看和u相连的边就可以了。对于每条边，更新mincost[v]=min(mincost[v], 边(u,v)的权值 )即可。</p>
+<p>如果每次都遍历未包含在X中的点mincost[v]，需要时间复杂度$O(|V|_2)$ 。如果使用堆来维护那么时间复杂度就是$O(|E|log|V|)$。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_V 1000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 999999999</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> cost[MAX_V][MAX_V]; <span class="comment">//存放边的权值</span></span><br><span class="line"><span class="keyword">int</span> mincost[MAX_V]; <span class="comment">//从集合X出发的边到每个顶点的最小权值</span></span><br><span class="line"><span class="keyword">bool</span> used[MAX_V];  <span class="comment">//顶点是否已经包含到X中</span></span><br><span class="line"><span class="keyword">int</span> V;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;  <span class="comment">//按要求输入数据</span></span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">prim</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; V; i++) &#123;</span><br><span class="line">        mincost[i] = INF;</span><br><span class="line">        used[i] = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    mincost[<span class="number">0</span>] = <span class="number">0</span>; <span class="comment">//选取零号节点作为起始点</span></span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;  <span class="comment">//用来记录总权值</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> v = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> u = <span class="number">0</span>; u &lt; V; u++) &#123;  <span class="comment">//选取权值最小的点，初始时会选中0号点</span></span><br><span class="line">            <span class="keyword">if</span> (!used[u] &amp;&amp; (v == <span class="number">-1</span> || mincost[u] &lt; mincost[v])) v = u;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (v == <span class="number">-1</span>) <span class="keyword">break</span>; <span class="comment">//如果v还是-1说明所有的点都被用过了</span></span><br><span class="line">        used[v] = <span class="literal">true</span>;  <span class="comment">//标记v被使用</span></span><br><span class="line">        res += mincost[v];  <span class="comment">//记录总权值，很显然第一次循环时v=0，mincost[0]=0;</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> u = <span class="number">0</span>; u &lt; V; u++) &#123;  <span class="comment">//更新所有点到X（已选点的集合）,因为新加入了节点v,所以将原来的距离和cost[v][u]比较。</span></span><br><span class="line">            mincost[u] = min(mincost[u], cost[v][u]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Kruskal算法"><a href="#Kruskal算法" class="headerlink" title="Kruskal算法"></a>Kruskal算法</h3><p>算法思路：</p>
+<ol>
+<li>按照边的权值顺序从小到大选择边，如果选中的边加入到已选边中不会产生圈，那么就把该边加入到已选边中。</li>
+<li>重复步骤1，直到所有的顶点被选则。</li>
+</ol>
+<p>该算法的重点在于如何检查是否存在圈。每次选中边检查该边的两个顶点是否在已选顶点中，如果连个都在，那么一定会产生圈。</p>
+<p>该算法主要是在边排序上花费时间，算法的时间复杂度是$O(|E|log|V|)$ 。</p>
+<p>算法实现如下：</p>
+<p>bigncaji.h头文件</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//bingcaji.h</span></span><br><span class="line"><span class="comment">// Created by wyc on 18-7-19.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> UNTITLED2_BINGCAJI_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> UNTITLED2_BINGCAJI_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>  MAXN 1000</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> par[MAXN], ranks[MAXN];  <span class="comment">//par表示parent代表父亲编号，par[x]指的是x的父节点编号</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//初始化n个元素</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">initUnionFind</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        par[i] = i;</span><br><span class="line">        ranks[i] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//查询树的根</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (par[x] == x) &#123;</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> par[x] = find(par[x]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//合并x和y所属的集合</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">unite</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">    x = find(x);</span><br><span class="line">    y = find(y);</span><br><span class="line">    <span class="keyword">if</span> (x == y) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span> (ranks[x] &lt; ranks[y]) &#123;</span><br><span class="line">        par[x] = y;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        par[y] = x;</span><br><span class="line">        <span class="keyword">if</span> (ranks[x] == ranks[y]) ranks[x]++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//x和y是否属于同一集合</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">same</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> find(x) ==find(y);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">//UNTITLED2_BINGCAJI_H</span></span></span><br></pre></td></tr></table></figure>
+<p>main.cpp文件</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"bingcaji.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_V 1000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 999999999</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span>&#123;</span><span class="keyword">int</span> u,v,cost;&#125;;</span><br><span class="line">edge es[MAX_V];</span><br><span class="line"><span class="keyword">int</span> V,E;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">comp</span><span class="params">(<span class="keyword">const</span> edge &amp; e1, <span class="keyword">const</span> edge &amp; e2)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> e1.cost &lt;e2.cost;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;V&gt;&gt;E;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;E;i++)&#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;es[i].u&gt;&gt;es[i].v&gt;&gt;es[i].cost;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">kruskal</span><span class="params">()</span></span>&#123;</span><br><span class="line">    sort(es,es+E,comp); <span class="comment">//按照从小到达排序</span></span><br><span class="line">    initUnionFind(V);</span><br><span class="line">    <span class="keyword">int</span> res=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;E;i++)&#123;</span><br><span class="line">        edge e=es[i];</span><br><span class="line">        <span class="keyword">if</span>(! same(e.u,e.v))&#123;</span><br><span class="line">            unite(e.u,e.v);</span><br><span class="line">            res+=e.cost;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    init();</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;kruskal();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 测试数据 ,该数据即为文章开始的图，输入为V E  边（u,v,cost）</span></span><br><span class="line"><span class="comment">8   11</span></span><br><span class="line"><span class="comment">0 2 2</span></span><br><span class="line"><span class="comment">1 2 3</span></span><br><span class="line"><span class="comment">2 3 4</span></span><br><span class="line"><span class="comment">2 5 1</span></span><br><span class="line"><span class="comment">3 4 3</span></span><br><span class="line"><span class="comment">5 6 5</span></span><br><span class="line"><span class="comment">3 6 7</span></span><br><span class="line"><span class="comment">3 7 9</span></span><br><span class="line"><span class="comment">6 7 8</span></span><br><span class="line"><span class="comment">6 4 1</span></span><br><span class="line"><span class="comment">4 7 5</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/最小生成树/" data-id="cjv0wzt8x001981rwjqzronis" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-csdn转移/次最短路径Roadblocks(POJNo.3255)" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/28/csdn转移/次最短路径Roadblocks(POJNo.3255)/" class="article-date">
+  <time datetime="2019-04-28T12:31:54.401Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>问题：</p>
+<p>某街区共有R条道路、N个路口。道路可以双向通行。问1号路口到N号路口的次短路的长度是多少？次短路指的是比最短路长度长的次短路径。同一条边可以经过多次。</p>
+<p><strong>限制条件</strong></p>
+<p><strong>$1 \leqslant N \leqslant 5000$</strong></p>
+<p>$1 \leqslant R \leqslant 100000$</p>
+<p>输入示例：</p>
+<p>N=4</p>
+<p>R=4</p>
+<p>1 2 100             //1 2表示节点，100表示1、2之间距离</p>
+<p>2 4 200</p>
+<p>2 3 250</p>
+<p>3 4 100</p>
+<p><img src="https://img-blog.csdn.net/201808012020197?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<p>输出示例：</p>
+<p>450</p>
+<p>思考：</p>
+<p>求最短路径我们有Bellman-Ford、Dijkstra、Floyd算法。但是本题是求次最短路径。Dijkstra算法的思路是依次去确定尚未确定的顶点中距离最小的顶点。Dijkstra算法不断更新每个节点的最短路径，如果能够多加入有个缓存，存储上一次的最短距离，比如，设置d[MAX_V]、oldD[AMX_V]两个存储最短距离，每次更新d数组之前，将d中的数据全部复制发给oldD数组，那么当d不在更新时，d中存储的是最短路径，oldD中存储的是次最短路径。</p>
+<p>首先来看看Dijkstra算法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_V 1000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 100000000000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> to, cost;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; P;<span class="comment">//first中存放距离，second中存放编号</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> V;</span><br><span class="line"><span class="built_in">vector</span>&lt;edge&gt; G[MAX_V];</span><br><span class="line"><span class="keyword">int</span> d[MAX_V];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dijkstra</span><span class="params">(<span class="keyword">int</span> s)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//优先级队列，从小到大排列</span></span><br><span class="line">    priority_queue&lt;P, <span class="built_in">vector</span>&lt;P&gt;, greater&lt;P&gt;&gt; que;</span><br><span class="line">    fill(d, d + V, INF);</span><br><span class="line">    d[s] = <span class="number">0</span>;</span><br><span class="line">    que.push(P(<span class="number">0</span>, s));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (!que.empty()) &#123;</span><br><span class="line">        P p = que.top();</span><br><span class="line">        que.pop();</span><br><span class="line">        <span class="keyword">int</span> v = p.second;</span><br><span class="line">        <span class="keyword">if</span> (d[v] &lt; p.first) <span class="keyword">continue</span>;<span class="comment">//在这种情况下说明此记录已经作废，例如第一次循环插入了P(3,4);第二次循环又插入了P(2,4),显然，第二次的数据应该</span></span><br><span class="line">                                                    <span class="comment">//替换掉第一次数据，但是由于我们在这里使用了哦=优先级队列存储，如果要替换掉上一次的记录=会比较麻烦，所以我们不去除无效的数据，</span></span><br><span class="line">                                                    <span class="comment">//当从队列中取出数据时再判断是否是无效的数据（在之前应当被替换的数据）。</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; G[v].size(); i++) &#123;</span><br><span class="line">            edge e = G[v][i];</span><br><span class="line">            <span class="keyword">if</span> (d[e.to] &gt; d[v] + e.cost) &#123;</span><br><span class="line">                d[e.to] = d[v] + e.cost;</span><br><span class="line">                que.push(P(d[e.to], e.to));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>之前关于最短路径的介绍：</p>
+<p><a href="https://blog.csdn.net/qq_28120673/article/details/81224205" target="_blank" rel="noopener">https://blog.csdn.net/qq_28120673/article/details/81224205</a></p>
+</blockquote>
+<p>修改Dijkstra算法，加入oldD[MAX_V];</p>
+<p>算法如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_V 1000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF  9999999</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> to, cost;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; P;<span class="comment">//first中存放距离，second中存放编号</span></span><br><span class="line"><span class="keyword">int</span> V;</span><br><span class="line"><span class="built_in">vector</span>&lt;edge&gt; G[MAX_V];  <span class="comment">//图用邻接表表示</span></span><br><span class="line"><span class="keyword">int</span> d[MAX_V];</span><br><span class="line"><span class="keyword">int</span> oldD[MAX_V];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N,R; <span class="comment">//N个路口，R条道路</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;N&gt;&gt;R;</span><br><span class="line">    V=N;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;V;i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> a,b,c;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b&gt;&gt;c;</span><br><span class="line">        edge* e=<span class="keyword">new</span> edge;</span><br><span class="line">        e-&gt;to=b<span class="number">-1</span>;</span><br><span class="line">        e-&gt;cost=c;</span><br><span class="line">        G[a<span class="number">-1</span>].push_back(*e);</span><br><span class="line"></span><br><span class="line">        edge* e1=<span class="keyword">new</span> edge;</span><br><span class="line">        e1-&gt;to=a<span class="number">-1</span>;</span><br><span class="line">        e1-&gt;cost=c;</span><br><span class="line">        G[b<span class="number">-1</span>].push_back(*e1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dijkstra</span><span class="params">(<span class="keyword">int</span> s)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//优先级队列，从小到大排列</span></span><br><span class="line">    priority_queue&lt;P, <span class="built_in">vector</span>&lt;P&gt;, greater&lt;P&gt;&gt; que;</span><br><span class="line">    fill(d, d + V, INF);</span><br><span class="line">    fill(oldD,oldD+V,INF);</span><br><span class="line">    d[s] = <span class="number">0</span>;</span><br><span class="line">    que.push(P(<span class="number">0</span>, s));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (!que.empty()) &#123;</span><br><span class="line">        P p = que.top();</span><br><span class="line">        que.pop();</span><br><span class="line">        <span class="keyword">int</span> v = p.second;</span><br><span class="line">        <span class="keyword">if</span> (d[v] &lt; p.first) <span class="keyword">continue</span>;<span class="comment">//在这种情况下说明此记录已经作废，例如第一次循环插入了P(3,4);第二次循环又插入了P(2,4),显然，第二次的数据应该</span></span><br><span class="line">        <span class="comment">//替换掉第一次数据，但是由于我们在这里使用了优先级队列存储，如果要替换掉上一次的记录=会比较麻烦，所以我们不去除无效的数据，</span></span><br><span class="line">        <span class="comment">//当从队列中取出数据时再判断是否是无效的数据（在之前应当被替换的数据）。</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; G[v].size(); i++) &#123;</span><br><span class="line">            edge e = G[v][i];</span><br><span class="line">            <span class="keyword">int</span> d2=d[v]+e.cost;</span><br><span class="line">            <span class="keyword">if</span> (d[e.to] &gt; d2) &#123;</span><br><span class="line">                swap(d[e.to],d2);</span><br><span class="line">                que.push(P(d[e.to], e.to));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(oldD[e.to]&gt;d2 &amp;&amp; d[e.to]&lt;d2)&#123; <span class="comment">//上一个if执行过后，d[e.to]一定不会大于d2,所以这里排除，d[e.to]==d2的情况。</span></span><br><span class="line">                oldD[e.to]=d2;</span><br><span class="line">                que.push(P(oldD[e.to],e.to));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    init();</span><br><span class="line">    dijkstra(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;V;i++)&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;oldD[i]&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;V;i++)&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;d[i]&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*  注意这里的节点是从1开始编号，而算法中是从0开始编号</span></span><br><span class="line"><span class="comment"> 4 4   </span></span><br><span class="line"><span class="comment"> 1 2 100</span></span><br><span class="line"><span class="comment"> 2 4 200</span></span><br><span class="line"><span class="comment"> 2 3 250</span></span><br><span class="line"><span class="comment"> 3 4 100</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/次最短路径Roadblocks(POJNo.3255)/" data-id="cjv0wzt90001d81rw3jt185b2" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-csdn转移/系统分区与系统引导" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/28/csdn转移/系统分区与系统引导/" class="article-date">
+  <time datetime="2019-04-28T12:31:54.389Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>##MBR分区<br>主引导记录（MBR，Main Boot Record）是位于磁盘最前边的一段引导（Loader）代码。它负责磁盘操作系统(DOS)对磁盘进行读写时分区合法性的判别、分区引导信息的定位，它由磁盘操作系统(DOS)在对硬盘进行初始化时产生的。<br><img src="https://img-blog.csdn.net/20180727112907452?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="MBR结构"><br>通常将包含MBR主引导记录的扇区称为主引导扇区，该扇区又称其为MBR扇区。主引导扇区是一个特殊空间，在格式化磁盘时不会不能清除主引导记录。主引导扇区有三个部分组成：</p>
+<ul>
+<li>主引导程序即主引导记录MBR（446字节），可在FDISK程序中找到，它用于硬盘启动时将系统控制转给用户指定的并在分区表中登记了的某个操作系统。</li>
+<li>磁盘分区表（DPT，Disk Partition Table），它由四个分区表项构成（每个16字节），负责说明磁盘上的分区情况，其内容由磁盘介质及用户在使用FDISK定义分区时决定。</li>
+<li>结束标志（2个字节）</li>
+</ul>
+<p><strong>MBR的主要功能及工作流程</strong><br>启动pc时，系统首先对硬件进行检测，硬件无误后读取MBR到内存中，并执行MBR程序段。主引导记录不属于任何一个操作系统（如果安装了多个操作系统），它在开机后首先被系统调入内存并执行，MBR程序的功能是将pc的控制权转交给主分区上的操作系统，并使用主分区信息表来管理磁盘。<br>MBR程序段的主要功能：</p>
+<ul>
+<li>检查分区表是否完好</li>
+<li>在分区表中寻找可引导的活动分区（活动分区，即为安装有操作系统的分区）</li>
+<li>将活动分区的第一逻辑扇区内容装入内存。在DOS分区中，此扇区称为DOS的引导记录（DBR）</li>
+</ul>
+<p>硬盘的分区规则是：一个分区的所有扇区必须连续，硬盘可以有最多4个物理上的分区，这4个物理分区可以是4个主分区或者3个主分区加一个扩展分区。在DOS/Windows管理下的扩展分区里，可以而且必须再继续划分逻辑分区（逻辑盘）。<br>用户就可以在一个物理硬盘驱动器上划分一个主分区和一个扩展分区，并在扩展分区上创建多个逻辑驱动器，也即我们常说的一个物理盘上多个逻辑盘。比如：分区一：主分区为C盘，安装Windows系统； 分区二： 扩展分区，再把它划分为两个逻辑分区D盘和E盘。<br>在一个划分有多个主分区的硬盘上，则可安装多个不同的操作系统。如Windows、Linux、Solaris等。每个操作系统自己去管理分配给自己的分区。</p>
+<p><strong>主分区、逻辑分区、扩展分区的关系：</strong><br><img src="https://img-blog.csdn.net/201807271523143?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="MBR中的分区表原理"></p>
+<p>##GPT分区<br>GPT磁盘是指使用GUID分区表的磁盘，是源自EFI标准的一种较新的磁盘分区表结构的标准。与普遍使用的主引导记录(MBR)分区方案相比，GPT提供了更加灵活的磁盘分区机制。</p>
+<p>GPT分区方案是用来替代老旧的MBR分区方案的方法，那么为什么要抛弃旧的MBR分区方案呢？其主要有两点原因：</p>
+<ul>
+<li>BMR只能有4个主分区</li>
+<li>MBR分区方案无法支持超过2TB容量的磁盘。(因为这一方案用4个字节存储分区的总扇区数）</li>
+</ul>
+<p>GPT分区的优点：</p>
+<ul>
+<li>支持2TB以上的大硬盘</li>
+<li>每个磁盘分区个数几乎没有限制（windows系统默认限制128个分区）。</li>
+<li>分区大小几乎没有限制</li>
+<li>分区表自带备份。在磁盘的首部和尾部保存了相同的两份分区表，以防其中一个不小心被销毁</li>
+<li>每个分区可以有一个名称。</li>
+</ul>
+<p>##BIOS+MBR和EFI+GPT</p>
+<p> <strong>BIOS+MBR：</strong></p>
+<ul>
+<li>BIOS：集成在电脑主板上的电脑自检系统，并且能够加载磁盘MBR上的引导程序。</li>
+<li>MBR：win7之前磁盘分区的一种标准，内含引导操作系统的引导程序和磁盘分区表。</li>
+<li>MBR上的引导程序：完成对磁盘上系统装载入内存的过程，即引导系统载入和启动。</li>
+<li>MBR上的磁盘分区表：最多有4个主分区或者扩展分区（源于MBR限制），最多有一个扩展分区（源于操作系统限制），综上即最多有三个主分区，一个扩展分区。MBR采用32位标识块在磁盘的位置，故最多能标识2^32个块，每个块512KB，故最大支持约2TB容量。</li>
+</ul>
+<p><strong>EFI+GPT：</strong></p>
+<ul>
+<li>EFI：一种基于新型主板的一种简易操作系统，可以识别.efi文件，采用C语言开发。（该操作系统完成的功能=BIOS+MBR上引导程序）</li>
+<li>GPT：一种新的磁盘分区标准，与EFI共生，采用64位标识磁盘上的块（MBR为32位来标识），旨在弥补MBR对大容量磁盘无法识别的不足，其所能识别的磁盘最大容量为（2^32）*2TB。（GPT完成的功能=MBR上的分区表）</li>
+<li>EFI+GPT的功能=BIOS+MBR（MBR引导程序+MBR磁盘分区表）</li>
+</ul>
+<p><strong>EFI+GPT的必备条件：</strong></p>
+<ul>
+<li>系统镜像中需要有efi格式的文件，被用于EFI系统的识别并安装程序。</li>
+<li>主板支持efi，操作系统支持efi。</li>
+<li>操作系统必须安装到GPT格式的磁盘。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/系统分区与系统引导/" data-id="cjv0wzt91001e81rwuyonmu5q" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-csdn转移/git入门--常用的git操作" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/28/csdn转移/git入门--常用的git操作/" class="article-date">
+  <time datetime="2019-04-28T12:31:54.385Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h2 id="git创建仓库并提交"><a href="#git创建仓库并提交" class="headerlink" title="git创建仓库并提交"></a>git创建仓库并提交</h2><p>git init 建立git 仓库</p>
+<p>git config -l 查看git配置信息</p>
+<p>git config –global user.name “***” 创建用户名</p>
+<p>git config –global user.email “×××” 创建用户邮箱</p>
+<p>git config –color.ui ture 在Linux下才有效。设置ui   </p>
+<p>git status 查看工作区状态</p>
+<p>git add ××× 向工作区中添加</p>
+<p>git commit -m “在这里添加描述” 提交添加</p>
+<h2 id="git查看提交履历"><a href="#git查看提交履历" class="headerlink" title="git查看提交履历"></a>git查看提交履历</h2><p>git log 查看当前已经提交的记录</p>
+<p>当我们修改某个文件后，使用：</p>
+<p>git status 查看状态，发现修改后的文件变成了红色；</p>
+<p>此时调用git add “ 文件名”  、 git commit -m “修改备注” ，修改后的记录保存，此时再查看git log 发现已经有两条记录</p>
+<h3 id="git-log-操作"><a href="#git-log-操作" class="headerlink" title="git log 操作"></a>git log 操作</h3><p>git log –online 将每条记录显示一行</p>
+<p>git log -p 详细显示</p>
+<p>git log stat 对每次的修改信息进行统计（基本没啥用）</p>
+<p>git log -数值 ， 比如：git log -3 查看最新的三条记录</p>
+<p>git log –help 查看git的详细帮助</p>
+<h2 id="git的状态理解"><a href="#git的状态理解" class="headerlink" title="git的状态理解"></a>git的状态理解</h2><p>git status 查看当前状态</p>
+<p>git checkout – [fileName] 取消更改返回到上一个保存的状态</p>
+<p>git add [文件名]将修改提交到索引区，可以使用git add . 提交当前文件夹下的所有文件</p>
+<p>git reset HEAD [文件名] 将提交到索引区的文件退出</p>
+<h2 id="比较git修改后的文件"><a href="#比较git修改后的文件" class="headerlink" title="比较git修改后的文件"></a>比较git修改后的文件</h2><p>git diff 比较当前修改了什么</p>
+<p>修改后的文件加入索引区后再使用git diff没有反应，此时可以使用git diff –cached</p>
+<p>git diff –cached 查看索引区的记录修改了哪些内容</p>
+<h2 id="git文件操作"><a href="#git文件操作" class="headerlink" title="git文件操作"></a>git文件操作</h2><p>git add [file1,file2,…] 提交文件</p>
+<p>git add . 提交当前文件夹下的所有文件</p>
+<p>git rm 文件删除</p>
+<p>git mv 文件移动</p>
+<p>​    git mv  oldFileName  newFileName 更改文件名</p>
+<h2 id="git忽略管理"><a href="#git忽略管理" class="headerlink" title="git忽略管理"></a>git忽略管理</h2><p>在项目文件夹中设置一个文件.gitignore文件，在该文件中写入要忽略管理的文件名，也可以根据后缀名来了忽略：</p>
+<p>比如忽略文件后缀名为tmp的文件， 可以在.gitignore中写入*.tmp</p>
+<h2 id="更新最后的提交"><a href="#更新最后的提交" class="headerlink" title="更新最后的提交"></a>更新最后的提交</h2><p>git commit -m “更新说明” ，提交记录</p>
+<p>git commit –amend  提交更新，并覆盖最后的一次提交</p>
+<p>git commit -am “更新说明”  [–amend]  ，提交更新，并覆盖最后的一次提交</p>
+<h2 id="返回到过去的版本"><a href="#返回到过去的版本" class="headerlink" title="返回到过去的版本"></a>返回到过去的版本</h2><p>git reset –hard HEAD返回到最后一次提提交的版本</p>
+<p>git reset –hard HEAD~返回到最后一次提交版本减一版本，即倒数第二个版本</p>
+<p>git reset –hard HEAD~n返回到倒数第n个版本</p>
+<p><strong>需要注意的是，使用git reset命令返回到以前的版本后，比当前版本新的版本会被删除，比如有5,4,3,2,1版本，当执行git reset –hard HEAD～2，返回到版本3，那么版本记录变成了3,2,1</strong></p>
+<p>git reset –hard HEAD [版本号] ,可以返回到指定单本号，接上面的例子，虽然版本记录变成了3,2,1 但是如果知道5号版本的版本号，那么使用这条命令，可以恢复到5,4,3,2,1的状态</p>
+<p>上述命令需要知道版本号，但是已经被“删除”的版本查看不到版本号，那么我要怎么恢呢？</p>
+<p>使用：git reflog 命令就可以查看。</p>
+<p>git reflog [-num] 表示显示几行</p>
+<h2 id="使用分支-该功能非常重要"><a href="#使用分支-该功能非常重要" class="headerlink" title="使用分支-该功能非常重要"></a>使用分支-该功能非常重要</h2><p>分支的作用是为了修改项目而用不会动主项目，等修改完成后该将修改覆盖主项目</p>
+<p> git branch [name] 创建分支</p>
+<p>git checkout branch_name 切换分支</p>
+<p>git branch 查看当前分支状态</p>
+<p>合并分支</p>
+<p>git merge  name 合并分支</p>
+<p>git branch -d [name] 删除分支</p>
+<h2 id="制造分支冲突"><a href="#制造分支冲突" class="headerlink" title="制造分支冲突"></a>制造分支冲突</h2><p>git checkout -b [branch_name] 建一个新分支并切换到该分支</p>
+<p>如果我们在开发过程中在主分支和开发分支对同一个文件进行了修改，那么在合并时会产生冲突</p>
+<p>如果是在vs code中冲突发生时可以手动选择保存那个分支的内容</p>
+<h2 id="Tag标签–用与版本管理"><a href="#Tag标签–用与版本管理" class="headerlink" title="Tag标签–用与版本管理"></a>Tag标签–用与版本管理</h2><p>git tag查看当前的标签</p>
+<p>git tag v1.0.0 打上版本标签，一般在commit之后操作</p>
+<p>git show  v1.0.1 查看历史版本</p>
+<h2 id="git-使用别名"><a href="#git-使用别名" class="headerlink" title="git 使用别名"></a>git 使用别名</h2><p><em>在git中将经常使用的名称以别名缩写的方式简化使用</em></p>
+<p>git config –global alias.[name]  [ command_name ]   例如简化checkout命令 git config alias.co checkout ,将checkout命令简化为co </p>
+<h2 id="开源中国Gitee"><a href="#开源中国Gitee" class="headerlink" title="开源中国Gitee"></a>开源中国Gitee</h2><p>怎样连接到远程服务器？</p>
+<p>git clone [url] 将服务器上的代码拷贝到本地</p>
+<p>git remote -v 添加新的远端服务器</p>
+<p>git push [origin]  [master] 将更新的代码推到远端服务器</p>
+<p>git branch 查看分支</p>
+<p>git branch -a 查看远端分支</p>
+<blockquote>
+<p>参考小马技术Git入门</p>
+<p><a href="https://www.bilibili.com/video/av23380399/?p=19" target="_blank" rel="noopener">https://www.bilibili.com/video/av23380399/?p=19</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/git入门--常用的git操作/" data-id="cjv0wzt8e000k81rw8fzi327t" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-csdn转移/vs code 界面去除菜单栏" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/28/csdn转移/vs code 界面去除菜单栏/" class="article-date">
+  <time datetime="2019-04-28T12:31:54.385Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h2 id="vs-code界面的设置"><a href="#vs-code界面的设置" class="headerlink" title="vs code界面的设置"></a>vs code界面的设置</h2><p>vscode在mac和ubuntu下的界面颜色纯黑，比较好看。但是win10下上部菜单大片的白色，丑！！！！</p>
+<p><img src="https://img-blog.csdn.net/20180809204848231?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<p>打开设置，从设置里找到窗口<br><img src="https://img-blog.csdn.net/20180809204903849?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<p><img src="https://img-blog.csdn.net/20180809204927627?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<p>找到倒数第二个选项，点击编辑按钮<br><img src="https://img-blog.csdn.net/20180809204939525?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<p>选择custom选项，重启后界面就变成了如下图<br><img src="https://img-blog.csdn.net/20180809204949497?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<p>或者，你可能会觉得菜单在窗口上也很丑，有没有方法隐藏它？<br>当然有方法，同样在设置中的窗口目录中”window.menuBarVisibility”: “default”, 设置为toggle，如下图所示：<br><img src="https://img-blog.csdn.net/20180809204958929?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<p>完成后，会发现菜单栏被隐藏，按住alt键，菜单栏会出现。<br><img src="https://img-blog.csdn.net/20180809205008878?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/vs code 界面去除菜单栏/" data-id="cjv0wzt8r000z81rwl1yl4qjf" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">下一页&raquo;</a>
+  </nav>
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/js对象/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/记忆化搜索与动态优化与背包问题/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/Fence Repair 栅栏分割/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/贪心算法-Aaruman's Army/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/贪心算法分析/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2019 wycan&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;1982659010@qq.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png">
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

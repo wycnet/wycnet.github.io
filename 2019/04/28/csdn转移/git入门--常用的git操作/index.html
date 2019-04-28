@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>wycBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="git创建仓库并提交git init 建立git 仓库 git config -l 查看git配置信息 git config –global user.name “***” 创建用户名 git config –global user.email “×××” 创建用户邮箱 git config –color.ui ture 在Linux下才有效。设置ui    git status 查看工作区状态">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wycBlog">
+<meta property="og:url" content="http://yoursite.com/2019/04/28/csdn转移/git入门--常用的git操作/index.html">
+<meta property="og:site_name" content="wycBlog">
+<meta property="og:description" content="git创建仓库并提交git init 建立git 仓库 git config -l 查看git配置信息 git config –global user.name “***” 创建用户名 git config –global user.email “×××” 创建用户邮箱 git config –color.ui ture 在Linux下才有效。设置ui    git status 查看工作区状态">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-26T10:27:44.479Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="wycBlog">
+<meta name="twitter:description" content="git创建仓库并提交git init 建立git 仓库 git config -l 查看git配置信息 git config –global user.name “***” 创建用户名 git config –global user.email “×××” 创建用户邮箱 git config –color.ui ture 在Linux下才有效。设置ui    git status 查看工作区状态">
+  
+    <link rel="alternate" href="/atom.xml" title="wycBlog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">wycBlog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-csdn转移/git入门--常用的git操作" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/28/csdn转移/git入门--常用的git操作/" class="article-date">
+  <time datetime="2019-04-28T12:31:54.385Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h2 id="git创建仓库并提交"><a href="#git创建仓库并提交" class="headerlink" title="git创建仓库并提交"></a>git创建仓库并提交</h2><p>git init 建立git 仓库</p>
+<p>git config -l 查看git配置信息</p>
+<p>git config –global user.name “***” 创建用户名</p>
+<p>git config –global user.email “×××” 创建用户邮箱</p>
+<p>git config –color.ui ture 在Linux下才有效。设置ui   </p>
+<p>git status 查看工作区状态</p>
+<p>git add ××× 向工作区中添加</p>
+<p>git commit -m “在这里添加描述” 提交添加</p>
+<h2 id="git查看提交履历"><a href="#git查看提交履历" class="headerlink" title="git查看提交履历"></a>git查看提交履历</h2><p>git log 查看当前已经提交的记录</p>
+<p>当我们修改某个文件后，使用：</p>
+<p>git status 查看状态，发现修改后的文件变成了红色；</p>
+<p>此时调用git add “ 文件名”  、 git commit -m “修改备注” ，修改后的记录保存，此时再查看git log 发现已经有两条记录</p>
+<h3 id="git-log-操作"><a href="#git-log-操作" class="headerlink" title="git log 操作"></a>git log 操作</h3><p>git log –online 将每条记录显示一行</p>
+<p>git log -p 详细显示</p>
+<p>git log stat 对每次的修改信息进行统计（基本没啥用）</p>
+<p>git log -数值 ， 比如：git log -3 查看最新的三条记录</p>
+<p>git log –help 查看git的详细帮助</p>
+<h2 id="git的状态理解"><a href="#git的状态理解" class="headerlink" title="git的状态理解"></a>git的状态理解</h2><p>git status 查看当前状态</p>
+<p>git checkout – [fileName] 取消更改返回到上一个保存的状态</p>
+<p>git add [文件名]将修改提交到索引区，可以使用git add . 提交当前文件夹下的所有文件</p>
+<p>git reset HEAD [文件名] 将提交到索引区的文件退出</p>
+<h2 id="比较git修改后的文件"><a href="#比较git修改后的文件" class="headerlink" title="比较git修改后的文件"></a>比较git修改后的文件</h2><p>git diff 比较当前修改了什么</p>
+<p>修改后的文件加入索引区后再使用git diff没有反应，此时可以使用git diff –cached</p>
+<p>git diff –cached 查看索引区的记录修改了哪些内容</p>
+<h2 id="git文件操作"><a href="#git文件操作" class="headerlink" title="git文件操作"></a>git文件操作</h2><p>git add [file1,file2,…] 提交文件</p>
+<p>git add . 提交当前文件夹下的所有文件</p>
+<p>git rm 文件删除</p>
+<p>git mv 文件移动</p>
+<p>​    git mv  oldFileName  newFileName 更改文件名</p>
+<h2 id="git忽略管理"><a href="#git忽略管理" class="headerlink" title="git忽略管理"></a>git忽略管理</h2><p>在项目文件夹中设置一个文件.gitignore文件，在该文件中写入要忽略管理的文件名，也可以根据后缀名来了忽略：</p>
+<p>比如忽略文件后缀名为tmp的文件， 可以在.gitignore中写入*.tmp</p>
+<h2 id="更新最后的提交"><a href="#更新最后的提交" class="headerlink" title="更新最后的提交"></a>更新最后的提交</h2><p>git commit -m “更新说明” ，提交记录</p>
+<p>git commit –amend  提交更新，并覆盖最后的一次提交</p>
+<p>git commit -am “更新说明”  [–amend]  ，提交更新，并覆盖最后的一次提交</p>
+<h2 id="返回到过去的版本"><a href="#返回到过去的版本" class="headerlink" title="返回到过去的版本"></a>返回到过去的版本</h2><p>git reset –hard HEAD返回到最后一次提提交的版本</p>
+<p>git reset –hard HEAD~返回到最后一次提交版本减一版本，即倒数第二个版本</p>
+<p>git reset –hard HEAD~n返回到倒数第n个版本</p>
+<p><strong>需要注意的是，使用git reset命令返回到以前的版本后，比当前版本新的版本会被删除，比如有5,4,3,2,1版本，当执行git reset –hard HEAD～2，返回到版本3，那么版本记录变成了3,2,1</strong></p>
+<p>git reset –hard HEAD [版本号] ,可以返回到指定单本号，接上面的例子，虽然版本记录变成了3,2,1 但是如果知道5号版本的版本号，那么使用这条命令，可以恢复到5,4,3,2,1的状态</p>
+<p>上述命令需要知道版本号，但是已经被“删除”的版本查看不到版本号，那么我要怎么恢呢？</p>
+<p>使用：git reflog 命令就可以查看。</p>
+<p>git reflog [-num] 表示显示几行</p>
+<h2 id="使用分支-该功能非常重要"><a href="#使用分支-该功能非常重要" class="headerlink" title="使用分支-该功能非常重要"></a>使用分支-该功能非常重要</h2><p>分支的作用是为了修改项目而用不会动主项目，等修改完成后该将修改覆盖主项目</p>
+<p> git branch [name] 创建分支</p>
+<p>git checkout branch_name 切换分支</p>
+<p>git branch 查看当前分支状态</p>
+<p>合并分支</p>
+<p>git merge  name 合并分支</p>
+<p>git branch -d [name] 删除分支</p>
+<h2 id="制造分支冲突"><a href="#制造分支冲突" class="headerlink" title="制造分支冲突"></a>制造分支冲突</h2><p>git checkout -b [branch_name] 建一个新分支并切换到该分支</p>
+<p>如果我们在开发过程中在主分支和开发分支对同一个文件进行了修改，那么在合并时会产生冲突</p>
+<p>如果是在vs code中冲突发生时可以手动选择保存那个分支的内容</p>
+<h2 id="Tag标签–用与版本管理"><a href="#Tag标签–用与版本管理" class="headerlink" title="Tag标签–用与版本管理"></a>Tag标签–用与版本管理</h2><p>git tag查看当前的标签</p>
+<p>git tag v1.0.0 打上版本标签，一般在commit之后操作</p>
+<p>git show  v1.0.1 查看历史版本</p>
+<h2 id="git-使用别名"><a href="#git-使用别名" class="headerlink" title="git 使用别名"></a>git 使用别名</h2><p><em>在git中将经常使用的名称以别名缩写的方式简化使用</em></p>
+<p>git config –global alias.[name]  [ command_name ]   例如简化checkout命令 git config alias.co checkout ,将checkout命令简化为co </p>
+<h2 id="开源中国Gitee"><a href="#开源中国Gitee" class="headerlink" title="开源中国Gitee"></a>开源中国Gitee</h2><p>怎样连接到远程服务器？</p>
+<p>git clone [url] 将服务器上的代码拷贝到本地</p>
+<p>git remote -v 添加新的远端服务器</p>
+<p>git push [origin]  [master] 将更新的代码推到远端服务器</p>
+<p>git branch 查看分支</p>
+<p>git branch -a 查看远端分支</p>
+<blockquote>
+<p>参考小马技术Git入门</p>
+<p><a href="https://www.bilibili.com/video/av23380399/?p=19" target="_blank" rel="noopener">https://www.bilibili.com/video/av23380399/?p=19</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/git入门--常用的git操作/" data-id="cjv0wzt8e000k81rw8fzi327t" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/28/csdn转移/系统分区与系统引导/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/28/csdn转移/vs code 界面去除菜单栏/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#git创建仓库并提交"><span class="toc-number">1.</span> <span class="toc-text">git创建仓库并提交</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git查看提交履历"><span class="toc-number">2.</span> <span class="toc-text">git查看提交履历</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#git-log-操作"><span class="toc-number">2.1.</span> <span class="toc-text">git log 操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git的状态理解"><span class="toc-number">3.</span> <span class="toc-text">git的状态理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#比较git修改后的文件"><span class="toc-number">4.</span> <span class="toc-text">比较git修改后的文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git文件操作"><span class="toc-number">5.</span> <span class="toc-text">git文件操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git忽略管理"><span class="toc-number">6.</span> <span class="toc-text">git忽略管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更新最后的提交"><span class="toc-number">7.</span> <span class="toc-text">更新最后的提交</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#返回到过去的版本"><span class="toc-number">8.</span> <span class="toc-text">返回到过去的版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用分支-该功能非常重要"><span class="toc-number">9.</span> <span class="toc-text">使用分支-该功能非常重要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#制造分支冲突"><span class="toc-number">10.</span> <span class="toc-text">制造分支冲突</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tag标签–用与版本管理"><span class="toc-number">11.</span> <span class="toc-text">Tag标签–用与版本管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-使用别名"><span class="toc-number">12.</span> <span class="toc-text">git 使用别名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开源中国Gitee"><span class="toc-number">13.</span> <span class="toc-text">开源中国Gitee</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2019 wycan&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;1982659010@qq.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png">
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

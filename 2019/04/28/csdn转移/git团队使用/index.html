@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>wycBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="git 团队使用新手使用 下载安装git  1sudo apt-get install git  克隆代码仓库  1git clone url  设置本地保存用户名和密码：为了不必每次都输入用户名和密码  1234git config --global credential.helper store# 如果只需要临时保存，可以使用一下命令git config --global credential">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wycBlog">
+<meta property="og:url" content="http://yoursite.com/2019/04/28/csdn转移/git团队使用/index.html">
+<meta property="og:site_name" content="wycBlog">
+<meta property="og:description" content="git 团队使用新手使用 下载安装git  1sudo apt-get install git  克隆代码仓库  1git clone url  设置本地保存用户名和密码：为了不必每次都输入用户名和密码  1234git config --global credential.helper store# 如果只需要临时保存，可以使用一下命令git config --global credential">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-26T10:29:26.793Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="wycBlog">
+<meta name="twitter:description" content="git 团队使用新手使用 下载安装git  1sudo apt-get install git  克隆代码仓库  1git clone url  设置本地保存用户名和密码：为了不必每次都输入用户名和密码  1234git config --global credential.helper store# 如果只需要临时保存，可以使用一下命令git config --global credential">
+  
+    <link rel="alternate" href="/atom.xml" title="wycBlog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">wycBlog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-csdn转移/git团队使用" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/28/csdn转移/git团队使用/" class="article-date">
+  <time datetime="2019-04-28T12:31:54.285Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h2 id="git-团队使用"><a href="#git-团队使用" class="headerlink" title="git 团队使用"></a>git 团队使用</h2><h2 id="新手使用"><a href="#新手使用" class="headerlink" title="新手使用"></a>新手使用</h2><ol>
+<li><p>下载安装git</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install git</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>克隆代码仓库</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> url</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置本地保存用户名和密码：为了不必每次都输入用户名和密码</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git config --global credential.helper store</span><br><span class="line"></span><br><span class="line"># 如果只需要临时保存，可以使用一下命令</span><br><span class="line">git config --global credential.helper cache</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看当前分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br><span class="line"># 显示结果中,前面带*号的为当前分支</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>切换到工作分支中</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 执行以下命令查看所有本地和远程分支</span></span><br><span class="line">git branch -a</span><br></pre></td></tr></table></figure>
+<p> 以下为输出信息:</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">*master</span><br><span class="line"> 	remotes/origin/HEAD -&gt; origin/master</span><br><span class="line"> 	remotes/origin/dev</span><br><span class="line"> 	remotes/origin/master</span><br><span class="line"> 	remotes/origin/<span class="built_in">test</span></span><br><span class="line"> 	remotes/origin/tzb</span><br><span class="line"> 	remotes/origin/wk</span><br><span class="line"> 	remotes/origin/wyc</span><br></pre></td></tr></table></figure>
+<p> 现在我要切换到我的开发分支上:</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout wyc</span><br><span class="line"><span class="comment"># 该命令会创建一个本地分支wyc,并自动跟踪(关联) 远程分支(即远程仓库中的分支)</span></span><br></pre></td></tr></table></figure>
+<p> 以下为输出信息:</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">分支 wyc 设置为跟踪来自 origin 的远程分支 wyc。</span><br><span class="line">切换到一个新分支 <span class="string">'wyc'</span></span><br></pre></td></tr></table></figure>
+<p> 现在我可以在该分支上修改我的代码了</p>
+</li>
+<li><p>提交修改</p>
+<p> 当我修改代码后,即可将当前的代码状态保存为一个记录</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看当前的代码状态,如果有文件被修改,那么执行改命令就会有提示</span></span><br><span class="line">git status</span><br><span class="line"><span class="comment"># 将所有修改的代码提交的缓存区</span></span><br><span class="line">git add .</span><br><span class="line"><span class="comment"># 将缓存区代码提交(此时还是保存在本地)</span></span><br><span class="line">git commit -m <span class="string">'说明'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将代码推送到服务器(远程仓库)</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 该命令默认推送当前分支到服务器,push之前最好先检查自己所在的分支(git branch)</span></span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="其他重要操作"><a href="#其他重要操作" class="headerlink" title="其他重要操作"></a>其他重要操作</h2><h3 id="用户身份"><a href="#用户身份" class="headerlink" title="用户身份"></a>用户身份</h3><ol>
+<li><p>管理员</p>
+<ul>
+<li>维护master分支，将master分支设置为保护分支，其他分支设置为常规分支</li>
+<li>合并各个开发开发者的代码</li>
+</ul>
+</li>
+</ol>
+<ol start="2">
+<li><p>开发者</p>
+<ul>
+<li>开发者在自己的分支上修改并提交代码</li>
+<li>提交自己的分支到仓库。</li>
+</ul>
+</li>
+</ol>
+<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><ol>
+<li><p>添加远程仓库<br> <code>git remote add &lt;shortname&gt; &lt;url&gt;</code></p>
+</li>
+<li><p>查看当前远程仓库<br> <code>git remote -v</code></p>
+</li>
+<li><p>fetch , pull , clone 的区别</p>
+<ul>
+<li><code>git fetch [remote-name]</code><br>这个命令会访问远程仓库，从中拉取所有你还没有的数据。 执行完成后，你将会拥有那个远程仓库中所有分支的引用，可以随时合并或查看。</li>
+</ul>
+</li>
+</ol>
+<pre><code>- `git pull [remote-name]`
+自动的抓取然后合并远程分支到当前分支。
+
+
+- `git clone [remote-name]`
+会自动设置本地 master 分支跟踪克隆的远程仓库的 master 分支
+</code></pre><h2 id="分支操作"><a href="#分支操作" class="headerlink" title="分支操作"></a>分支操作</h2><ol>
+<li><p>新建分支<br><code>git branch iss53</code></p>
+</li>
+<li><p>切换到新建的分支<br><code>git checkout iss53</code></p>
+</li>
+<li><p>上面两条命令合并为一个：<code>git checkout iss53</code></p>
+</li>
+</ol>
+<h3 id="合并分支"><a href="#合并分支" class="headerlink" title="合并分支"></a>合并分支</h3><ol>
+<li><p>将开发分支iss53合并到master分支上,先转到master分支上，在进行合并</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout master</span><br><span class="line">git merge iss53</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果一个分支已经没有用了，可以删除它<br><code>git branch -d iss53</code></p>
+</li>
+</ol>
+<h3 id="合并时遇到冲突"><a href="#合并时遇到冲突" class="headerlink" title="合并时遇到冲突"></a>合并时遇到冲突</h3><pre><code>如果你在两个不同的分支中，对同一个文件的同一个部分进行了不同的修改，Git 就没法干净的合并它们。
+
+执行git merge &lt;branchName&gt; 时如果遇到分支冲突，就会提示合并冲突
+
+使用git status 命令来查看当前的冲突
+
+当有冲突时，git会在有冲突的文件中加入标记，待手动解决后，执行：
+git add &lt;文件名&gt; 将文件标记为冲突已解决
+最后执行 git commit -m &apos;说明&apos; 来完成合并并提交
+</code></pre><h3 id="本地跟踪非master分支"><a href="#本地跟踪非master分支" class="headerlink" title="本地跟踪非master分支"></a>本地跟踪非master分支</h3><ol>
+<li><p>当我们直接执行clone命令时，默认跟踪的是远程的master分支，如果想要跟踪其他分支,需要设置：</p>
+<p> <code>git checkout -b [branch] [remotename]/[branch]</code></p>
+<p> 该命令有一个简洁写法：</p>
+<p> <code>git checkout --track [remotename]/[branch]</code></p>
+</li>
+<li><p>如果想给当前的分支更改跟踪对象，：</p>
+<p> <code>git branch -u origin/(branchName)</code></p>
+</li>
+</ol>
+<h2 id="git将密码永久保存在本地"><a href="#git将密码永久保存在本地" class="headerlink" title="git将密码永久保存在本地"></a>git将密码永久保存在本地</h2><ol>
+<li><p>将账户密码保存</p>
+<p> <code>git config --global credential.helper store</code></p>
+</li>
+<li><p>如果为临时保存:</p>
+<p><code>git config --global credential.helper cache</code></p>
+</li>
+</ol>
+<h2 id="git切换到以前的记录"><a href="#git切换到以前的记录" class="headerlink" title="git切换到以前的记录"></a>git切换到以前的记录</h2><ol>
+<li>显示所有的提交记录<br> <code>git log --pretty=oneline</code></li>
+<li><p>切换到之前的记录<br>  下面这个命令将版本回退<br> <code>git reset --hard &lt;记录编号&gt;</code><br> 下面这个命令将建立一个新分支<br> <code>git checkout   branchName &lt;记录编号&gt;</code> 只需要记录编号的前几位</p>
+<p> 当切换到以前的版本后，再执行<code>git log</code> 将看不见当前版本之后的记录，</p>
+<p> 若要找回丢失的记录，可以使用 <code>git log -g</code> ,此时可以看见丢失的记录,<br> 可以使用 <code>git checkout &lt;记录编号&gt;</code> 切换回来，或者使用 :<code>git branch &lt;newBranchName&gt; &lt;记录编号&gt;</code> 来创建一个新的分支.</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/git团队使用/" data-id="cjv0wzt8g000m81rwtvunq1ye" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/28/csdn转移/python常用库类/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/28/csdn转移/js正则表达式/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#git-团队使用"><span class="toc-number">1.</span> <span class="toc-text">git 团队使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#新手使用"><span class="toc-number">2.</span> <span class="toc-text">新手使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他重要操作"><span class="toc-number">3.</span> <span class="toc-text">其他重要操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#用户身份"><span class="toc-number">3.1.</span> <span class="toc-text">用户身份</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#操作"><span class="toc-number">3.2.</span> <span class="toc-text">操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分支操作"><span class="toc-number">4.</span> <span class="toc-text">分支操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#合并分支"><span class="toc-number">4.1.</span> <span class="toc-text">合并分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#合并时遇到冲突"><span class="toc-number">4.2.</span> <span class="toc-text">合并时遇到冲突</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本地跟踪非master分支"><span class="toc-number">4.3.</span> <span class="toc-text">本地跟踪非master分支</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git将密码永久保存在本地"><span class="toc-number">5.</span> <span class="toc-text">git将密码永久保存在本地</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git切换到以前的记录"><span class="toc-number">6.</span> <span class="toc-text">git切换到以前的记录</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2019 wycan&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;1982659010@qq.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png">
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

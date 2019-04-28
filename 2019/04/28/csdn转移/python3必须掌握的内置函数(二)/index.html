@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>wycBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="41、object() 返回一个object实例，object类是所有类的基类 42、oct(number) 将整数转换为8进制 43、open(filename[,mode[,bufsize]]) 打开一个文件并返回文件对象，mode打开模式，bufsize字符编码 44、ord(char) 返回指定字符的Unicode码 123print(ord(&apos;a&apos;))print(ord(&apos;我&apos;))pri">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wycBlog">
+<meta property="og:url" content="http://yoursite.com/2019/04/28/csdn转移/python3必须掌握的内置函数(二)/index.html">
+<meta property="og:site_name" content="wycBlog">
+<meta property="og:description" content="41、object() 返回一个object实例，object类是所有类的基类 42、oct(number) 将整数转换为8进制 43、open(filename[,mode[,bufsize]]) 打开一个文件并返回文件对象，mode打开模式，bufsize字符编码 44、ord(char) 返回指定字符的Unicode码 123print(ord(&apos;a&apos;))print(ord(&apos;我&apos;))pri">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-26T10:29:02.089Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="wycBlog">
+<meta name="twitter:description" content="41、object() 返回一个object实例，object类是所有类的基类 42、oct(number) 将整数转换为8进制 43、open(filename[,mode[,bufsize]]) 打开一个文件并返回文件对象，mode打开模式，bufsize字符编码 44、ord(char) 返回指定字符的Unicode码 123print(ord(&apos;a&apos;))print(ord(&apos;我&apos;))pri">
+  
+    <link rel="alternate" href="/atom.xml" title="wycBlog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">wycBlog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-csdn转移/python3必须掌握的内置函数(二)" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/28/csdn转移/python3必须掌握的内置函数(二)/" class="article-date">
+  <time datetime="2019-04-28T12:31:54.305Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>41、object() 返回一个object实例，object类是所有类的基类</p>
+<p>42、oct(number) 将整数转换为8进制</p>
+<p>43、open(filename[,mode[,bufsize]]) 打开一个文件并返回文件对象，mode打开模式，bufsize字符编码</p>
+<p>44、ord(char) 返回指定字符的Unicode码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(ord(<span class="string">'a'</span>))</span><br><span class="line">print(ord(<span class="string">'我'</span>))</span><br><span class="line">print(ord(<span class="string">'😂'</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>97
+25105
+128514
+</code></pre><p>45、pow(x,y[,z]) 返回x的y次方，并可以将结果对z求模</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(pow(<span class="number">2</span>,<span class="number">10</span>))</span><br><span class="line">print(pow(<span class="number">2</span>,<span class="number">10</span>,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>1024
+1
+</code></pre><p>46、print(x,…) 将参数打印出来</p>
+<p>47、property(fget[,fset[,fdel[,doc]]]) 根据一组存取函数创建一个特性</p>
+<p>48、range([start,]stop[,step]) 根据参数start、stop、step返回指定范围内的一系列值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">10</span>):</span><br><span class="line">    print(i,end=<span class="string">' '</span>)</span><br><span class="line"></span><br><span class="line">print()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    print(j,end=<span class="string">' '</span>)</span><br><span class="line">    </span><br><span class="line">print()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">10</span>,<span class="number">2</span>):</span><br><span class="line">    print(x,end=<span class="string">' '</span>)</span><br><span class="line"></span><br><span class="line">print()</span><br><span class="line"></span><br><span class="line">lists = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">6</span>]</span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span>  lists:</span><br><span class="line">    print(s,end=<span class="string">' '</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>1 2 3 4 5 6 7 8 9 
+0 1 2 3 4 5 6 7 8 9 
+1 3 5 7 9 
+1 2 3 5 6 
+</code></pre><p>49、repr(object) 返回对象的字符串表示，通常作为eval的参数。类可以定义自己的<code>__repr__（）</code>方法来控制当该类的对象被调用是返回的内容</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">s1 = <span class="string">'wangyincan'</span></span><br><span class="line">print(s1)</span><br><span class="line">print(repr(s1))</span><br><span class="line"></span><br><span class="line">list1 = [<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'c'</span>]</span><br><span class="line">print(list1)</span><br><span class="line">print(repr(list1))</span><br><span class="line"></span><br><span class="line">dict1 = &#123;<span class="number">1</span>:<span class="string">'a'</span>,<span class="number">2</span>:<span class="string">'b'</span>&#125;</span><br><span class="line">print(dict1)</span><br><span class="line">print(repr(dict1))</span><br><span class="line"><span class="comment"># 从输出结果可以发现，列表和字典等都定义了__repr__（）方法，类似于java类中定义的toString()方法</span></span><br></pre></td></tr></table></figure>
+<pre><code>wangyincan
+&apos;wangyincan&apos;
+[&apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &apos;c&apos;]
+[&apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &apos;c&apos;]
+{1: &apos;a&apos;, 2: &apos;b&apos;}
+{1: &apos;a&apos;, 2: &apos;b&apos;}
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">dog</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,name,color)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.clor = color</span><br><span class="line">    </span><br><span class="line">dog1 = dog(<span class="string">'ding'</span>,<span class="string">'red'</span>)</span><br><span class="line">print(repr(dog1)) <span class="comment"># 输出结果可以看见该类没有定义__repr__()方法</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">people</span>:</span></span><br><span class="line">     <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,name,age)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.age = age</span><br><span class="line">     <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.name+str(self.age)</span><br><span class="line"></span><br><span class="line">p1 = people(<span class="string">'wang'</span>,<span class="number">22</span>)</span><br><span class="line">print(p1)</span><br><span class="line">s1=repr(p1) </span><br><span class="line">print(s1) <span class="comment"># 从输出结果可以看出，people函数定义了__repr__()后，可以输出字符串表示。其实print(object)方法是先调用object的__reper__()方法后再输出的</span></span><br></pre></td></tr></table></figure>
+<pre><code>&lt;__main__.dog object at 0x000001D0C76F06A0&gt;
+wang22
+wang22
+</code></pre><p>50、reversed(sequence) 返回一个反向迭序列的迭代器。 sequence必须是实现了<strong>reversed</strong>()的类，或者支持序列协议(实现了<strong>len</strong>()方法和<strong>getitem</strong>()方法)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">listr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]</span><br><span class="line">print(reversed(listr))<span class="comment"># 该输出为迭代器，并不是序列</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> r <span class="keyword">in</span> reversed(listr): <span class="comment">#循环迭代</span></span><br><span class="line">    print(r,end=<span class="string">' '</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;list_reverseiterator object at 0x000001D0C7676358&gt;
+6 5 4 3 2 1 6 5 4 3 2 1 
+</code></pre><p>51、round(float[,n]) 将指定的浮点数整圆到小数点后n位. round并不是简单的四舍五入法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">print(round(<span class="number">1.5</span>))</span><br><span class="line">print(round(<span class="number">0.5</span>))</span><br><span class="line">print(round(<span class="number">-0.5</span>))</span><br><span class="line">print(round(<span class="number">1.55</span>,<span class="number">1</span>))</span><br><span class="line">print(round(<span class="number">1.45</span>,<span class="number">1</span>))  <span class="comment"># 根据输出可以看出，它并不是按四舍五入来计算的。所以这个函数有啥用？？</span></span><br></pre></td></tr></table></figure>
+<pre><code>2
+0
+0
+1.6
+1.4
+</code></pre><p>52、set([iterable])  返回一个集合，如果指定了iterable，那么将从iterable取数据后生成一个集合</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">lists = [<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">4</span>]</span><br><span class="line">set1 = set(lists)</span><br><span class="line">print(set1)</span><br><span class="line"></span><br><span class="line">dict1 = &#123;<span class="string">'a'</span>:<span class="number">1</span>,<span class="string">'b'</span>:<span class="number">2</span>,<span class="string">'c'</span>:<span class="number">2</span>&#125;</span><br><span class="line">set2 = set(dict1) <span class="comment"># 将字典转换为set，它只会记录key值</span></span><br><span class="line">print(set2)</span><br></pre></td></tr></table></figure>
+<pre><code>{1, 2, 3, 4}
+{&apos;b&apos;, &apos;a&apos;, &apos;c&apos;}
+</code></pre><p>53、seattr(object,name,value) 给指定对象设置属性</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">dog</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,name,color)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.clor = color</span><br><span class="line">    </span><br><span class="line">dog1 = dog(<span class="string">'ding'</span>,<span class="string">'red'</span>)</span><br><span class="line">setattr(dog1,<span class="string">'age'</span>,<span class="number">2</span>)  <span class="comment">## 我给dog对象设置属性age</span></span><br><span class="line">print(dog1.age)</span><br><span class="line"></span><br><span class="line">dog2 = dog(<span class="string">'jing'</span>,<span class="string">'white'</span>)</span><br><span class="line"><span class="comment">#print(dog2.age) # 这一句会出错</span></span><br><span class="line">setattr(dog,<span class="string">'age'</span>,<span class="number">3</span>)  <span class="comment"># 注意这里，我给dog类设置一个属性age</span></span><br><span class="line">print(dog2.age) <span class="comment">#在检查发现dog2中有了age属性</span></span><br></pre></td></tr></table></figure>
+<pre><code>2
+3
+</code></pre><p>54、sorted(iterable[,cmp][,key=Null][,reverse=False]) 返回一个排序后的列表，其中的元素来自iterable。参数用法与列表的sort方法相同</p>
+<ul>
+<li>cmp – 是排序函数，python3已经弃用</li>
+<li>key – 设置用来排序的值</li>
+<li>reverse – 是否将排序结果反转</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">students = [(<span class="string">'john'</span>, <span class="string">'A'</span>, <span class="number">15</span>), (<span class="string">'jane'</span>, <span class="string">'B'</span>, <span class="number">12</span>), (<span class="string">'dave'</span>, <span class="string">'B'</span>, <span class="number">10</span>)]</span><br><span class="line">print(sorted(students, key=<span class="keyword">lambda</span> s: s[<span class="number">2</span>]))            <span class="comment"># 按年龄排序</span></span><br><span class="line">[(<span class="string">'dave'</span>, <span class="string">'B'</span>, <span class="number">10</span>), (<span class="string">'jane'</span>, <span class="string">'B'</span>, <span class="number">12</span>), (<span class="string">'john'</span>, <span class="string">'A'</span>, <span class="number">15</span>)]</span><br><span class="line">print(sorted(students, key=<span class="keyword">lambda</span> s: s[<span class="number">2</span>],reverse=<span class="keyword">True</span>))    <span class="comment"># 按年龄排序</span></span><br></pre></td></tr></table></figure>
+<pre><code>[(&apos;dave&apos;, &apos;B&apos;, 10), (&apos;jane&apos;, &apos;B&apos;, 12), (&apos;john&apos;, &apos;A&apos;, 15)]
+[(&apos;john&apos;, &apos;A&apos;, 15), (&apos;jane&apos;, &apos;B&apos;, 12), (&apos;dave&apos;, &apos;B&apos;, 10)]
+</code></pre><p>上面的例子中使用了lambda表达式,作用是创建一个匿名函数，<code>lambda parameters: expression</code>,这个语法将被翻译为：<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> &lt;<span class="title">lambda</span>&gt;<span class="params">(parameters)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> expression</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sorted(<span class="string">"This is a test string from Andrew"</span>.split(), key=str.lower)</span><br></pre></td></tr></table></figure>
+<pre><code>[&apos;a&apos;, &apos;Andrew&apos;, &apos;from&apos;, &apos;is&apos;, &apos;string&apos;, &apos;test&apos;, &apos;This&apos;]
+</code></pre><p>55、staticmethod(func) 根据实例方法创建一个静态方法</p>
+<p>静态方法可以被类调用，或类的实例对象调用。</p>
+<p>通常创建静态方法可以使用装饰器来创建<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span></span><br><span class="line"><span class="meta">    @staticmethod    # 以@开头表示一个装饰器</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(arg1, arg2, ...)</span>:</span> ...</span><br></pre></td></tr></table></figure></p>
+<p>它与下面的写法等价</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(arg1, arg2, ...)</span>:</span> ...</span><br><span class="line">        </span><br><span class="line">    f = staticmethod(f) <span class="comment">#将方法f()转变成static方法</span></span><br></pre></td></tr></table></figure>
+<p>staticmethod方法使用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">dog</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getType</span><span class="params">(x)</span>:</span></span><br><span class="line">        <span class="keyword">if</span>(x==<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">return</span> <span class="string">'小狗'</span></span><br><span class="line">        <span class="keyword">elif</span>(x==<span class="number">2</span>):</span><br><span class="line">            <span class="keyword">return</span> <span class="string">'大狗'</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">'不是狗'</span></span><br><span class="line"></span><br><span class="line">    getType = staticmethod(getType)</span><br><span class="line"></span><br><span class="line">print(dog.getType(<span class="number">1</span>))</span><br><span class="line">print(dog().getType(<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>小狗
+小狗
+</code></pre><p>如果不将方法转化为静态方法，那么在用类名可以调用该方法，但是用类的实例化对象不能调用该方法，一下例子将输出错误</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">dog</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getType</span><span class="params">(x)</span>:</span></span><br><span class="line">        <span class="keyword">if</span>(x==<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">return</span> <span class="string">'小狗'</span></span><br><span class="line">        <span class="keyword">elif</span>(x==<span class="number">2</span>):</span><br><span class="line">            <span class="keyword">return</span> <span class="string">'大狗'</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">'不是狗'</span></span><br><span class="line">print(dog.getType(<span class="number">1</span>))</span><br><span class="line">print(dog().getType(<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>小狗
+
+
+
+---------------------------------------------------------------------------
+
+TypeError                                 Traceback (most recent call last)
+
+&lt;ipython-input-49-923bcf517446&gt; in &lt;module&gt;()
+     11 
+     12 print(dog.getType(1))
+---&gt; 13 print(dog().getType(1))
+
+
+TypeError: getType() takes 1 positional argument but 2 were given
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">dog</span>:</span></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getType</span><span class="params">(x)</span>:</span></span><br><span class="line">        <span class="keyword">if</span>(x==<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">return</span> <span class="string">'小狗'</span></span><br><span class="line">        <span class="keyword">elif</span>(x==<span class="number">2</span>):</span><br><span class="line">            <span class="keyword">return</span> <span class="string">'大狗'</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">'不是狗'</span></span><br><span class="line">        </span><br><span class="line">print(dog.getType(<span class="number">1</span>))</span><br><span class="line">print(dog().getType(<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>小狗
+小狗
+</code></pre><p>56、str(object) 返回指定对象的格式良好的字符串表示</p>
+<p>那么str()函数与repr()函数的区别是啥？</p>
+<p>57、sum(seq[,start]) 计算数字序列中所有元素的和，可以指定开始位置，默认为0</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sums = sum([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>])</span><br><span class="line">print(sums)</span><br></pre></td></tr></table></figure>
+<pre><code>28
+</code></pre><p>58、super([type[,obj/type]]) 返回一个将方法调用委托给超类的代理</p>
+<p>59、tuple([sequence]) 创建一个元组</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tuplea = tuple([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>])</span><br><span class="line">print(tuplea)</span><br></pre></td></tr></table></figure>
+<pre><code>(1, 2, 3, 4)
+</code></pre><p>60、type(object) 返回指定对象的类型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">lista = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">dicta = &#123;<span class="string">'a'</span>:<span class="number">1</span>,<span class="string">'b'</span>:<span class="number">2</span>&#125;</span><br><span class="line"></span><br><span class="line">print(type(lista))</span><br><span class="line">print(type(dicta))</span><br><span class="line">print(type(bool))</span><br><span class="line">print(type(<span class="keyword">True</span>))</span><br><span class="line">print(type(<span class="number">0</span>))</span><br><span class="line">print(type(<span class="string">'aa'</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;class &apos;list&apos;&gt;
+&lt;class &apos;dict&apos;&gt;
+&lt;class &apos;type&apos;&gt;
+&lt;class &apos;bool&apos;&gt;
+&lt;class &apos;int&apos;&gt;
+&lt;class &apos;str&apos;&gt;
+</code></pre><p>61、type(name,bases,dict) 返回一个新的类型对象，其名称、基类和作用域由相应的参数指定</p>
+<p>62、vars([object]) 返回一个表示局部作用域的字典或一个包含指定对象的属性的字典(不要修改这个字典)</p>
+<p>63、zip(sequence1,…) 返回一个元组迭代器，可以将多个列表组合到一起，迭代长度与最短的sequence相同</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">lista = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">listb = [<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>,<span class="string">'e'</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> index <span class="keyword">in</span> zip(lista,listb):</span><br><span class="line">    print(index)</span><br></pre></td></tr></table></figure>
+<pre><code>(1, &apos;a&apos;)
+(2, &apos;b&apos;)
+(3, &apos;c&apos;)
+(4, &apos;d&apos;)
+(5, &apos;e&apos;)
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/python3必须掌握的内置函数(二)/" data-id="cjv0wzt8p000w81rwuupqi77v" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/28/csdn转移/python3必须掌握的内置函数(一)/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/28/csdn转移/python List中的方法/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/js对象/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/记忆化搜索与动态优化与背包问题/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/Fence Repair 栅栏分割/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/贪心算法-Aaruman's Army/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/贪心算法分析/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2019 wycan&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;1982659010@qq.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png">
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

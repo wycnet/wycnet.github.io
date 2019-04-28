@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>wycBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="##1、硬币问题 题目：有1元、5元、10元、100元、500元的硬币各C1、C5、C10、C50、C100、C500枚。现在要用这些硬币来值付A元，最少需要多少枚硬币？假设本题至少存在一种值付方案。 限制条件：0&amp;lt;=C1,C5,C10,C50,C100,C500&amp;lt;=10^90&amp;lt;=A&amp;lt;=10^9 输入样例：C1=3，C5=2,C10=1,C50=3,C100=0,C500=">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wycBlog">
+<meta property="og:url" content="http://yoursite.com/2019/04/28/csdn转移/贪心算法分析/index.html">
+<meta property="og:site_name" content="wycBlog">
+<meta property="og:description" content="##1、硬币问题 题目：有1元、5元、10元、100元、500元的硬币各C1、C5、C10、C50、C100、C500枚。现在要用这些硬币来值付A元，最少需要多少枚硬币？假设本题至少存在一种值付方案。 限制条件：0&amp;lt;=C1,C5,C10,C50,C100,C500&amp;lt;=10^90&amp;lt;=A&amp;lt;=10^9 输入样例：C1=3，C5=2,C10=1,C50=3,C100=0,C500=">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdn.net/20180712195153331?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:updated_time" content="2019-04-26T10:23:54.147Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="wycBlog">
+<meta name="twitter:description" content="##1、硬币问题 题目：有1元、5元、10元、100元、500元的硬币各C1、C5、C10、C50、C100、C500枚。现在要用这些硬币来值付A元，最少需要多少枚硬币？假设本题至少存在一种值付方案。 限制条件：0&amp;lt;=C1,C5,C10,C50,C100,C500&amp;lt;=10^90&amp;lt;=A&amp;lt;=10^9 输入样例：C1=3，C5=2,C10=1,C50=3,C100=0,C500=">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20180712195153331?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+  
+    <link rel="alternate" href="/atom.xml" title="wycBlog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">wycBlog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-csdn转移/贪心算法分析" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/28/csdn转移/贪心算法分析/" class="article-date">
+  <time datetime="2019-04-28T12:31:54.493Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>##1、硬币问题</p>
+<p>题目：<br>有1元、5元、10元、100元、500元的硬币各C1、C5、C10、C50、C100、C500枚。现在要用这些硬币来值付A元，最少需要多少枚硬币？假设本题至少存在一种值付方案。</p>
+<p>限制条件：<br><strong>0&lt;=C1,C5,C10,C50,C100,C500&lt;=10^9</strong><br><strong>0&lt;=A&lt;=10^9</strong></p>
+<p>输入样例：<br><strong>C1=3，C5=2,C10=1,C50=3,C100=0,C500=2,A=620</strong><br>输出样例：<br><strong>6（500元1枚，50元2枚，10元1枚，5元2枚，合计6枚）</strong></p>
+<p>该问题中，我们优先使用面值较大的硬币。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">const static int v[6] = &#123; 1,5,10,50,100,500 &#125;;</span><br><span class="line"></span><br><span class="line">int C[6];</span><br><span class="line">int count[6];</span><br><span class="line">int A;</span><br><span class="line"></span><br><span class="line">void init()&#123;</span><br><span class="line">	for(int i=0;i&lt;6;i++)&#123;</span><br><span class="line">		cin&gt;&gt;C[i];</span><br><span class="line">	&#125;</span><br><span class="line">	cin&gt;&gt;A;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void sove()&#123;</span><br><span class="line">	int ans=0;</span><br><span class="line">	for(int i=5;i&gt;=0;i--)&#123;</span><br><span class="line">		int temp=min(A/v[i], C[i]); //第i种硬币最多可以使用A/v[i]个，C[i],表示第i种硬币的个数，说以取两者较小值</span><br><span class="line">		A-=temp*v[i];</span><br><span class="line">		count[i]=temp;</span><br><span class="line">		ans+=temp;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;ans&lt;&lt;&quot;(&quot;;</span><br><span class="line">	for(int i=5;i&gt;=0;i--)&#123;</span><br><span class="line">		cout&lt;&lt;v[i]&lt;&lt;&quot;元&quot;&lt;&lt;count[i]&lt;&lt;&quot;枚,&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;&quot;)&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">	init();</span><br><span class="line">	sove();</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>##1、区间问题<br>问题：区间调度问题<br>现在又n项工作，每项工作分别在Si时间开始，在ti时间结束。对于每项工作，你都可以选择参与与否。如果选择了参与，那么自始至终都必须全程参与。此外，参与工作的时间段不能重叠（即使是开始的瞬间和结束的瞬间也是不允许的）。<br>限制条件：<br><strong>1&lt;=N&lt;=100000</strong><br><strong>1&lt;=si&lt;=ti&lt;=10^9</strong></p>
+<p>输入样例：<br><strong>n=5, s={1,2,4,6,8}, t={3,5,7,8,10}</strong><br>输出样例：<br><strong>3（选取工作1、3、5）</strong></p>
+<p>算法分析：在可选工作中吗，每次都选择结束时间最早的工作。</p>
+<p>设计代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">#define MAX_N 100000</span><br><span class="line"></span><br><span class="line">//用于对工作排序</span><br><span class="line">pair&lt;int, int&gt; itv[MAX_N];</span><br><span class="line">int N, S[MAX_N], T[MAX_N];</span><br><span class="line"></span><br><span class="line">void init()&#123;</span><br><span class="line">	cin&gt;&gt;N;</span><br><span class="line">	for(int i=0;i&lt;N;i++)&#123;</span><br><span class="line">		cin&gt;&gt;S[i];</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	for(int i=0;i&lt;N;i++)&#123;</span><br><span class="line">		cin&gt;&gt;T[i];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void sove()&#123;</span><br><span class="line">	//对pair排序，T放入first，S放入second</span><br><span class="line">	for(int i=0; i&lt;N; i++)&#123;</span><br><span class="line">		itv[i].first=T[i];</span><br><span class="line">		itv[i].second=S[i];</span><br><span class="line">	&#125;</span><br><span class="line">	sort(itv, itv+N); //按t(工作结束时间)排序</span><br><span class="line">	int ans=0,t=0;</span><br><span class="line">	for(int i=0; i&lt;N ; i++)&#123;</span><br><span class="line">		if(t&lt;itv[i].second)&#123;</span><br><span class="line">			ans++;</span><br><span class="line">			t=itv[i].first;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">	init();</span><br><span class="line">	sove();</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>##3、字典最小问题</p>
+<p>题目：Best Cow Line(POJ 3617)<br>给定长度为N的字符串S,要构造一个长度为N的字符串T。T是一个空串，随后反复进行下列任意操作。<br>从S头部删除一个字符，加到T的尾部<br>从S尾部删除一个字符，加到T的尾部<br>目标是要构造字典序尽可能小的字符串T。<br>限制条件：<br><strong>1&lt;=N&lt;=2000</strong><br><strong>字符串S只包含大写英文字母</strong></p>
+<p>输入示例：<br>N=6;<br>S=”ACDBCB”<br>输出示例：<br>ABCBCD</p>
+<p>操作过程示意图：<br><img src="https://img-blog.csdn.net/20180712195153331?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="操作过程"></p>
+<p>分析：</p>
+<ul>
+<li>不断取S的开头和末尾中较小的一个字符放入到T的末尾<ul>
+<li>但是这样做会出现一个问题，如果S开头和末尾相同，接下来一个也相同，再接下一个也相同，……. 。这样的化难道需要我们依次进行判断怕然比较大小吗？其实不需要这样做，我们可以利用字符串比大小的原理来设计算法。</li>
+</ul>
+</li>
+<li>比较字符串S和S‘ 的大小</li>
+<li>将较小的字符串的首字母移入T</li>
+</ul>
+<p>代码如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line">int n;</span><br><span class="line">string S;</span><br><span class="line">string T=&quot;&quot;;</span><br><span class="line">string SR;</span><br><span class="line"></span><br><span class="line">void sove()&#123;</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	cin&gt;&gt;S;</span><br><span class="line">	int leng=S.length();</span><br><span class="line">	SR=S.substr(0, leng/2);</span><br><span class="line">	reverse(S.begin(),S.end());</span><br><span class="line">	if(leng%2!=0)</span><br><span class="line">		S=S.substr(0,leng/2+1);</span><br><span class="line">	else S=S.substr(0,leng/2);</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">	for(int i=0;i&lt;leng;i++)&#123;</span><br><span class="line">		if(SR.length()==0)&#123;</span><br><span class="line">			T.append(S);</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line">		if(S.length()==0)&#123;</span><br><span class="line">			T.append(SR);</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line">		if(SR&lt;S)&#123;</span><br><span class="line">			T.append(SR.substr(0,1));</span><br><span class="line">			SR=SR.substr(1);</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			T.append(S.substr(0,1));</span><br><span class="line">			S=S.substr(1);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;T;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">	sove();</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/贪心算法分析/" data-id="cjv0wzt93001i81rwbrabuadx" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/28/csdn转移/贪心算法-Aaruman's Army/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/28/csdn转移/最基础的穷竭搜索（2）/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/js对象/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/记忆化搜索与动态优化与背包问题/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/Fence Repair 栅栏分割/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/贪心算法-Aaruman's Army/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/贪心算法分析/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2019 wycan&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;1982659010@qq.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png">
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

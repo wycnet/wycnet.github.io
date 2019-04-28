@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>wycBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="##背包问题动态规划（DP）—— 算法设计方法之一。 问题：有几个重量和价值分别为Wi和Vi的物品。从这些物品中挑选出总重量不超过W的物品，求所有挑选方案中价值总和最大的值。限制条件1&amp;lt;=n&amp;lt;=1001&amp;lt;=Wi，Vi&amp;lt;=1001&amp;lt;=W&amp;lt;=10000 输入样例：n = 4(w ,v) = { (2,3), (1,2),(3,4), (2,2) }W=5;输出样例：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wycBlog">
+<meta property="og:url" content="http://yoursite.com/2019/04/28/csdn转移/记忆化搜索与动态优化与背包问题/index.html">
+<meta property="og:site_name" content="wycBlog">
+<meta property="og:description" content="##背包问题动态规划（DP）—— 算法设计方法之一。 问题：有几个重量和价值分别为Wi和Vi的物品。从这些物品中挑选出总重量不超过W的物品，求所有挑选方案中价值总和最大的值。限制条件1&amp;lt;=n&amp;lt;=1001&amp;lt;=Wi，Vi&amp;lt;=1001&amp;lt;=W&amp;lt;=10000 输入样例：n = 4(w ,v) = { (2,3), (1,2),(3,4), (2,2) }W=5;输出样例：">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdn.net/20180713193515659?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180714124844938?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:updated_time" content="2019-04-26T10:23:11.916Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="wycBlog">
+<meta name="twitter:description" content="##背包问题动态规划（DP）—— 算法设计方法之一。 问题：有几个重量和价值分别为Wi和Vi的物品。从这些物品中挑选出总重量不超过W的物品，求所有挑选方案中价值总和最大的值。限制条件1&amp;lt;=n&amp;lt;=1001&amp;lt;=Wi，Vi&amp;lt;=1001&amp;lt;=W&amp;lt;=10000 输入样例：n = 4(w ,v) = { (2,3), (1,2),(3,4), (2,2) }W=5;输出样例：">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20180713193515659?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+  
+    <link rel="alternate" href="/atom.xml" title="wycBlog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">wycBlog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-csdn转移/记忆化搜索与动态优化与背包问题" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/28/csdn转移/记忆化搜索与动态优化与背包问题/" class="article-date">
+  <time datetime="2019-04-28T12:31:54.517Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>##背包问题<br>动态规划（DP）—— 算法设计方法之一。</p>
+<p>问题：有几个重量和价值分别为Wi和Vi的物品。从这些物品中挑选出总重量不超过W的物品，求所有挑选方案中价值总和最大的值。<br><strong>限制条件</strong><br><strong>1&lt;=n&lt;=100</strong><br><strong>1&lt;=Wi，Vi&lt;=100</strong><br><strong>1&lt;=W&lt;=10000</strong></p>
+<p>输入样例：<br>n = 4<br>(w ,v) = { (2,3), (1,2),(3,4), (2,2) }<br>W=5;<br>输出样例：<br>7（选择0,1,3号）</p>
+<p>这种问题就是背包问题。背包问题看起来非常复杂，需要测试很多种组合。首先我们对每个物品是否放入背包进行搜索试试看。<br>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">#define MAX_N 100</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int n, W; //n个 物品， 总重量不超过W</span><br><span class="line"></span><br><span class="line">int w[MAX_N], v[MAX_N];</span><br><span class="line"></span><br><span class="line">//从第i个物品开始挑选总重量小于j的部分</span><br><span class="line">int rec(int i, int j) &#123;</span><br><span class="line">    int res;</span><br><span class="line">    if (i == n) &#123;</span><br><span class="line">        //已经没有剩下的了</span><br><span class="line">        return res = 0;</span><br><span class="line">    &#125; else if (j &lt; w[i]) &#123;</span><br><span class="line">        res = rec(i + 1, j);//这个物品超重了,尝试下一个</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        res = max(rec(i + 1, j), rec(i + 1, j - w[i]) + v[i]); //在这里进行分支前一个是不包含第i个，后一个是包含第i个。</span><br><span class="line">    &#125;</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void init() &#123;</span><br><span class="line">    cin &gt;&gt; n ;</span><br><span class="line">    for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        cin &gt;&gt; w[i];</span><br><span class="line">        cin &gt;&gt; v[i];</span><br><span class="line">    &#125;</span><br><span class="line">    cin&gt;&gt;W;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    init();</span><br><span class="line">    cout &lt;&lt; rec(0, W) &lt;&lt; endl;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>虽然上述方法可以求解，但是显然这种方法不是很好。它的搜索深度为n，最坏情况需要$O(2^n)$时间复杂度。该递归调用方法使用了遍历二叉树搜索的原理。</p>
+<p><img src="https://img-blog.csdn.net/20180713193515659?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="二叉树"></p>
+<p>其实这里是有改进的地方，观察二叉树会发现rec(3,2)执行了两次，但是如果我们在执行第一次的时候将rec(3,2)的值保存起来，那么下次执行时就可以直接调用结果了（这便是记忆化搜索）。<br>来试试新的方法：增加一个二维数组dp[][],将执行结果没一步保存在其中。</p>
+<p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">#define MAX_N 100</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int n, W; //n个 物品， 总重量不超过W</span><br><span class="line"></span><br><span class="line">int w[MAX_N], v[MAX_N];</span><br><span class="line">int dp[MAX_N][MAX_N];</span><br><span class="line"></span><br><span class="line">//从第i个物品开始挑选总重量小于j的部分</span><br><span class="line">int rec(int i, int j) &#123;</span><br><span class="line">    if (dp[i][j] != 0) &#123;</span><br><span class="line">        return dp[i][j]; //如果有记录则直接返回结果</span><br><span class="line">    &#125;</span><br><span class="line">    int res;</span><br><span class="line">    if (i == n) &#123;</span><br><span class="line">        //已经没有剩下的了</span><br><span class="line">        return res = 0;</span><br><span class="line">    &#125; else if (j &lt; w[i]) &#123;</span><br><span class="line">        res = rec(i + 1, j);//这个物品超重了,尝试下一个</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        res = max(rec(i + 1, j), rec(i + 1, j - w[i]) + v[i]); //在这里进行分支前一个是不包含第i个，后一个是包含第i个。</span><br><span class="line">    &#125;</span><br><span class="line">    dp[i][j] = res;  //结果保存</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void init() &#123;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        cin &gt;&gt; w[i];</span><br><span class="line">        cin &gt;&gt; v[i];</span><br><span class="line">    &#125;</span><br><span class="line">    cin &gt;&gt; W;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    init();</span><br><span class="line">    cout &lt;&lt; rec(0, W) &lt;&lt; endl;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>仔细研究前面的算法用到的这个记忆数组。记dp[i][j]为根据rec的定义，从第i个物品开始挑选总重量小于j时，总价值最大的值。于是我们有一下递推公式。</p>
+<p>$dp[n][j]=0$<br>$$dp[i][j]=\left{<br>\begin{aligned}<br> dp[i+1][j] (j&lt;w[i]) \<br>max( dp[i+1][j], dp[ii+1][j-w[i]+v[i])<br>\end{aligned}<br>\right.<br>$$<br>不用递归函数，直接使用地推公式将各项值计算出来，然后用二重信息即可解决该问题。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">int dp[MAX_N+1][MAX_N+1] &#123;&#125;; //初始化为全0</span><br><span class="line">void solve2()&#123;</span><br><span class="line">    for(int i=0;i&lt;n-1;i--)&#123;</span><br><span class="line">        for(int j=0;j&lt;=W;j++)&#123;</span><br><span class="line">            if(j&lt;w[i])&#123;</span><br><span class="line">                dp[i][j]=dp[i+1][j];</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                dp[i][j]=max(dp[i+1][j] , dp[i+1][j-w[i]] + v[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>虽然这个函数的时间复杂度与前一个相同$O(n×W)$ ,但是简明了许多。<br>动态规划问题（dp）可以分析其递推公式。</p>
+<p>注意：全局数组和静态数组会被初始化为0；局部数据需要手动初始化为0，例如：int  a[4]={} ; 或 int a[4] {} ; 或 int a[4] {0} 。如果括号里写0或什么都不写将会把数组全部初始化为0，但是如果这样写：int a[4] {1}; ，将会被初始化为1 0 0 0.</p>
+<p>##其他推导方法</p>
+<p>递推公式有多种推导方法，使用不同的递推公式我们可以得到多种算法。</p>
+<p>####正向推导</p>
+<p>刚讲到DP中关于i的循环是逆向进行的。如下递推公式是正向进行的。<br>$dp[i+1][j]:=$从前i个物品中挑选出总重量不超过j的物品时，总价值的最大值</p>
+<p>$dp[0][j]=0$<br>$$dp[i+1][j]=\left{<br>\begin{aligned}<br> dp[i][j] ,(j&lt;w[i]) \<br>max( dp[i][j], dp[i][j-w[i]]+v[i])<br>\end{aligned}<br>\right.<br>$$</p>
+<p>仔细观察公式会发现，dp中的i和w和v中的i不同，dp中的i表示前i个物品，而w和v中的i表示物品的编号，即编号是从0开始的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">void solve() &#123;</span><br><span class="line">    for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        for (int j = 0; j &lt;= W; j++) &#123;</span><br><span class="line">            if (j &lt; w[i]) &#123;</span><br><span class="line">                dp[i + 1][j] = dp[i][j];</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                dp[i + 1][j] = max(dp[i][j], dp[i][j - w[i]] + v[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;dp[n][W];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>###除了使用地推公式外的其他方法</p>
+<p>除了用递推方式逐项求解外，还可以把状态转换想象成从“前i个物品中挑选出总重量不超过j时的状态” 向“前i+1个物品中选取总重量不超过j“ 和 ”前i+1个物品中选取总重量不超过j+w[i] 时的状态“的转移，于是可以实现如下形式。</p>
+<p><img src="https://img-blog.csdn.net/20180714124844938?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI4MTIwNjcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<pre><code>void solve2() {
+    for (int i = 0; i &lt; n; i++) {
+        for (int j = 0; j &lt; W; j++) {
+            dp[i + 1][j] = max(dp[i + 1][j], dp[i][j]);
+            if (j + w[i] &lt;= W) {
+                dp[i + 1][j + w[i]] = max(dp[i + 1][j + w[i]], dp[i][j] + v[i]);//  dp[i+1][j+w[i]]表示前i+1个物品，重量不超过j+w[i]的价值，dp[i][j]+v[i],表前i个物品重量不超过j的价值，加上第i+1个物品的价值，也就是说，它和dp[i + 1][j + w[i]]相比默认选择了第i+1个物品。
+            }
+        }
+    }
+    cout &lt;&lt; dp[n][W];
+
+
+</code></pre><p>上述问题中，从当前状态转移到下一状态的形式，需要注意初项之外也需要初始化（在本问题中，因为价值的初始值为0，所以没有显示的初始化，在有些问题中初始值为无穷大等，需要显示的初始化。）<br>同一个问题可能有很多不同的解法：搜索记忆法、递推关系dp、状态转移dp等。根据具体的问题选择较好的方法。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/记忆化搜索与动态优化与背包问题/" data-id="cjv0wzt92001g81rwsj5fmnp1" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/28/csdn转移/js对象/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/28/csdn转移/Fence Repair 栅栏分割/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/js对象/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/记忆化搜索与动态优化与背包问题/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/Fence Repair 栅栏分割/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/贪心算法-Aaruman's Army/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/28/csdn转移/贪心算法分析/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2019 wycan&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;1982659010@qq.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png">
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

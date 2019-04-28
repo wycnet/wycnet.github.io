@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>wycBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="参考  https://zhuanlan.zhihu.com/p/32925500   jupyternotebook选择conda环境https://blog.csdn.net/u011606714/article/details/77741324  清华镜像源文件  https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/?C=M&amp;amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wycBlog">
+<meta property="og:url" content="http://yoursite.com/2019/04/28/csdn转移/anaconda使用/index.html">
+<meta property="og:site_name" content="wycBlog">
+<meta property="og:description" content="参考  https://zhuanlan.zhihu.com/p/32925500   jupyternotebook选择conda环境https://blog.csdn.net/u011606714/article/details/77741324  清华镜像源文件  https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/?C=M&amp;amp;">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-26T10:29:15.881Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="wycBlog">
+<meta name="twitter:description" content="参考  https://zhuanlan.zhihu.com/p/32925500   jupyternotebook选择conda环境https://blog.csdn.net/u011606714/article/details/77741324  清华镜像源文件  https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/?C=M&amp;amp;">
+  
+    <link rel="alternate" href="/atom.xml" title="wycBlog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">wycBlog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-csdn转移/anaconda使用" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/28/csdn转移/anaconda使用/" class="article-date">
+  <time datetime="2019-04-28T12:31:54.289Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <blockquote>
+<p>参考  <a href="https://zhuanlan.zhihu.com/p/32925500" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/32925500</a></p>
+</blockquote>
+<blockquote>
+<p>jupyternotebook选择conda环境<a href="https://blog.csdn.net/u011606714/article/details/77741324" target="_blank" rel="noopener">https://blog.csdn.net/u011606714/article/details/77741324</a></p>
+</blockquote>
+<p>清华镜像源文件</p>
+<blockquote>
+<p><a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/?C=M&amp;O=D" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/?C=M&amp;O=D</a></p>
+</blockquote>
+<h2 id="anaconda安装配置"><a href="#anaconda安装配置" class="headerlink" title="anaconda安装配置"></a>anaconda安装配置</h2><p>安装：<br>下载安装包后，使用命令<code>bash 安装包名称</code>，进行安装</p>
+<p>配置：</p>
+<p>国外网络有时太慢，可以通过配置把下载源改为国内的<br>通过 conda config 命令生成配置文件，这里使用清华的镜像：</p>
+<blockquote>
+<p><a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</a></p>
+<ol>
+<li>首先，打开Anaconda Prompt窗口，执行命令：<br> <code>conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</code></li>
+<li>然后，执行命令：<code>conda config --set show_channel_urls yes</code></li>
+</ol>
+</blockquote>
+<ol start="3">
+<li>找到用户目录底下找到 .condarc 文件<br> 用编辑软件打开 .condarc 文件，删除第3行 –defaults，保存文件</li>
+</ol>
+<h2 id="启动图形界面"><a href="#启动图形界面" class="headerlink" title="启动图形界面"></a>启动图形界面</h2><ol>
+<li>终端输入：anaconda-navigator来启动anaconda的图形界面。</li>
+</ol>
+<h2 id="conda常用命令："><a href="#conda常用命令：" class="headerlink" title="conda常用命令："></a>conda常用命令：</h2><ol>
+<li><p>验证conda已经被安装：conda-version</p>
+</li>
+<li><p>更新conda到最新版本：conda update conda</p>
+</li>
+<li><p>查看帮助信息：conda –help 或者 conda -h</p>
+</li>
+<li><p>卸载conda：rm -rf ～/anaconda3</p>
+</li>
+</ol>
+<h2 id="管理环境"><a href="#管理环境" class="headerlink" title="管理环境"></a>管理环境</h2><ol>
+<li>创建新环境： conda create –name &lt;env_name&gt; &lt;package_names&gt;<br> 注意：<ul>
+<li>&lt;env_name&gt; 创建的环境名。用英文名称，不要加空格，名称两边不要加尖括号</li>
+<li>&lt;package_names&gt; 安装在环境中的包名</li>
+</ul>
+</li>
+</ol>
+<pre><code>1. 如果安装指定的版本号，只需要在包名称后面以=和版本号的形式执行。如：
+    `conda create --name python2 python=2.7`
+该命令会创建一个名为‘Python2’的环境，环境中安装版本为2.7的Python
+
+2. 如果要在新穿件的环境中创建多个包，直接在&lt;package_names&gt; 后一空格隔开，添加多个包名称。例如：
+`conda create -n python3 python=3.5 numpy pandas`
+即创建一个名为“python3”的环境，环境中安装版本为3.5的python，同时也安装了numpy和pandas。
+ --name 同样可以替换为 -n 。
+
+提示：默认情况下，新创建的环境将会被保存在 
+
+/Users/&lt;user_name&gt;/anaconda3/env 目录下，其中， &lt;user_name&gt; 为当前用户的用户名。
+</code></pre><ol start="2">
+<li><p>切换环境<br> linux命令：</p>
+<p> <code>source activate &lt;env_names&gt;</code></p>
+<p> windows命令：<br> `activate &lt;env_name&gt;</p>
+<p> 提示:</p>
+<ul>
+<li><p>如果创建环境后安装Python时没有指定Python的版本，那么将会安装与Anaconda版本相同的Python版本，即如果安装Anaconda第2版，则会自动安装Python 2.x；如果安装Anaconda第3版，则会自动安装Python 3.x。</p>
+</li>
+<li><p>当成功切换环境之后，在该行行首将以“(env_name)”或<code>[env_name]</code>开头。其中，“env_name”为切换到的环境名。如：在macOS系统中执行 source active python2 ，即切换至名为“python2”的环境，则行首将会以(python2)开头。</p>
+</li>
+</ul>
+</li>
+<li><p>退出环境至root</p>
+<ul>
+<li><p>Linux 或 macOS</p>
+<p>  source deactivate</p>
+</li>
+</ul>
+</li>
+</ol>
+<pre><code>- Windows
+
+    deactivate
+
+
+- 提示
+
+    当执行退出当前环境，回到root环境命令后，原本行首以“(env_name)”或`[env_name]`开头的字符将不再显示。
+</code></pre><ol start="4">
+<li><p>显示已创建环境</p>
+<p> <code>conda info --envs</code><br> 或</p>
+<p> <code>conda info -e</code><br> 或</p>
+<p> <code>conda env list</code></p>
+</li>
+</ol>
+<ol start="5">
+<li><p>复制环境</p>
+<p> <code>conda create --name &lt;new_env_name&gt; --clone &lt;copied_env_name&gt;</code></p>
+<p> 注意：</p>
+<ul>
+<li><p>&lt;copied_env_name&gt; 即为被复制/克隆环境名。环境名两边不加尖括号“&lt;&gt;”。</p>
+</li>
+<li><p>&lt;new_env_name&gt; 即为复制之后新环境的名称。环境名两边不加尖括号“&lt;&gt;”。</p>
+</li>
+<li><p>conda create –name py2 –clone python2 ，即为克隆名为“python2”的环境，克隆后的新环境名为“py2”。此时，环境中将同时存在“python2”和“py2”环境，且两个环境的配置相同。</p>
+</li>
+</ul>
+</li>
+</ol>
+<ol start="6">
+<li><p>删除环境</p>
+<p> <code>conda remove --name &lt;env_name&gt; --all</code></p>
+<p> 注意： &lt;env_name&gt; 为被删除环境的名称。环境名两边不加尖括号“&lt;&gt;”。</p>
+</li>
+</ol>
+<h2 id="包管理"><a href="#包管理" class="headerlink" title="包管理"></a>包管理</h2><ol>
+<li><p>查找可以供安装的包版本</p>
+<ul>
+<li><p>精确查找</p>
+<p>  <code>conda search --full-name &lt;package_full_name&gt;</code></p>
+<p>  注意：</p>
+<ul>
+<li><p>–full-name 为精确查找的参数。</p>
+</li>
+<li><p>&lt;package_full_name&gt; 是被查找包的全名。包名两边不加尖括号“&lt;&gt;”。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<pre><code>    - 例如： conda search --full-name python 即查找全名为“python”的包有哪些版本可供安装。
+
+
+- 模糊查找
+
+    `conda search &lt;text&gt;`
+
+    - 注意： &lt;text&gt; 是查找含有此字段的包名。此字段两边不加尖括号“&lt;&gt;”。
+    - 例如： conda search py 即查找含有“py”字段的包，有哪些版本可供安装。
+</code></pre><ol start="2">
+<li><p>获取当前环境中已安装的包信息</p>
+<p> <code>conda list</code></p>
+<ul>
+<li>执行上述命令后将在终端显示当前环境已安装包的包名及其版本号。</li>
+</ul>
+</li>
+</ol>
+<ol start="3">
+<li><p>安装包</p>
+<ul>
+<li><p>在指定环境中安装包</p>
+<p>  <code>conda install --name &lt;env_name&gt; &lt;package_name&gt;</code></p>
+<p>  注意：</p>
+<ul>
+<li><p>&lt;env_name&gt; 即将包安装的指定环境名。环境名两边不加尖括号“&lt;&gt;”。</p>
+</li>
+<li><p>&lt;package_name&gt; 即要安装的包名。包名两边不加尖括号“&lt;&gt;”。</p>
+</li>
+<li><p>例如： conda install –name python2 pandas 即在名为“python2”的环境中安装pandas包。</p>
+</li>
+</ul>
+</li>
+<li><p>在当前环境中安装包</p>
+<pre><code>`conda install &lt;package_name&gt;`
+</code></pre><p>  注意：</p>
+<ul>
+<li><p>&lt;package_name&gt; 即要安装的包名。包名两边不加尖括号“&lt;&gt;”。</p>
+</li>
+<li><p>执行命令后在当前环境中安装包。</p>
+</li>
+<li><p>例如： conda install pandas 即在当前环境中安装pandas包。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/csdn转移/anaconda使用/" data-id="cjv0wzt8b000f81rwln49di5y" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/28/csdn转移/python中dict 字典的方法/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/28/csdn转移/python常用库类/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#anaconda安装配置"><span class="toc-number">1.</span> <span class="toc-text">anaconda安装配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动图形界面"><span class="toc-number">2.</span> <span class="toc-text">启动图形界面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#conda常用命令："><span class="toc-number">3.</span> <span class="toc-text">conda常用命令：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#管理环境"><span class="toc-number">4.</span> <span class="toc-text">管理环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#包管理"><span class="toc-number">5.</span> <span class="toc-text">包管理</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2019 wycan&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;1982659010@qq.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png">
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>
